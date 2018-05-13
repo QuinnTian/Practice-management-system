@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.CompanyDao">
+	<insert id="insert" parameterType="com.sict.entity.Company"
+		statementType="PREPARED">
+		insert into
+		sj_company(id,create_time,com_name,com_code,short_name,contacts,phone,address,email,check_state,check_note,check_man,state,applicable_scope,industry,temp1,temp2,temp3)
+		values
+		(#{id},#{create_time},#{com_name},#{com_code},#{short_name},#{contacts},#{phone},#{address},#{email},#{check_state},#{check_note},#{check_man},#{state},#{applicable_scope},#{industry},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Company"
+		resultType="com.sict.entity.Company">
+		select * from sj_company where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="com_name != null">
+			and com_name = #{com_name}
+		</if>
+		<if test="com_code != null">
+			and com_code = #{com_code}
+		</if>
+		<if test="short_name != null">
+			and short_name = #{short_name}
+		</if>
+		<if test="contacts != null">
+			and contacts = #{contacts}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="address != null">
+			and address = #{address}
+		</if>
+		<if test="email != null">
+			and email = #{email}
+		</if>
+		<if test="check_state != null">
+			and check_state = #{check_state}
+		</if>
+		<if test="check_note != null">
+			and check_note = #{check_note}
+		</if>
+		<if test="check_man != null">
+			and check_man = #{check_man}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+	order by create_time desc
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Company"
+		resultType="int">
+		select count(*) from sj_company where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="com_name != null">
+			and com_name = #{com_name}
+		</if>
+		<if test="com_code != null">
+			and com_code = #{com_code}
+		</if>
+		<if test="short_name != null">
+			and short_name = #{short_name}
+		</if>
+		<if test="contacts != null">
+			and contacts = #{contacts}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="address != null">
+			and address = #{address}
+		</if>
+		<if test="email != null">
+			and email = #{email}
+		</if>
+		<if test="check_state != null">
+			and check_state = #{check_state}
+		</if>
+		<if test="check_note != null">
+			and check_note = #{check_note}
+		</if>
+		<if test="check_man != null">
+			and check_man = #{check_man}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+	</select>
+	<delete id="delete" parameterType="com.sict.entity.Company">
+		delete from sj_company where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Company">
+		select * from sj_company where id=#{id}
+	</select>
+	<!-- 查询所有单位 by郑春光20140910 -->
+	<select id="selectAllCompanys" resultType="com.sict.entity.Company"> 
+      <![CDATA[ select * from sj_company  ]]>
+	</select>
+	<!-- 更新企业信息 by 邢志武 20141205 -->
+	<update id="update" parameterType="com.sict.entity.Company">
+		UPDATE sj_company
+		<set>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="com_code != null">com_code=#{com_code},</if>
+			<if test="com_name != null">com_name=#{com_name},</if>
+			<if test="short_name != null">short_name=#{short_name},</if>
+			<if test="contacts!= null">contacts=#{contacts},</if>
+			<if test="check_man!= null">check_man=#{check_man},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="address != null">address=#{address},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="check_state != null">check_state=#{check_state},</if>
+			<if test="check_note != null">check_note=#{check_note},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!-- 查询所有有效单位 byccc20150122 -->
+	<select id="selectAllCompanysCheck" resultType="com.sict.entity.Company"> 
+      <![CDATA[ select * from sj_company   where check_state='1' or check_state='0']]>
+	</select>
+	<!-- 根据companys_id 显示创建企业的学生id by 邢志武 20141205 -->
+	<select id="selectStuIdByCompanyId" resultType="String">
+  		<![CDATA[
+  			select  p.STU_ID  from sj_company c ,sj_practice_record p where p.COMPANY_ID=c.ID
+ 			AND p.APPLY_TIME=(SELECT MIN(APPLY_TIME) FROM sj_practice_record WHERE COMPANY_ID=#{company_id})
+			AND c.ID=#{company_id}
+  		]]>
+	</select>
+	<!-- 根据companys_id 查找审核企业的教师id by 邢志武 20141205 -->
+	<select id="selectCheckManById" resultType="String">
+  		<![CDATA[
+  			SELECT DISTINCT(CHECK_MAN) FROM sj_company WHERE CREATE_TIME=(SELECT MIN(CREATE_TIME) FROM sj_company WHERE ID=#{id})
+  		]]>
+	</select>
+	<!-- 根据适用范围和所属行业  查找企业 by ccc 20150312 -->
+	<select id="getCompanyByScopeAndInd"  parameterType="map" resultType="com.sict.entity.Company">
+  		<![CDATA[
+  			SELECT * FROM sj_company WHERE industry=#{industry} and  find_in_set(#{applicable_scope},applicable_scope);
+  		]]>
+	</select>  
+	<!--通过企业所属行业和学院id得到所对应的企业  -->
+	<select id="getCompanys"  parameterType="map" 
+		resultType="com.sict.entity.Company">
+		select * FROM sj_company where 1 = 1
+		<if test="xy_id !=null">
+		and APPLICABLE_SCOPE like CONCAT('%',#{xy_id},'%')
+		</if>
+		<if test="industry !=null">
+		and industry = #{industry}
+		</if>
+		<if test="content !=null">
+		and ((address like CONCAT('%',#{content},'%')) or (create_time like CONCAT('%',#{content},'%')) or (com_name like CONCAT('%',#{content},'%')) or (short_name like CONCAT('%',#{content},'%')) or (contacts like CONCAT('%',#{content},'%'))or (com_code like CONCAT('%',#{content},'%')))
+		</if>
+		order by create_time desc;
+	
+	</select>
+	<!--通过学院id得到所对应的企业  -->
+	<select id="getCompanysById"  parameterType="map" resultType="com.sict.entity.Company">
+	<![CDATA[
+		select * FROM sj_company where APPLICABLE_SCOPE like CONCAT('%',#{id},'%') order by create_time desc;
+	]]>
+	</select>
+	
+	<!-- 根据INDUSTRY 和APPLICABLE_SCOPE  显示企业信息 by 邢志武 2015年4月8日 -->
+	<select id="getRecByIndustryAndDept_id" resultType="com.sict.entity.RecruitInfo">
+  		<![CDATA[
+  			SELECT * FROM sj_recruit_info 
+			WHERE COM_ID IN (SELECT ID 
+			FROM sj_company 
+			WHERE INDUSTRY=#{industry}
+			)  
+  		]]>
+	</select>
+	<!-- 根据岗位查询招聘信息  2015年5月18日 14:46:55 邢志武-->
+	<select id="getRecByRecrut_profOrPostIDOrComName" resultType="com.sict.entity.RecruitInfo">
+  		<![CDATA[
+  			SELECT * FROM sj_recruit_info 
+			WHERE COM_ID IN (SELECT ID 
+			FROM sj_company WHERE COM_NAME LIKE CONCAT('%',#{recrut_prof },'%'))  
+			OR  RECRUIT_PROF  LIKE CONCAT('%',#{recrut_prof },'%')
+            OR  POST_ID LIKE CONCAT('%',#{recrut_prof},'%')
+
+  		]]>
+	</select>
+	<!-- 根据岗位查询招聘信息  2015年5月18日 14:46:55 邢志武-->
+	<select id="getRecByPostID" resultType="com.sict.entity.RecruitInfo">
+  		<![CDATA[
+  			SELECT * FROM sj_recruit_info 
+			WHERE POST_ID LIKE CONCAT('%',#{postId},'%') AND STATE='1'
+  		]]>
+	</select>
+	<!-- 根据专业查询招聘信息  2015年5月18日 14:46:55 邢志武-->
+	<select id="getRecByRecrut_prof" resultType="com.sict.entity.RecruitInfo">
+  		<![CDATA[
+  			SELECT * FROM sj_recruit_info 
+			WHERE COM_ID IN (SELECT ID 
+			FROM sj_company WHERE COM_NAME LIKE CONCAT('%',#{recrut_prof },'%')) 
+			OR  POST_ID LIKE CONCAT('%',#{recrut_prof},'%')
+			OR RECRUIT_PROF  LIKE CONCAT('%',#{recrut_prof },'%')
+  		]]>
+	</select>
+	 <!-- 根据专业查询招聘信息  2015年5月18日 14:46:55 邢志武-->
+	<select id="getRecByComName" resultType="com.sict.entity.RecruitInfo">
+  		<![CDATA[
+  			SELECT * FROM sj_recruit_info 
+			WHERE COM_ID IN (SELECT ID 
+			FROM sj_company WHERE COM_NAME LIKE CONCAT('%',#{comName },'%'))  
+  		]]>
+	</select>
+	
+	<!-- 模糊查询 查询前三十条 信息 时间倒排序  邢志武-->
+	<select id="getSomeCompany" resultType="com.sict.entity.Company">
+  		<![CDATA[
+  			SELECT * FROM sj_company 
+  			WHERE COM_NAME LIKE CONCAT( '%',#{comName}, '%') 
+  			AND STATE='1'  
+  			ORDER BY CREATE_TIME DESC LIMIT 30
+  		]]>
+	</select>
+	<!-- 根据公司的名称和适应的学院查询相应的公司记录-->
+	<select id="getCompanyByComNameAndApplicableScope"  parameterType="map"  resultType="com.sict.entity.Company">
+  		<![CDATA[
+  			SELECT * from sj_company WHERE COM_NAME=#{comName} 
+  			AND APPLICABLE_SCOPE LIKE CONCAT( '%',#{ApplicableScope}, '%')
+  		]]>
+	</select>
+	<!-- 根据学生ID查找企业 李泽 -->
+	<select id="getCompanyByCompanyId" parameterType="String"
+		resultType="com.sict.entity.Company">
+  		<![CDATA[
+  			select * from sj_company where ID = #{companyId}; 
+  		]]>
+	</select>
+	<!-- 根据行业id查找企业  周睿 -->
+		<select id="getCompanyByIndustry" parameterType="String"
+		resultType="com.sict.entity.Company">
+  		<![CDATA[
+  			select * from sj_company where industry = #{industry} AND STATE='1';
+  		]]>
+	</select>
+</mapper>

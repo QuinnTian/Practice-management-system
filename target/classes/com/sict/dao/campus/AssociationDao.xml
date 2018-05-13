@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.campus.AssociationDao">
+	<insert id="insert" parameterType="com.sict.entity.Association"
+		statementType="PREPARED">
+		insert into
+		sj_association(id,sa_code,sa_name,sa_level,sa_category,sa_college_id,sa_tea_id,sa_stu_id,sa_describe,sa_create_user,sa_create_time,sa_parent_id,sa_last_edit_user,sa_last_edit_time,state,temp1,temp2,temp3,temp4,temp5)
+		values
+		(#{id},#{sa_code},#{sa_name},#{sa_level},#{sa_category},#{sa_college_id},#{sa_tea_id},#{sa_stu_id},#{sa_describe},#{sa_create_user},#{sa_create_time},#{sa_parent_id},#{sa_last_edit_user},#{sa_last_edit_time},#{state},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})
+	</insert>
+
+
+
+	<select id="select" parameterType="com.sict.entity.Association"
+		resultType="com.sict.entity.Association">
+		select * from sj_association where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="sa_code != null">
+			and sa_code = #{sa_code}
+		</if>
+		<if test="sa_name != null">
+			and sa_name = #{sa_name}
+		</if>
+		<if test="sa_level != null">
+			and sa_level = #{sa_level}
+		</if>
+		<if test="sa_category != null">
+			and sa_category = #{sa_category}
+		</if>
+		<if test="sa_college_id != null">
+			and sa_college_id = #{sa_college_id}
+		</if>
+		<if test="sa_tea_id != null">
+			and sa_tea_id = #{sa_tea_id}
+		</if>
+		<if test="sa_stu_id != null">
+			and sa_stu_id = #{sa_stu_id}
+		</if>
+		<if test="sa_describe != null">
+			and sa_describe = #{sa_describe}
+		</if>
+		<if test="sa_create_user != null">
+			and sa_create_user = #{sa_create_user}
+		</if>
+		<if test="sa_create_time != null">
+			and sa_create_time = #{sa_create_time}
+		</if>
+		<if test="sa_parent_id != null">
+			and sa_parent_id = #{sa_parent_id}
+		</if>
+		<if test="sa_last_edit_user != null">
+			and sa_last_edit_user = #{sa_last_edit_user}
+		</if>
+		<if test="sa_last_edit_time != null">
+			and sa_last_edit_time = #{sa_last_edit_time}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Association"
+		resultType="int">
+		select count(*) from sj_association where 1=1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="sa_code != null">
+			and sa_code = #{sa_code}
+		</if>
+		<if test="sa_name != null">
+			and sa_name = #{sa_name}
+		</if>
+		<if test="sa_level != null">
+			and sa_level = #{sa_level}
+		</if>
+		<if test="sa_category != null">
+			and sa_category = #{sa_category}
+		</if>
+		<if test="sa_college_id != null">
+			and sa_college_id = #{sa_college_id}
+		</if>
+		<if test="sa_tea_id != null">
+			and sa_tea_id = #{sa_tea_id}
+		</if>
+		<if test="sa_stu_id != null">
+			and sa_stu_id = #{sa_stu_id}
+		</if>
+		<if test="sa_describe != null">
+			and sa_describe = #{sa_describe}
+		</if>
+		<if test="sa_create_user != null">
+			and sa_create_user = #{sa_create_user}
+		</if>
+		<if test="sa_create_time != null">
+			and sa_create_time = #{sa_create_time}
+		</if>
+		<if test="sa_parent_id != null">
+			and sa_parent_id = #{sa_parent_id}
+		</if>
+		<if test="sa_last_edit_user != null">
+			and sa_last_edit_user = #{sa_last_edit_user}
+		</if>
+		<if test="sa_last_edit_time != null">
+			and sa_last_edit_time = #{sa_last_edit_time}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Association">
+		UPDATE sj_association
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="sa_code != null">sa_code=#{sa_code},</if>
+			<if test="sa_name != null">sa_name=#{sa_name},</if>
+			<if test="sa_level != null">sa_level=#{sa_level},</if>
+			<if test="sa_category != null">sa_category=#{sa_category},</if>
+			<if test="sa_college_id != null">sa_college_id=#{sa_college_id},</if>
+			<if test="sa_tea_id != null">sa_tea_id=#{sa_tea_id},</if>
+			<if test="sa_stu_id != null">sa_stu_id=#{sa_stu_id},</if>
+			<if test="sa_describe != null">sa_describe=#{sa_describe},</if>
+			<if test="sa_create_user != null">sa_create_user=#{sa_create_user},</if>
+			<if test="sa_create_time != null">sa_create_time=#{sa_create_time},</if>
+			<if test="sa_parent_id != null">sa_parent_id=#{sa_parent_id},</if>
+			<if test="sa_last_edit_user != null">sa_last_edit_user=#{sa_last_edit_user},</if>
+			<if test="sa_last_edit_time != null">sa_last_edit_time=#{sa_last_edit_time},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Association">
+		delete from sj_association
+		where id=#{id}
+	</delete>
+	<select id="selectById1" parameterType="String"
+		resultType="com.sict.entity.Association">
+		select * from sj_association where id=#{id}
+	</select>
+
+	<select id="SelectBySaCategory" parameterType="String"
+		resultType="com.sict.entity.Association">
+         <![CDATA[ 
+        	 select * from sj_association where  sa_category=#{sa_category}
+           ]]>
+	</select>
+	<select id="selectMaxCode" parameterType="String"
+		resultType="com.sict.entity.Association">
+         <![CDATA[ 
+        	 SELECT * FROM SJ_ASSOCIATION WHERE SA_CODE LIKE  CONCAT('%', #{collage_id}, '%') order by sa_code desc LIMIT 1 
+           ]]>
+	</select>
+	<!-- 通过上级部门id查出该部门所有学生会  by 李达、师杰 20160301 -->
+	<select id="selectByParentId" parameterType="String" resultType="com.sict.entity.Org" >
+		<![CDATA[select * from SJ_ASSOCIATION where parent_id = #{PraentId} AND sa_category='1']]>
+	</select>
+</mapper>

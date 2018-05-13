@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="A_Graduationmaterials" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0ef639e4-a818-47a8-9fbc-9a6f53b509d9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="contract_handin_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[contract_handin_rate]]></fieldDescription>
+	</field>
+	<field name="countIdPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[countIdPassNum]]></fieldDescription>
+	</field>
+	<field name="count_contract_handin_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[count_contract_handin_rate]]></fieldDescription>
+	</field>
+	<field name="countIdNoPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[countIdNoPassNum]]></fieldDescription>
+	</field>
+	<field name="countContractPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[countContractPassNum]]></fieldDescription>
+	</field>
+	<field name="contract_pass_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[contract_pass_rate]]></fieldDescription>
+	</field>
+	<field name="countContractNoPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[countContractNoPassNum]]></fieldDescription>
+	</field>
+	<field name="contractNoPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[contractNoPassNum]]></fieldDescription>
+	</field>
+	<field name="count_contract_pass_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[count_contract_pass_rate]]></fieldDescription>
+	</field>
+	<field name="contractPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[contractPassNum]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="count_group_count_number" class="java.lang.Integer">
+		<fieldDescription><![CDATA[count_group_count_number]]></fieldDescription>
+	</field>
+	<field name="count_id_handin_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[count_id_handin_rate]]></fieldDescription>
+	</field>
+	<field name="count_id_pass_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[count_id_pass_rate]]></fieldDescription>
+	</field>
+	<field name="group_name" class="java.lang.String">
+		<fieldDescription><![CDATA[group_name]]></fieldDescription>
+	</field>
+	<field name="group_count_number" class="java.lang.Integer">
+		<fieldDescription><![CDATA[group_count_number]]></fieldDescription>
+	</field>
+	<field name="group_number" class="java.lang.Integer">
+		<fieldDescription><![CDATA[group_number]]></fieldDescription>
+	</field>
+	<field name="head" class="java.lang.String">
+		<fieldDescription><![CDATA[head]]></fieldDescription>
+	</field>
+	<field name="idNoPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idNoPassNum]]></fieldDescription>
+	</field>
+	<field name="idPassNum" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idPassNum]]></fieldDescription>
+	</field>
+	<field name="id_handin_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[id_handin_rate]]></fieldDescription>
+	</field>
+	<field name="id_pass_rate" class="java.lang.String">
+		<fieldDescription><![CDATA[id_pass_rate]]></fieldDescription>
+	</field>
+	<field name="num_contract_pass_rate" class="java.lang.Integer">
+		<fieldDescription><![CDATA[num_contract_pass_rate]]></fieldDescription>
+	</field>
+	<field name="num_id_pass_rate" class="java.lang.Integer">
+		<fieldDescription><![CDATA[num_id_pass_rate]]></fieldDescription>
+	</field>
+	<variable name="count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{head}]]></variableExpression>
+	</variable>
+	<variable name="sum" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{group_number}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="154" y="0" width="245" height="50" uuid="6f81b8ee-7304-4afe-a252-da73e40006f3"/>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="36" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[就业材料汇总]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="5" forecolor="#666666" uuid="087525b8-2d92-40d9-9a20-56bd839aa8ae"/>
+			</line>
+			<line>
+				<reportElement x="0" y="40" width="555" height="2" forecolor="#666666" uuid="ee9ccc42-4d48-4818-9664-a056dce517a3"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="7" width="555" height="47" forecolor="#000000" backcolor="#FFFFFF" uuid="a2b0b583-d862-4682-9f20-a6d310b7749f"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="幼圆" size="12" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[摘要：您现在查看的是学生的就业材料汇总报表，包括身份证、合同的上交率、合格率表格显示分析（上交率指的是上交人数占总人数的比例，合格率指的是上交合格的人数占总上交人数的比例），以及分组人数饼状图分析和合格率的柱状图]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="41" width="137" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="191f717a-cf13-4144-acbc-a87183684b1e"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[实习分组]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="137" y="41" width="81" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="425bd606-ed28-44ee-86e6-412b755a0ef3"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[分组人数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="301" y="41" width="83" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="fc609e46-94a1-4f4d-bee1-d01f4716a5aa"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[身份证合格率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="465" y="41" width="90" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="7064b819-3d74-41c6-a8e9-da66de77ea65"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[合同合格率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="218" y="41" width="83" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="22c219c1-3e7a-4faf-9dfb-67be3cbb746e"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[身份证上交率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="384" y="41" width="81" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="69b1e758-7ecd-4e7f-9d9d-0e4d56e0d107"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[合同上交率]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="137" height="20" backcolor="#999999" uuid="60c26fd0-382e-4a46-ba18-d298279192a7"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="微软雅黑" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{group_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="0" width="81" height="20" uuid="d1ee04cb-b970-49ad-9970-0cb065809e9b"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="新宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{group_count_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="0" width="83" height="20" uuid="8d856180-b8bb-4060-bdfb-0128ae25e3f0"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="新宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_pass_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="90" height="20" uuid="aa9412fd-241e-4f14-8105-4e9bea70f5ae"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="新宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contract_pass_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="0" width="83" height="20" uuid="56e7cf33-412a-49f2-a683-708f75a221b1"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="新宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_handin_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="0" width="81" height="20" uuid="8da633fe-207f-45bc-b033-53a9db5dcdf3"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement>
+					<font fontName="新宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contract_handin_rate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="35" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="313" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="43" width="271" height="270" uuid="b3605ad6-dda3-4d06-b804-4fd51958c9c6"/>
+					<chartTitle>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+						<subtitleExpression><![CDATA["分组人数分析"]]></subtitleExpression>
+					</chartSubtitle>
+					<chartLegend>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{group_name}]]></keyExpression>
+					<valueExpression><![CDATA[$F{group_number}]]></valueExpression>
+					<labelExpression><![CDATA[$F{group_name}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#CCCCCC"/>
+						<seriesColor seriesOrder="1" color="#F2B90E"/>
+						<seriesColor seriesOrder="2" color="#666666"/>
+						<seriesColor seriesOrder="3" color="#95773A"/>
+						<seriesColor seriesOrder="4" color="#FF9900"/>
+					</plot>
+					<itemLabel>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+			<barChart>
+				<chart>
+					<reportElement x="271" y="43" width="284" height="125" uuid="35482519-09ac-4db3-a224-86b5cc8f8d83"/>
+					<chartTitle>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+						<subtitleExpression><![CDATA["身份证合格率"]]></subtitleExpression>
+					</chartSubtitle>
+					<chartLegend>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["身份证通过率"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{group_name}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{num_id_pass_rate}]]></valueExpression>
+						<labelExpression><![CDATA[$F{group_name}]]></labelExpression>
+						<itemHyperlink hyperlinkTarget="Top">
+							<hyperlinkTooltipExpression><![CDATA[$F{id_pass_rate}]]></hyperlinkTooltipExpression>
+						</itemHyperlink>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#999999"/>
+					</plot>
+					<itemLabel>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</itemLabel>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<barChart>
+				<chart>
+					<reportElement x="271" y="188" width="284" height="125" uuid="6b5626b7-dcd7-4b24-9ecb-226f37b83ab4"/>
+					<chartTitle>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+						<subtitleExpression><![CDATA["合同合格率"]]></subtitleExpression>
+					</chartSubtitle>
+					<chartLegend>
+						<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["合同通过率"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{group_name}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{num_contract_pass_rate}]]></valueExpression>
+						<labelExpression><![CDATA[$F{group_name}]]></labelExpression>
+						<itemHyperlink hyperlinkTarget="Top">
+							<hyperlinkTooltipExpression><![CDATA[$F{contract_pass_rate}]]></hyperlinkTooltipExpression>
+						</itemHyperlink>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#FF9900"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="微软雅黑" pdfEncoding="UniGB-UCS2-H"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<textField>
+				<reportElement x="0" y="0" width="137" height="20" uuid="e51b9329-a485-438a-9844-cdcbf4b94315"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="新宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["总计"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="0" width="81" height="20" uuid="0424ec84-5289-42da-ae9e-8190791a05fd"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textFieldExpression><![CDATA[$V{sum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="90" height="20" uuid="8602b9bf-0b7d-4bfa-a127-1d934af3cb01"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{count_contract_pass_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="0" width="83" height="20" uuid="8d4f56dc-c5e4-4d24-93b5-24f9e0d45342"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{count_id_pass_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="0" width="83" height="20" uuid="6b9c6899-5bf0-4c7d-ae1c-25bd2949bb60"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{count_id_handin_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="384" y="0" width="81" height="20" uuid="3a9484c4-b495-4b18-8992-f136b27e8c1f"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{count_contract_handin_rate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

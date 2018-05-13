@@ -1,0 +1,161 @@
+/* CSS Document */
+/*----------表单中---------中等----------的-----------格式-------------*/
+.sjjx-form {
+	font: normal 16px 'Lucida Sans Unicode', 'Lucida Grande', Helvetica,
+		Arial, sans-serif;
+	color: #000;
+	font-weight: bold;
+}
+/*input,textarea,select三个的字体相关样式*/
+.sjjx-form input,.sjjx-form textarea {
+	padding: 5px;
+	border: solid 1px #d1d1d1;
+	outline: 0;
+	width: 200px;
+	background: #FFFFFF url('bg_form.png') left top repeat-x;
+	background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF),
+		color-stop(4%, #EEEEEE), to(#FFFFFF) );
+	background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+}
+
+.sjjx-form select {
+	padding: 5px;
+	border: solid 1px #d1d1d1;
+	outline: 0;
+	width: auto;
+	background: #FFFFFF url('bg_form.png') left top repeat-x;
+	background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF),
+		color-stop(4%, #EEEEEE), to(#FFFFFF) );
+	background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+}
+
+.sjjx-form textarea {
+	min-height: 300px;
+	min-width: 700px;
+}
+/* focus获取焦点后的样式 */
+.sjjx-form input:hover,.sjjx-form textarea:hover,.sjjx-form input:focus,.sjjx-form textarea:focus
+	{
+	border-color: #8dbdf5;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+
+.sjjx-form label {
+	margin-left: 10px;
+	color: #999999;
+}
+/* outline（轮廓）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用*/
+.sjjx-form select:focus {
+	outline: inset #C0C0C0;
+}
+
+.sjjx-form table {
+	cellpadding: 4;
+	font-size: "20px";
+}
+
+/*按钮--以下三个都是按钮样式*/
+.sjjx-form input.sjjx-button,.sjjx-form button {
+	background: #10689a;
+	border: none;
+	color: #fff;
+	width: auto;
+	cursor: pointer;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 5px 10px;
+	font-size: 1.1em;
+	border-radius: 2px;
+	letter-spacing: 1px;
+}
+
+.sjjx-form input.sjjx-button:hover {
+	background: #1478b1;
+}
+
+/*----------------------------------非表单或表单中个别的样式-------------------------------*/
+
+/* General Blueprint Style */
+/* Made with http://icomoon.io/ */
+*,*:after,*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body,html {
+	font-size: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+body {
+	font: normal 16px 'Lucida Sans Unicode', 'Lucida Grande', Helvetica,
+		Arial, sans-serif;
+	color: #000;
+	font-weight: bold;
+	background: #FFFFF0;
+}
+
+a {
+	color: #787878;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000;
+}
+
+/*----------------表------------------格-----------------*/
+.sjjx-table {
+	border: 1px solid #000 margin:                                    0 auto;
+	width: 99.5%;
+	margin-left: 5px
+}
+
+.sjjx-table tr th {
+	height: 28px;
+	line-height: 28px;
+	background: #d1e1f8;
+	border: 1px solid #8dbdf5;
+}
+
+.sjjx-table tr td.left_td {
+	text-align: left;
+} /*<td>标签居左*/
+.sjjx-table tr td.right_td {
+	text-align: right;
+} /*<td>标签居右*/
+.sjjx-table tr td.center_td {
+	text-align: center;
+} /*<td>标签居中*/
+.sjjx-table tr td {
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	background: #fff;
+	vertical-align: middle;
+	border: 1px solid #8dbdf5;
+} /* 默认背景被白色 */
+.sjjx-table tr.alt td {
+	background: #ecf0f8;
+} /* 默认隔行背景颜色 */
+.sjjx-table tr.over td {
+	background: #FFFCCC
+} /* :鼠标经过时候背景颜色 */

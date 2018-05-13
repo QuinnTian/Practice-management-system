@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrainState" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32120dc4-6b9a-4fbf-b7f2-97b07417bd1d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="avg_score" class="java.lang.Double">
+		<fieldDescription><![CDATA[avg_score]]></fieldDescription>
+	</field>
+	<field name="college" class="java.lang.String">
+		<fieldDescription><![CDATA[college]]></fieldDescription>
+	</field>
+	<field name="month" class="java.lang.String">
+		<fieldDescription><![CDATA[month]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="total_score" class="java.lang.Double">
+		<fieldDescription><![CDATA[total_score]]></fieldDescription>
+	</field>
+	<field name="total_stu_num" class="java.lang.Double">
+		<fieldDescription><![CDATA[total_stu_num]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="52" uuid="bbb3fcf2-eac7-4897-9ed4-dff9f30e2d7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="微软雅黑" size="30" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[学院实习成绩折线图]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
+	</pageHeader>
+	<pageFooter>
+		<band height="17" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="145" splitType="Stretch">
+			<lineChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="145" uuid="c9165994-2245-4563-8cae-9b4ede7eee8b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{college}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{month}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{avg_score}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="A_TrainDetail" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="33661d39-5ae4-4dc9-b3b4-853dafba8d25">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="report_title" class="java.lang.String"/>
+	<parameter name="yearAndTerm" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class_num" class="java.lang.String">
+		<fieldDescription><![CDATA[class_num]]></fieldDescription>
+	</field>
+	<field name="course_name" class="java.lang.String">
+		<fieldDescription><![CDATA[course_name]]></fieldDescription>
+	</field>
+	<field name="group_name" class="java.lang.String">
+		<fieldDescription><![CDATA[group_name]]></fieldDescription>
+	</field>
+	<field name="teacher_name" class="java.lang.String">
+		<fieldDescription><![CDATA[teacher_name]]></fieldDescription>
+	</field>
+	<field name="train_place" class="java.lang.String">
+		<fieldDescription><![CDATA[train_place]]></fieldDescription>
+	</field>
+	<field name="train_time" class="java.lang.String">
+		<fieldDescription><![CDATA[train_time]]></fieldDescription>
+	</field>
+	<field name="week_num" class="java.lang.String">
+		<fieldDescription><![CDATA[week_num]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="24" forecolor="#000000" uuid="2402ad65-499a-4db2-b3dc-b71b8c18f6d4"/>
+				<textElement textAlignment="Center">
+					<font fontName="幼圆" size="20" isBold="true" isItalic="true" isUnderline="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{report_title}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="24" width="555" height="2" forecolor="#009999" uuid="32cea270-84c2-42e1-bc47-e398a011dcb0"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="26" width="555" height="20" uuid="e6d42217-1777-4c7e-8a8d-9385def0e104"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="幼圆" size="15" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{yearAndTerm}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="41" width="210" height="20" forecolor="#FFFFFF" backcolor="#00CCCC" uuid="1c39a506-f2ec-49fd-8069-5bead9b7803b"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="13" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[分组名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="210" y="41" width="52" height="20" forecolor="#FFFFFF" backcolor="#00CCCC" uuid="f79e9976-dd53-4b70-99ca-9102445a111c"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="13" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[课程]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="262" y="41" width="57" height="20" forecolor="#FFFFFF" backcolor="#00CCCC" uuid="a77a2630-0f79-479c-ae37-11fcf328a957"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="13" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[周次]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="319" y="41" width="92" height="20" forecolor="#FFFFFF" backcolor="#00CCCC" uuid="b0fd62cb-efe9-446e-aee2-d588f9f69201"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="13" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="411" y="41" width="56" height="20" forecolor="#FFFFFF" backcolor="#00CCCC" uuid="1bc11645-156a-4780-81d9-65cdbc568b9f"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="13" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[节次]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="467" y="41" width="88" height="20" forecolor="#FFFFFF" backcolor="#00CCCC" uuid="93be15bb-4681-4d4f-8e4e-65cea59aea1a"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="微软雅黑" size="13" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[地点]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#E9E2E2" uuid="a9c6822f-2f99-48b2-9390-51d397b27ca6">
+					<printWhenExpression><![CDATA[$V{COLUMN_COUNT}.intValue() % 2 != 0]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="210" height="20" uuid="46222737-aa05-4ada-bb87-ae3779124faf"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="幼圆" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{group_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="52" height="20" uuid="11c15ed2-43b8-41d8-a21d-a5080aa785ae"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="幼圆" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{course_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="57" height="20" uuid="a4d51568-f15d-4685-96cc-4c833a0a4c4b"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="幼圆" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{week_num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="0" width="92" height="20" uuid="2c47f4af-93f0-42ab-93d5-024a32a788e8"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="幼圆" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{train_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="0" width="57" height="20" uuid="73eaff08-eebd-4ad6-a1ad-0eddc15d5b05"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="幼圆" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{class_num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="467" y="0" width="88" height="20" uuid="6fdf2d3a-a85f-4521-b2b7-297a81c9e1c4"/>
+				<box>
+					<pen lineWidth="0.0" lineColor="#333333"/>
+					<topPen lineWidth="0.0" lineColor="#333333"/>
+					<leftPen lineWidth="0.0" lineColor="#333333"/>
+					<bottomPen lineWidth="0.0" lineColor="#333333"/>
+					<rightPen lineWidth="0.0" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="幼圆" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{train_place}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

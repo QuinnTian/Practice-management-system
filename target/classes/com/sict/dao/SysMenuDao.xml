@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.SysMenuDao">
+	<insert id="insert" parameterType="com.sict.entity.SysMenu"
+		statementType="PREPARED">
+		insert into
+		sj_sys_menu(id,sm_name,sm_code,sm_title,sm_parent,sm_page_phone,sm_page,sm_description,sm_used,sm_icon_name,sm_shortcut_key,sm_is_top,sm_cotain_page,temp1,temp2,temp3,temp4,temp5)
+		values
+		(#{id},#{sm_name},#{sm_code},#{sm_title},#{sm_parent},#{sm_page_phone},#{sm_page},#{sm_description},#{sm_used},#{sm_icon_name},#{sm_shortcut_key},#{sm_is_top},#{sm_cotain_page},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.SysMenu"
+		resultType="com.sict.entity.SysMenu">
+		select * from sj_sys_menu where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="sm_name != null">
+			and sm_name = #{sm_name}
+		</if>
+		<if test="sm_code != null">
+			and sm_code = #{sm_code}
+		</if>
+		<if test="sm_title != null">
+			and sm_title = #{sm_title}
+		</if>
+		<if test="sm_parent != null">
+			and sm_parent = #{sm_parent}
+		</if>
+		<if test="sm_page_phone != null">
+			and sm_page_phone = #{sm_page_phone}
+		</if>
+		<if test="sm_page != null">
+			and sm_page = #{sm_page}
+		</if>
+		<if test="sm_description != null">
+			and sm_description = #{sm_description}
+		</if>
+		<if test="sm_used != null">
+			and sm_used = #{sm_used}
+		</if>
+		<if test="sm_icon_name != null">
+			and sm_icon_name = #{sm_icon_name}
+		</if>
+		<if test="sm_shortcut_key != null">
+			and sm_shortcut_key = #{sm_shortcut_key}
+		</if>
+		<if test="sm_is_top != null">
+			and sm_is_top = #{sm_is_top}
+		</if>
+		<if test="sm_cotain_page != null">
+			and sm_cotain_page = #{sm_cotain_page}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+		order by sm_code
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.SysMenu"
+		resultType="int">
+		select count(*) from sj_sys_menu where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="sm_name != null">
+			and sm_name = #{sm_name}
+		</if>
+		<if test="sm_code != null">
+			and sm_code = #{sm_code}
+		</if>
+		<if test="sm_title != null">
+			and sm_title = #{sm_title}
+		</if>
+		<if test="sm_parent != null">
+			and sm_parent = #{sm_parent}
+		</if>
+		<if test="sm_page_phone != null">
+			and sm_page_phone = #{sm_page_phone}
+		</if>
+		<if test="sm_page != null">
+			and sm_page = #{sm_page}
+		</if>
+		<if test="sm_description != null">
+			and sm_description = #{sm_description}
+		</if>
+		<if test="sm_used != null">
+			and sm_used = #{sm_used}
+		</if>
+		<if test="sm_icon_name != null">
+			and sm_icon_name = #{sm_icon_name}
+		</if>
+		<if test="sm_shortcut_key != null">
+			and sm_shortcut_key = #{sm_shortcut_key}
+		</if>
+		<if test="sm_is_top != null">
+			and sm_is_top = #{sm_is_top}
+		</if>
+		<if test="sm_cotain_page != null">
+			and sm_cotain_page = #{sm_cotain_page}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.SysMenu">
+		UPDATE sj_sys_menu
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="sm_name != null">sm_name=#{sm_name},</if>
+			<if test="sm_code != null">sm_code=#{sm_code},</if>
+			<if test="sm_title != null">sm_title=#{sm_title},</if>
+			<if test="sm_parent != null">sm_parent=#{sm_parent},</if>
+			<if test="sm_page_phone != null">sm_page_phone=#{sm_page_phone},</if>
+			<if test="sm_page != null">sm_page=#{sm_page},</if>
+			<if test="sm_description != null">sm_description=#{sm_description},</if>
+			<if test="sm_used != null">sm_used=#{sm_used},</if>
+			<if test="sm_icon_name != null">sm_icon_name=#{sm_icon_name},</if>
+			<if test="sm_shortcut_key != null">sm_shortcut_key=#{sm_shortcut_key},</if>
+			<if test="sm_is_top != null">sm_is_top=#{sm_is_top},</if>
+			<if test="sm_cotain_page != null">sm_cotain_page=#{sm_cotain_page},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.SysMenu">
+		delete from sj_sys_menu where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.SysMenu">
+		select * from sj_sys_menu where id=#{id}
+	</select>
+	<select id="selectByRoleId" parameterType="String" resultType="com.sict.entity.SysMenu">
+		select b.* from sj_sys_role_menu a,sj_sys_menu b 
+		where a.SRM_MENU_ID=b.ID 
+		AND a.SRM_ROLE_ID= #{role_id} and SM_IS_TOP='1'
+		ORDER BY SM_CODE
+	</select>
+	<select id="selectByRoleIdAndPraentId" parameterType="map" resultType="com.sict.entity.SysMenu">
+		select b.* from sj_sys_role_menu a,sj_sys_menu b 
+		where a.SRM_MENU_ID=b.ID 
+		AND a.SRM_ROLE_ID= #{role_id} AND b.SM_PARENT=#{praent_id}
+		ORDER BY SM_CODE
+	</select>
+	
+	<!-- 根据角色id查菜单资源表且 为可用 且为一级菜单 -->
+	<select id="selectListByRoleId" parameterType="String" resultType="com.sict.entity.SysMenu">
+		SELECT * FROM sj_sys_menu WHERE ID IN (
+			SELECT SRM_MENU_ID FROM sj_sys_role_menu WHERE SRM_ROLE_ID =#{srm_role_id}
+		) AND SM_USED = 1 AND SM_IS_TOP = '1'
+	</select>
+	
+	<!-- 根据角色id查菜单资源表且为可用且SM_SHORTCUT_KEY（是否为快捷键）为1 -->
+	<select id="selectListByRoleIdMP" parameterType="String" resultType="com.sict.entity.SysMenu">
+		SELECT * FROM sj_sys_menu WHERE ID IN (
+			SELECT SRM_MENU_ID FROM sj_sys_role_menu WHERE SRM_ROLE_ID =#{srm_role_id}
+		) AND SM_USED = 1 AND SM_SHORTCUT_KEY = '1'
+	</select>
+	
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.ScoreDao">
+
+	<!-- 检查是否签到成功 by孟凡朕 20140917 -->
+	<select id="selectScore" parameterType="map" resultType="com.sict.entity.Score">
+         <![CDATA[ 
+              
+              select * from sj_score where stu_id=#{stu_id}
+         ]]>
+	</select>
+
+	<!-- <resultMap id="BaseResultMap" type="com.dingxun.tiku.vo.Area"> <id 
+		column="area_id" jdbcType="INTEGER" property="areaId" /> <result column="code" 
+		jdbcType="VARCHAR" property="code" /> <result column="parent" jdbcType="INTEGER" 
+		property="parent" /> </resultMap> -->
+
+	<insert id="insertMap" parameterType="map" statementType="PREPARED">
+		<![CDATA[ 
+		INSERT INTO sj_score(ID,PRACTICE_ID,STU_ID,TYPE,TIME,YEAR,TERM,SCORE,WEIGHT,NOTE)
+		values(#{id},#{Practice_id},#{stu_id},#{type},#{time},#{year},#{term},#{score},#{Weight},#{Note})
+	]]>
+	</insert>
+	<select id="ScoreList" parameterType="map" resultType="java.util.HashMap">
+         <![CDATA[ 
+	 select b.USER_ID,d.SCORE thesisscore,e.SCORE evaluatescore,sum(c.SCORE)/12 
+	monthscore,f.ORG_NAME,g.TRUE_NAME,g.STU_CODE,(d.SCORE*#{weight_thesis}+e.SCORE*#{weight_evaluate}+(sum(c.SCORE)/12)*#{weight_month})  totalscore,h.TASK_NAME
+	from sj_groups a,sj_group_members b,sj_month_summary c,sj_thesis
+	d,sj_evaluate e,sj_org f,sj_student g,sj_practice_task h
+	where A.PRACTICE_ID=#{practice_id}
+	and h.id=#{practice_id}
+	and a.id=b.group_id
+	and LENGTH(b.user_id)=32
+	and f.ID=g.CLASS_ID
+	and g.id=b.USER_ID
+	and b.user_id=c.stu_id
+	and b.user_id=d.stu_id
+	and b.user_id=e.stu_id
+	GROUP BY c.STU_ID
+         ]]>
+	</select>
+	<!--获取该实践任务下该学生的的论文分数 2015-01-27 邢志武 -->
+	<select id="getThesisScore" parameterType="map" resultType="String">
+         <![CDATA[ 
+			SELECT SCORE FROM sj_thesis 
+			WHERE  REVIEW_TIME=( SELECT MAX(REVIEW_TIME) FROM sj_thesis 
+			WHERE STU_ID=#{stu_id}
+			AND PRACTICE_ID=#{pract_id} ) 
+         ]]>
+	</select>
+	<!-- 获取该实践任务下该学生的的月总结分数 2015-01-27 邢志武  9月5-10月5为九月    吴敬国2015-10-10 -->
+	<!-- 假期后修改 2016年1月20日 -->
+	<!--  	原方法
+			SELECT SUM(SCORE) FROM sj_summary_qnanswer 
+			WHERE user_id= #{stu_id}
+			AND practiceTasksID=#{pract_id}
+			AND enddate >'2015-09-05' AND questionnaire_id NOT IN (
+			SELECT id FROM sj_summary_questionnaire WHERE startdate <'2015-09'
+			)
+	-->
+	<select id="getMothScore" parameterType="map" resultType="double">
+         <![CDATA[ 
+			SELECT SUM(SCORE) FROM sj_summary_qnanswer 
+			WHERE user_id= #{stu_id}
+			AND practiceTasksID=#{pract_id}
+			AND enddate >#{year} AND questionnaire_id NOT IN (
+			SELECT id FROM sj_summary_questionnaire WHERE startdate <#{year}
+			OR state='0'
+			)
+         ]]>
+	</select>
+	<!--获取该实践任务下该学生的的奖惩分数 2015-01-27 邢志武 -->
+	<select id="getEvaScore" parameterType="map" resultType="double">
+         <![CDATA[ 
+			SELECT sum(SCORE) FROM sj_evaluate WHERE STU_ID=#{stu_id}
+			AND PRACTICE_ID=#{pract_id}
+         ]]>
+	</select>
+		<!--获取该实践任务下该学生的的奖惩开始时间 2015-01-27 邢志武 -->
+	<select id="getStartThesisTime" parameterType="map" resultType="String">
+         <![CDATA[ 
+			SELECT MIN(answerDate) FROM sj_summary_qnanswer 
+			WHERE user_id=#{stu_id}
+			AND practiceTasksID=#{pract_id}
+         ]]>
+	</select>
+	<!--删除临时表中所有的内容  -->
+	<delete id="deleteAll">
+	<![CDATA[ 
+			delete FROM sj_temporarycomplish WHERE 1=1	
+         ]]>
+	</delete>
+	<!--插入今天的完成情况  -->
+	<insert id="insertTeaComplish" parameterType="com.sict.entity.TemporaryComplish">
+		<![CDATA[ 
+		INSERT INTO sj_temporarycomplish(id,thesisscoreaccomplish,mothscoreaccomplish,tea_id)
+		values(#{id},#{thesisscoreaccomplish},#{mothscoreaccomplish},#{tea_id})
+	]]>
+	</insert>
+	
+	<select id="getTeacherComplish" parameterType="String" resultType="com.sict.entity.TemporaryComplish">
+         <![CDATA[ 
+			SELECT * FROM sj_temporarycomplish WHERE TEA_ID=#{tea_id}
+         ]]>
+	</select>
+	
+	
+</mapper> 

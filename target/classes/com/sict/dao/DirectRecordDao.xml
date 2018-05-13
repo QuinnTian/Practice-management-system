@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.DirectRecordDao">
+	<insert id="insert" parameterType="com.sict.entity.DirectRecord"
+		statementType="PREPARED">
+		insert into
+		sj_direct_record(id,practice_id,title,direct_time,direct_place,org_id,stu_id,direct_desc,file_id,temp1,temp2,temp3,create_time,temp4,temp5)
+		values
+		(#{id},#{practice_id},#{title},#{direct_time},#{direct_place},#{org_id},#{stu_id},#{direct_desc},#{file_id},#{temp1},#{temp2},#{temp3},#{create_time},#{temp4},#{temp5})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.DirectRecord"
+		resultType="com.sict.entity.DirectRecord">
+		select * from sj_direct_record where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="direct_time != null">
+			and direct_time = #{direct_time}
+		</if>
+		<if test="direct_place != null">
+			and direct_place = #{direct_place}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="direct_desc != null">
+			and direct_desc = #{direct_desc}
+		</if>
+		<if test="file_id != null">
+			and file_id = #{file_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.DirectRecord"
+		resultType="int">
+		select count(*) from sj_direct_record where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="direct_time != null">
+			and direct_time = #{direct_time}
+		</if>
+		<if test="direct_place != null">
+			and direct_place = #{direct_place}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="direct_desc != null">
+			and direct_desc = #{direct_desc}
+		</if>
+		<if test="file_id != null">
+			and file_id = #{file_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.DirectRecord">
+		UPDATE sj_direct_record
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="practice_id != null">practice_id=#{practice_id},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="direct_time != null">direct_time=#{direct_time},</if>
+			<if test="direct_place != null">direct_place=#{direct_place},</if>
+			<if test="org_id != null">org_id=#{org_id},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="direct_desc != null">direct_desc=#{direct_desc},</if>
+			<if test="file_id != null">file_id=#{file_id},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.DirectRecord">
+		delete from sj_direct_record
+		where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.DirectRecord">
+		select * from sj_direct_record where id=#{id}
+	</select>
+	<select id="getTeaDirecRecsByTeaIdAndMonth" parameterType="map"
+		resultType="com.sict.entity.DirectRecord">
+		SELECT * from sj_direct_record
+		WHERE PRACTICE_ID IN
+		(SELECT ID FROM sj_practice_task WHERE TEA_ID=#{tea_id})
+		AND DIRECT_TIME like CONCAT('%',#{month},'%') AND TEMP1=#{dr_type}
+		<!-- AND DIRECT_TIME like '%#{month}%' -->
+	</select>
+	<select id="getTeaDirecRecsByTeaId" parameterType="String"
+		resultType="com.sict.entity.DirectRecord">
+		SELECT * from sj_direct_record
+		WHERE PRACTICE_ID IN
+		(SELECT ID FROM sj_practice_task WHERE TEA_ID=#{tea_id}) ORDER BY CREATE_TIME DESC
+	</select>
+	<select id="getTeaDirecRecsByTeaIdAndDr_type" parameterType="map"
+		resultType="com.sict.entity.DirectRecord">
+		SELECT * from sj_direct_record
+		WHERE TEMP1=#{dr_type} AND PRACTICE_ID IN
+		(SELECT ID FROM sj_practice_task WHERE TEA_ID=#{tea_id}) ORDER BY CREATE_TIME DESC
+	</select>
+</mapper>

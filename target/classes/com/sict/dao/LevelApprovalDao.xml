@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.LevelApprovalDao">
+	<insert id="insert" parameterType="com.sict.entity.LevelApproval"
+		statementType="PREPARED">
+		insert into
+		sj_level_approval(id,level_application_id,approval_tea,approval_time,approval_state,approval_opinion,last_approval_id,is_approval_pass,temp1,temp2,temp3,temp4,temp5)
+		values
+		(#{id},#{level_application_id},#{approval_tea},#{approval_time},#{approval_state},#{approval_opinion},#{last_approval_id},#{is_approval_pass},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.LevelApproval"
+		resultType="com.sict.entity.LevelApproval">
+		select * from sj_level_approval where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="level_application_id != null">
+			and level_application_id = #{level_application_id}
+		</if>
+		<if test="approval_tea != null">
+			and approval_tea = #{approval_tea}
+		</if>
+		<if test="approval_time != null">
+			and approval_time = #{approval_time}
+		</if>
+		<if test="approval_state != null">
+			and approval_state = #{approval_state}
+		</if>
+		<if test="approval_opinion != null">
+			and approval_opinion = #{approval_opinion}
+		</if>
+		<if test="last_approval_id != null">
+			and last_approval_id = #{last_approval_id}
+		</if>
+		<if test="is_approval_pass != null">
+			and is_approval_pass = #{is_approval_pass}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.LevelApproval"
+		resultType="int">
+		select count(*) from sj_level_approval where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="level_application_id != null">
+			and level_application_id = #{level_application_id}
+		</if>
+		<if test="approval_tea != null">
+			and approval_tea = #{approval_tea}
+		</if>
+		<if test="approval_time != null">
+			and approval_time = #{approval_time}
+		</if>
+		<if test="approval_state != null">
+			and approval_state = #{approval_state}
+		</if>
+		<if test="approval_opinion != null">
+			and approval_opinion = #{approval_opinion}
+		</if>
+		<if test="last_approval_id != null">
+			and last_approval_id = #{last_approval_id}
+		</if>
+		<if test="is_approval_pass != null">
+			and is_approval_pass = #{is_approval_pass}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.LevelApproval">
+		UPDATE sj_level_approval
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="level_application_id != null">level_application_id=#{level_application_id},</if>
+			<if test="approval_tea != null">approval_tea=#{approval_tea},</if>
+			<if test="approval_time != null">approval_time=#{approval_time},</if>
+			<if test="approval_state != null">approval_state=#{approval_state},</if>
+			<if test="approval_opinion != null">approval_opinion=#{approval_opinion},</if>
+			<if test="last_approval_id != null">last_approval_id=#{last_approval_id},</if>
+			<if test="is_approval_pass != null">is_approval_pass=#{is_approval_pass},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.LevelApproval">
+		delete from sj_level_approval
+		where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.LevelApproval">
+		select * from sj_level_approval where id=#{id}
+	</select>
+	<select id="selectByLevel_App_ID" parameterType="String"
+		resultType="com.sict.entity.LevelApproval">
+		select * from sj_level_approval where
+		level_application_id=#{id}
+	</select>
+
+	<!-- 根据班级的id和老师id（辅导员id或者班主任id查询） 2016-02-21 张向杨 -->
+	<select id="selectByClassId" parameterType="String" resultMap="levelApproval">
+		select *
+		from
+		sj_level_application appl,
+		sj_level_approval appr
+		where
+		appl.id = appr.level_application_id
+		and appl.sla_real_students_id
+		in (
+		select
+		id
+		from
+		sj_student
+		where
+		class_id = #{classid}
+		)
+		order by
+		appl.sla_time desc
+	</select>
+	<resultMap type="com.sict.entity.LevelApproval" id="levelApproval">
+		<id property="id" column="id" />
+		<result property="level_application_id" column="level_application_id" />
+		<result property="approval_tea" column="approval_tea" />
+		<result property="approval_time" column="approval_time" />
+		<result property="approval_state" column="approval_state" />
+		<result property="approval_opinion" column="approval_opinion" />
+		<result property="last_approval_id" column="last_approval_id" />
+		<result property="is_approval_pass" column="is_approval_pass" />
+		<result property="temp1" column="temp1" />
+		<result property="temp2" column="temp2" />
+		<result property="temp3" column="temp3" />
+		<result property="temp4" column="temp4" />
+		<result property="temp5" column="temp5" />
+		<!-- ofType指定students集合中的对象类型 -->
+
+		<association property="application" javaType="com.sict.entity.Application">
+			<id property="id" column="id" />
+			<result property="sla_type" column="sla_type" />
+			<result property="sla_place" column="sla_place" />
+			<result property="sla_rank" column="sla_rank" />
+			<result property="sla_stu" column="sla_stu" />
+			<result property="sla_time" column="sla_time" />
+			<result property="sla_real_students_id" column="sla_real_students_id" />
+			<result property="sla_begin_time" column="sla_begin_time" />
+			<result property="sla_end_time" column="sla_end_time" />
+			<result property="sla_duration" column="sla_duration" />
+			<result property="sla_reason_desc" column="sla_reason_desc" />
+			<result property="is_level_school" column="is_level_school" />
+			<result property="sla_approval_state" column="sla_approval_state" />
+			<result property="final_approval_tea" column="final_approval_tea" />
+			<result property="final_approval_time" column="final_approval_time" />
+			
+			<result property="sla_effects" column="sla_effects" />
+			<result property="sla_code" column="sla_code" />
+			<result property="sla_leave_type" column="sla_leave_type" />
+			<result property="sla_org_id" column="sla_org_id" />
+
+			<result property="temp1" column="temp1" />
+			<result property="temp2" column="temp2" />
+			<result property="temp3" column="temp3" />
+			<result property="temp4" column="temp4" />
+			<result property="temp5" column="temp5" />
+		</association>
+	</resultMap>
+
+
+	<!-- 根据学院的id 查询审批记录2016-02-21 张向杨 -->
+	<select id="selectByCollegeIdAndApprovalStateAndleaveType"
+		parameterType="map" resultMap="levelApproval">
+
+		select *
+		from
+		sj_level_application appl,
+		sj_level_approval appr
+		where
+		appr.level_application_id =appl.id
+		<choose>
+			<when test="leaveType==null">
+				<!-- 什么都不做 -->
+			</when>
+			<when test="leaveType=='12'.toString()">
+
+				and appl.sla_leave_type in ('1','2')
+			</when>
+			<when test="leaveType=='234'.toString()">
+				and appl.sla_leave_type in ('2','3','4')
+			</when>
+			<otherwise>
+				and appl.sla_leave_type=#{leaveType}
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="teacherId==null"></when>
+			<when test="teacherId=='other'.toString()">
+				and appr.approval_tea!=#{teaId}
+				and appr.last_approval_id is not null 
+			</when>
+			<when test="teacherId=='othes'.toString()">
+				and appr.approval_tea!=#{teaId}
+			</when>
+			<otherwise>
+				and appr.approval_tea =#{teacherId}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="approvalState==null">
+				<!-- 什么都不做 -->
+			</when>
+			<when test="approvalState=='23'.toString()">
+				and appl.sla_approval_state in ('2','3')
+			</when>
+			<when test="approvalState=='14'.toString()">
+				and appl.sla_approval_state in ('1','4')
+			</when>
+			<when test="approvalState=='25'.toString()">
+				and appl.sla_approval_state in ('2','5')
+			</when>
+			<when test="approvalState=='36'.toString()">
+				and appl.sla_approval_state in ('3','6')
+			</when>
+			<when test="approvalState=='56'.toString()">
+				and appl.sla_approval_state in ('5','6')
+			</when>
+			<when test="approvalState=='24'.toString()">
+				and appl.sla_approval_state in ('2','4')
+			</when>
+			<when test="approvalState=='2356'.toString()">
+				and appl.sla_approval_state in ('2','3','5','6')
+			</when>
+			<when test="approvalState=='23456'.toString()">
+				and appl.sla_approval_state in ('2','3','4','5','6')
+			</when>
+			<otherwise>
+				and appl.sla_approval_state=#{approvalState}
+			</otherwise>
+		</choose>
+		and appl.sla_real_students_id
+		in
+		<choose>
+			<when test="type=='1'.toString()"></when>
+			<when test="type=='2'.toString()">
+				(
+				select
+				stu.id
+				from
+				sj_student stu
+				where
+				class_id in (
+				select
+				org.id
+				from
+				sj_org org
+				where
+				org.parent_id in (
+				select
+				o.id
+				from
+				sj_org o
+				where
+				o.parent_id = #{collegeId}
+				)
+				)
+				)
+			</when>
+			<when test="type=='3'.toString()">
+				(
+				select
+				stu.id
+				from
+				sj_student stu
+				where
+				class_id in (
+				select
+				org.id
+				from
+				sj_org org
+				where
+				org.parent_id =#{collegeId}
+				)
+				)
+			</when>
+			<when test="type=='4'.toString()"></when>
+			<when test="type=='5'.toString()">
+				(select id from sj_student where
+				class_id=#{collegeId})
+			</when>
+		</choose>
+		<choose>
+			<when test="date==null">
+
+			</when>
+			<when test="date!=null">
+				and appr.approval_time like concat(#{date},'%')
+			</when>
+		</choose>
+		<choose>
+			<when test="flag">
+				group by appl.sla_code desc
+			</when>
+			<otherwise>
+				<!-- 什么都不做 -->
+			</otherwise>
+		</choose>
+	
+		order by appr.approval_time desc
+	</select>
+	<!-- 根据申请人id，请假条类型 获得对应的审批记录 2016-05-13 张向杨 -->
+	<select id="selectByStuIdAndLeaveType" parameterType="map"
+		resultMap="levelApproval">
+		select
+		*
+		from
+		sj_level_approval appr ,sj_level_application appl
+		where
+		appl.sla_stu = #{stuId}
+		and appl.sla_leave_type=#{leaveType}
+		and
+		appl.id=appr.level_application_id
+		and appl.sla_time=#{date}
+		<if test="b">
+			group by
+			appl.sla_code
+		</if>
+		order by appl.sla_time desc
+	</select>
+	<!-- 根据班级的id查询已通过的有效的请假信息 2016-05-12 丁乐晓 -->
+	<select id="selectPassByClassId" parameterType="map" resultMap="levelApproval">
+
+		select
+		SLA_REAL_STUDENTS_ID,SLA_REASON_DESC,SLA_BEGIN_TIME,SLA_END_TIME
+		from
+		sj_level_application appl,
+		sj_level_approval appr
+		where
+		appl.id =
+		appr.level_application_id
+		and appl.sla_real_students_id
+		in (
+		select
+		id
+		from
+		sj_student
+		where
+		class_id = #{classid}
+		)
+		and SLA_EFFECTS LIKE
+		CONCAT('%',#{sla_effects},'%')
+		and IS_APPROVAL_PASS='1'
+		and
+		SLA_END_TIME>=NOW()
+		and NOW()>=SLA_BEGIN_TIME
+	</select>
+
+	<select id=""> 
+		
+	</select>
+</mapper>

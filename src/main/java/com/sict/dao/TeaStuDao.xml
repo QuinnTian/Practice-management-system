@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.TeaStuDao">
+	<insert id="insert" parameterType="com.sict.entity.TeaStu"
+		statementType="PREPARED">
+		insert into
+		sj_tea_stu(id,practice_code,practice_name,begin_time,end_time,stu_code,stu_name,tea_code,tea_name,class_code,class_name,state,temp1,temp2,temp3)
+		values
+		(#{id},#{practice_code},#{practice_name},#{begin_time},#{end_time},#{stu_code},#{stu_name},#{tea_code},#{tea_name},#{class_code},#{class_name},#{state},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.TeaStu"
+		resultType="com.sict.entity.TeaStu">
+		select * from sj_tea_stu where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_code != null">
+			and practice_code = #{practice_code}
+		</if>
+		<if test="practice_name != null">
+			and practice_name = #{practice_name}
+		</if>
+		<if test="begin_time != null">
+			and begin_time = #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="stu_code != null">
+			and stu_code = #{stu_code}
+		</if>
+		<if test="stu_name != null">
+			and stu_name = #{stu_name}
+		</if>
+		<if test="tea_code != null">
+			and tea_code = #{tea_code}
+		</if>
+		<if test="tea_name != null">
+			and tea_name = #{tea_name}
+		</if>
+		<if test="class_code != null">
+			and class_code = #{class_code}
+		</if>
+		<if test="class_name != null">
+			and class_name = #{class_name}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.TeaStu"
+		resultType="int">
+		select count(*) from sj_tea_stu where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_code != null">
+			and practice_code = #{practice_code}
+		</if>
+		<if test="practice_name != null">
+			and practice_name = #{practice_name}
+		</if>
+		<if test="begin_time != null">
+			and begin_time = #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="stu_code != null">
+			and stu_code = #{stu_code}
+		</if>
+		<if test="stu_name != null">
+			and stu_name = #{stu_name}
+		</if>
+		<if test="tea_code != null">
+			and tea_code = #{tea_code}
+		</if>
+		<if test="tea_name != null">
+			and tea_name = #{tea_name}
+		</if>
+		<if test="class_code != null">
+			and class_code = #{class_code}
+		</if>
+		<if test="class_name != null">
+			and class_name = #{class_name}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.TeaStu">
+		UPDATE sj_tea_stu
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="practice_code != null">practice_code=#{practice_code},</if>
+			<if test="practice_name != null">practice_name=#{practice_name},</if>
+			<if test="begin_time != null">begin_time=#{begin_time},</if>
+			<if test="end_time != null">end_time=#{end_time},</if>
+			<if test="stu_code != null">stu_code=#{stu_code},</if>
+			<if test="stu_name != null">stu_name=#{stu_name},</if>
+			<if test="tea_code != null">tea_code=#{tea_code},</if>
+			<if test="tea_name != null">tea_name=#{tea_name},</if>
+			<if test="class_code != null">class_code=#{class_code},</if>
+			<if test="class_name != null">class_name=#{class_name},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.TeaStu">
+		delete from sj_tea_stu where
+		id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.TeaStu">
+		select * from sj_tea_stu where id=#{id}
+	</select>
+
+
+	<!-- 根据学号查询任务编号 byccc20141105 -->
+	<select id="selectPractice_code" resultType="com.sict.entity.TeaStu">
+  		<![CDATA[
+  			select * from sj_tea_stu where stu_code=#{stu_code}
+  		]]>
+	</select>
+	<!-- 根据session中的学生编号查询虚拟班级表中的班级信息 -->
+	<select id="selectByStuCode" parameterType="String"
+		resultType="com.sict.entity.GraduationMaterials">
+         <![CDATA[ 
+         SELECT b.*
+			from  sj_graduation_materials a,sj_tea_stu b
+			where a.class_code=b.class_code and
+			 b.stu_code=#{stu_code}
+         ]]>
+	</select>
+	<!-- by 王磊  功能通过 教工号和实习任务查找对应的学生 2014-11-21 -->
+	<select id="selectStudents" parameterType="map"
+	resultType="com.sict.entity.TeaStu">
+	select * from sj_tea_stu where  tea_code=#{tea_code} and practice_code = #{practice_code} 
+	</select>
+	<!-- 吴敬国20141123-->
+	<select id="selectTeaListByTeacodeAndPracticecode" parameterType="String"
+		resultType="com.sict.entity.TeaStu">
+         <![CDATA[ 
+         select stu_code,stu_name from sj_tea_stu where  tea_code=#{tea_code} and practice_code=#{practice_code} and state='1'
+         ]]>
+	</select>
+	
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.ReportDetailGraduationMaterialMapper">
+	<resultMap id="ReportDetailGraduationMaterialResult" type="com.sict.entity.ReportDetailGraduationMaterial">
+		<id property="stu_id" column="stu_id" />
+		<result property="dept_id" column="tea_dept_id" />
+		<result property="entry_year" column="stu_entry_year" />
+		<result property="task_type" column="sj_practice_task.task_type" />
+		<result property="org_id" column="org_id" />
+		<result property="parent_id" column="org_parent_id" />		
+		<result property="group_id" column="group_id" />
+		<result property="group_name" column="sj_groups.group_name" />
+		<result property="true_name" column="sj_teacher.true_name" />
+		<result property="materials_type" column="sj_graduation_materials.materials_type" />
+		<result property="check_state" column="sj_graduation_materials.check_state" />
+
+	</resultMap>
+
+ 	<select id="selectAllReportDetailGraduationMaterial" parameterType="Map" resultMap="ReportDetailGraduationMaterialResult">
+  		<![CDATA[
+  	select sj_teacher.dept_id as tea_dept_id,sj_student.entry_year as stu_entry_year,sj_practice_task.task_type,
+    sj_org.id as org_id,sj_org.parent_id as org_parent_id,
+    sj_groups.id as group_id,sj_groups.group_name,sj_student.id as stu_id,sj_teacher.true_name,sj_graduation_materials.materials_type,sj_graduation_materials.check_state
+		from sj_teacher,sj_practice_task,sj_groups,sj_group_members,sj_student,sj_graduation_materials,sj_org
+		where sj_org.id=sj_teacher.dept_id
+		and sj_teacher.id=sj_practice_task.tea_id
+		and sj_practice_task.id=sj_groups.practice_id
+		and sj_groups.id=sj_group_members.group_id
+		and sj_group_members.user_id=sj_student.id
+		and sj_student.id=sj_graduation_materials.stu_id
+		and sj_graduation_materials.practice_id=sj_practice_task.id
+		and sj_student.entry_year=#{entry_year} 
+		and sj_practice_task.task_type=#{task_type}
+		
+  		]]>
+  		<!-- and FIND_IN_SET(sj_org.id, getChildLst(#{dept_id}))  -->
+</select>
+</mapper> 

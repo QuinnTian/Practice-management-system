@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.DailyInspectDetailsDao">
+	<insert id="insert" parameterType="com.sict.entity.DailyInspectDetails"
+		statementType="PREPARED">
+		insert into
+		sj_daily_inspect_details(id,affect_object,sdid_class_id,sdid_room_id,inspect_object_id,index_id,grade,occur_num,inspect_id,temp1,temp2,temp3,temp4,temp5)
+		values
+		(#{id},#{affect_object},#{sdid_class_id},#{sdid_room_id},#{inspect_object_id},#{index_id},#{grade},#{occur_num},#{inspect_id},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})
+	</insert>
+
+	<select id="select" parameterType="com.sict.entity.DailyInspectDetails"
+		resultType="com.sict.entity.DailyInspectDetails">
+		select * from sj_daily_inspect_details where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="affect_object != null">
+			and affect_object = #{affect_object}
+		</if>
+		<if test="sdid_class_id != null">
+			and sdid_class_id = #{sdid_class_id}
+		</if>
+		<if test="sdid_room_id != null">
+			and sdid_room_id = #{sdid_room_id}
+		</if>
+		<if test="inspect_object_id != null">
+			and inspect_object_id = #{inspect_object_id}
+		</if>
+		<if test="index_id != null">
+			and index_id = #{index_id}
+		</if>
+		<if test="grade != null">
+			and grade = #{grade}
+		</if>
+		<if test="occur_num != null">
+			and occur_num = #{occur_num}
+		</if>
+		<if test="inspect_id != null">
+			and inspect_id = #{inspect_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+	</select>
+
+	<select id="selectCount" parameterType="com.sict.entity.DailyInspectDetails"
+		resultType="int">
+		select count(*) from sj_daily_inspect_details where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="affect_object != null">
+			and affect_object = #{affect_object}
+		</if>
+		<if test="sdid_class_id != null">
+			and sdid_class_id = #{sdid_class_id}
+		</if>
+		<if test="sdid_room_id != null">
+			and sdid_room_id = #{sdid_room_id}
+		</if>
+		<if test="inspect_object_id != null">
+			and inspect_object_id = #{inspect_object_id}
+		</if>
+		<if test="index_id != null">
+			and index_id = #{index_id}
+		</if>
+		<if test="grade != null">
+			and grade = #{grade}
+		</if>
+		<if test="occur_num != null">
+			and occur_num = #{occur_num}
+		</if>
+		<if test="inspect_id != null">
+			and inspect_id = #{inspect_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+
+	<update id="update" parameterType="com.sict.entity.DailyInspectDetails">
+		UPDATE sj_daily_inspect_details
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="affect_object != null">affect_object=#{affect_object},</if>
+			<if test="sdid_class_id != null">sdid_class_id=#{sdid_class_id},</if>
+			<if test="sdid_room_id != null">sdid_room_id=#{sdid_room_id},</if>
+			<if test="inspect_object_id != null">inspect_object_id=#{inspect_object_id},</if>
+			<if test="index_id != null">index_id=#{index_id},</if>
+			<if test="grade != null">grade=#{grade},</if>
+			<if test="occur_num != null">occur_num=#{occur_num},</if>
+			<if test="inspect_id != null">inspect_id=#{inspect_id},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="com.sict.entity.DailyInspectDetails">
+		delete from sj_daily_inspect_details where id=#{id}
+	</delete>
+
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.DailyInspectDetails">
+		select * from sj_daily_inspect_details where id=#{id}
+	</select>
+	<!-- 根据关联上级id查询 某检查表下所有关联的详情表 by李达、师杰 20160301 -->
+	<select id="selectByInspect_id" parameterType="map"
+		resultType="com.sict.entity.DailyInspectDetails">
+  		<![CDATA[
+  			select * from sj_daily_inspect_details where inspect_id=#{inspect_id} 
+  		]]>
+	</select>
+	<!-- 根据日常检查表id合并日常检查详情表数据 -->
+	<select id="groupByIndexId" parameterType="map"
+		resultType="com.sict.entity.DailyInspectDetails">
+		select
+		id,affect_object,sdid_class_id,sdid_room_id,group_concat(inspect_object_id)
+		AS 'inspect_object_id',index_id,grade,inspect_id,temp1,temp2,temp3,temp4,temp5
+		from sj_daily_inspect_details where inspect_id=#{inspect_id} 
+		group by index_id
+
+	</select>
+	<!--根据日常检查表id和作用对象查询相关日常检查详情表中的学生id by师杰 2016-05-02-->
+	<select id="selectMebByObj" parameterType="map"
+		resultType="String">
+		select distinct INSPECT_OBJECT_ID from sj_daily_inspect_details 
+	WHERE inspect_id=#{inspect_id} and affect_object = 3
+
+	</select>
+	<!-- 通过导员ID和时间获取数据库中日常检查详情表中的记录 by张邦卿 2016-05-09 -->
+	<select id="getDailyInspectByDYId" parameterType="map"
+		resultType="com.sict.entity.DailyInspectDetails">
+  		<![CDATA[
+  			SELECT * FROM sj_daily_inspect_details WHERE INSPECT_ID=(
+			SELECT ID FROM sj_daily_inspect WHERE SDI_CLASS_ID IN(
+			SELECT ID FROM sj_org WHERE COUNSELOR_ID=#{Id}) 
+			AND INSPECT_TIME="2016-05-03 11:11:13");
+  		]]>
+	</select>
+</mapper>

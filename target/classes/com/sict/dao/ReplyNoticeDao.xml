@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.ReplyNoticeDao">
+	<insert id="insert" parameterType="com.sict.entity.ReplyNotice"
+		statementType="PREPARED">
+		insert into
+		sj_bbs_replyNotice(id,invitation_id,content,issuer_id,reply_id,isRead,create_time,state,Temp1,Temp2,Temp3,Temp4,Temp5)
+		values
+		(#{id},#{invitation_id},#{content},#{issuer_id},#{reply_id},#{isRead},#{create_time},#{state},#{Temp1},#{Temp2},#{Temp3},#{Temp4},#{Temp5})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.ReplyNotice"
+		resultType="com.sict.entity.ReplyNotice">
+		select * from sj_bbs_replyNotice where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="invitation_id != null">
+			and invitation_id = #{invitation_id}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="issuer_id != null">
+			and issuer_id = #{issuer_id}
+		</if>
+		<if test="reply_id != null">
+			and reply_id = #{reply_id}
+		</if>
+		<if test="isRead != null">
+			and isRead = #{isRead}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="Temp1 != null">
+			and Temp1 = #{Temp1}
+		</if>
+		<if test="Temp2 != null">
+			and Temp2 = #{Temp2}
+		</if>
+		<if test="Temp3 != null">
+			and Temp3 = #{Temp3}
+		</if>
+		<if test="Temp4 != null">
+			and Temp4 = #{Temp4}
+		</if>
+		<if test="Temp5 != null">
+			and Temp5 = #{Temp5}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.ReplyNotice"
+		resultType="int">
+		select count(*) from sj_bbs_replyNotice where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="invitation_id != null">
+			and invitation_id = #{invitation_id}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="issuer_id != null">
+			and issuer_id = #{issuer_id}
+		</if>
+		<if test="reply_id != null">
+			and reply_id = #{reply_id}
+		</if>
+		<if test="isRead != null">
+			and isRead = #{isRead}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="Temp1 != null">
+			and Temp1 = #{Temp1}
+		</if>
+		<if test="Temp2 != null">
+			and Temp2 = #{Temp2}
+		</if>
+		<if test="Temp3 != null">
+			and Temp3 = #{Temp3}
+		</if>
+		<if test="Temp4 != null">
+			and Temp4 = #{Temp4}
+		</if>
+		<if test="Temp5 != null">
+			and Temp5 = #{Temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.ReplyNotice">
+		UPDATE sj_bbs_replyNotice
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="invitation_id != null">invitation_id=#{invitation_id},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="issuer_id != null">issuer_id=#{issuer_id},</if>
+			<if test="reply_id != null">reply_id=#{reply_id},</if>
+			<if test="isRead != null">
+				isRead=#{isRead},
+			</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="Temp1 != null">Temp1=#{Temp1},</if>
+			<if test="Temp2 != null">Temp2=#{Temp2},</if>
+			<if test="Temp3 != null">Temp3=#{Temp3},</if>
+			<if test="Temp4 != null">Temp4=#{Temp4},</if>
+			<if test="Temp5 != null">Temp5=#{Temp5}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.ReplyNotice">
+		delete from sj_bbs_replyNotice
+		where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.ReplyNotice">
+		select * from sj_bbs_replyNotice where id=#{id}
+	</select>
+	<!--查询本人未查看的通知  -->
+	<select id="selectNotReadNotice" parameterType="String"
+		resultType="com.sict.entity.ReplyNotice">
+		SELECT * FROM sj_bbs_replynotice WHERE issuer_id = #{user_id} AND isread='2' ORDER BY create_time DESC
+	</select>
+</mapper>

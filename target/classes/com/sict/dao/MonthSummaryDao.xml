@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.MonthSummaryDao">
+
+ 	<!-- -->
+    <insert id="upPhoto" parameterType="com.sict.entity.MonthSummary">
+        <![CDATA[ 
+           UPDATE sj_month_summary SET photo_id=#{photo_id} WHERE id=#{id}
+        ]]>  
+    </insert>
+    
+    <!--  检查是否有月总结   by孟凡朕 20140917-->
+   <select id="isMonthSummary" parameterType="map" resultType="com.sict.entity.MonthSummary">
+         <![CDATA[ 
+              
+              select * from sj_month_summary where stu_code=#{stu_code} and date_format(time,'%Y-%m')=#{time}
+         ]]>  
+    </select> 
+     
+ 
+ 	
+</mapper> 

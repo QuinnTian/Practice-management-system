@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.TrainDetailDao">
+	<insert id="insert" parameterType="com.sict.entity.TrainDetail"
+		statementType="PREPARED">
+		insert into
+		sj_train_detail(id,task_id,org_id,group_id,course_id,tea_id,train_time,train_term,week_num,class_num,train_place,temp1,temp2,temp3)
+		values
+		(#{id},#{task_id},#{org_id},#{group_id},#{course_id},#{tea_id},#{train_time},#{train_term},#{week_num},#{class_num},#{train_place},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.TrainDetail"
+		resultType="com.sict.entity.TrainDetail">
+		select * from sj_train_detail where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="task_id != null">
+			and task_id = #{task_id}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="group_id != null">
+			and group_id = #{group_id}
+		</if>
+		<if test="course_id != null">
+			and course_id = #{course_id}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="train_time != null">
+			and train_time = #{train_time}
+		</if>
+		<if test="train_term != null">
+			and train_term = #{train_term}
+		</if>
+		<if test="week_num != null">
+			and week_num = #{week_num}
+		</if>
+		<if test="class_num != null">
+			and class_num = #{class_num}
+		</if>
+		<if test="train_place != null">
+			and train_place = #{train_place}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.TrainDetail"
+		resultType="int">
+		select count(*) from sj_train_detail where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="task_id != null">
+			and task_id = #{task_id}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="group_id != null">
+			and group_id = #{group_id}
+		</if>
+		<if test="course_id != null">
+			and course_id = #{course_id}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="train_time != null">
+			and train_time = #{train_time}
+		</if>
+		<if test="train_term != null">
+			and train_term = #{train_term}
+		</if>
+		<if test="week_num != null">
+			and week_num = #{week_num}
+		</if>
+		<if test="class_num != null">
+			and class_num = #{class_num}
+		</if>
+		<if test="train_place != null">
+			and train_place = #{train_place}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.TrainDetail">
+		UPDATE sj_train_detail
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="task_id != null">task_id=#{task_id},</if>
+			<if test="org_id != null">org_id=#{org_id},</if>
+			<if test="group_id != null">group_id=#{group_id},</if>
+			<if test="course_id != null">course_id=#{course_id},</if>
+			<if test="tea_id != null">tea_id=#{tea_id},</if>
+			<if test="train_time != null">train_time=#{train_time},</if>
+			<if test="train_term != null">train_term=#{train_term},</if>
+			<if test="week_num != null">week_num=#{week_num},</if>
+			<if test="class_num != null">class_num=#{class_num},</if>
+			<if test="train_place != null">train_place=#{train_place},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.TrainDetail">
+		delete from sj_train_detail where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.TrainDetail">
+		select * from sj_train_detail where id=#{id}
+	</select>
+	<select id="searchTrain" parameterType="map"
+		resultType="com.sict.entity.TrainDetail">
+  		<![CDATA[
+  		SELECT * FROM sj_train_detail  where  task_id=#{task_id} and  train_time between #{ts} and #{time} order by train_time ,class_num
+  		]]>
+	</select>
+	<select id="searchTrainNoTime" parameterType="map"
+		resultType="com.sict.entity.TrainDetail">
+  		<![CDATA[
+  		SELECT  *, count(DISTINCT( substring( train_time,   1,   10   )))  FROM sj_train_detail  where  task_id=#{task_id}  group by train_time order by train_time ,class_num
+  		]]>
+	</select>
+	<!-- 根据学院id得到本学院的所有的实训安排信息 by王磊2015年1月29日-->
+	<select id="selectListByDeptid" parameterType="string"
+		resultType="com.sict.entity.TrainDetail">
+  		<![CDATA[
+  		 select * from sj_train_detail where tea_id in(
+  		 SELECT id from sj_teacher where DEPT_ID IN(SELECT ID from sj_org WHERE parent_id=#{dept_id}) or DEPT_ID=#{dept_id})
+  		]]>
+	</select>
+	<!-- 根据部门id得到该部门的实训安排课表信息 by 王磊2015年6月9日  -->
+	<select id="selectByDeptId" parameterType="string"
+		resultType="com.sict.entity.TrainDetail">
+  		<![CDATA[
+  		 SELECT * FROM sj_train_detail where TEA_ID IN(select id from sj_teacher where DEPT_ID=#{dept_id})
+  		]]>
+	</select>
+	<!--得到实训任务的年份 by王磊2015年6月10日  -->
+	<select id="getYears" resultType="String">
+		<![CDATA[
+		SELECT DISTINCT(LEFT(train_time,4)) from sj_train_detail ORDER BY train_time
+		]]>
+	</select>
+	<!--通过实训时间，学期，部门id条件得到实训安排  -->
+	<select id="getTrains" parameterType="Map" resultType="com.sict.entity.TrainDetail">
+		<![CDATA[
+		select * from sj_train_detail where sj_train_detail.TRAIN_TERM=#{term}
+				and sj_train_detail.TRAIN_TIME>#{begin_time}
+				and sj_train_detail.TRAIN_TIME<#{end_time}
+				and tea_id IN(select id from sj_teacher where DEPT_ID=#{dept_id})
+		]]>
+	</select>
+	<!--通过实训时间，学期，教师id条件得到实训安排  -->
+	<select id="getTrainsByTeaId" parameterType="Map" resultType="com.sict.entity.TrainDetail">
+		<![CDATA[
+		select * from sj_train_detail where sj_train_detail.TRAIN_TERM=#{term}
+				and sj_train_detail.TRAIN_TIME>#{begin_time}
+				and sj_train_detail.TRAIN_TIME<#{end_time}
+				and tea_id=#{tea_id} ORDER BY TRAIN_TIME;
+		]]>
+	</select>
+</mapper>

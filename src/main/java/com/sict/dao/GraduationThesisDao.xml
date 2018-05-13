@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.GraduationThesisDao">
+	<!-- 查询所有graduationThesis by ccc 20140914 -->
+	<select id="select" parameterType="com.sict.entity.GraduationThesis"
+		resultType="com.sict.entity.GraduationThesis">
+		select * from sj_thesis where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="thesis_name != null">
+			and thesis_name = #{thesis_name}
+		</if>
+		<if test="version != null">
+			and version = #{version}
+		</if>
+		<if test="thesis_desc != null">
+			and thesis_desc = #{thesis_desc}
+		</if>
+		<if test="file_id != null">
+			and file_id = #{file_id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="review_time != null">
+			and review_time = #{review_time}
+		</if>
+		<if test="progress != null">
+			and progress = #{progress}
+		</if>
+		<if test="comment != null">
+			and comment = #{comment}
+		</if>
+		<if test="score_type != null">
+			and score_type = #{score_type}
+		</if>
+		<if test="score != null">
+			and score = #{score}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+        ORDER BY VERSION  DESC
+	</select>
+	<!-- 根据id查询毕业论文 by ccc 20140917 -->
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.GraduationThesis">
+		select * from sj_thesis where id=#{id}
+	</select>
+	<!-- 修改毕业论文 by ccc 20140917 -->
+	<update id="update" parameterType="com.sict.entity.GraduationThesis">
+		UPDATE sj_thesis
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="practice_id != null">practice_id=#{practice_id},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="type != null">type=#{type},</if>
+			<if test="thesis_name != null">thesis_name=#{thesis_name},</if>
+			<if test="version != null">version=#{version},</if>
+			<if test="thesis_desc != null">thesis_desc=#{thesis_desc},</if>
+			<if test="file_id != null">file_id=#{file_id},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="review_time != null">review_time=#{review_time},</if>
+			<if test="progress != null">progress=#{progress},</if>
+			<if test="comment != null">comment=#{comment},</if>
+			<if test="score_type != null">score_type=#{score_type},</if>
+			<if test="score != null">score=#{score},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+	<!-- 删除毕业论文byCCC20140917 -->
+	<delete id="delete" parameterType="com.sict.entity.GraduationThesis">
+		delete from sj_thesis where id=#{id}
+	</delete>
+	<!-- 插入毕业论文信息 byCCC20140917 -->
+	<insert id="insert" parameterType="com.sict.entity.GraduationThesis"
+		statementType="PREPARED">
+		insert into
+		sj_thesis(id,practice_id,stu_id,type,thesis_name,version,thesis_desc,file_id,create_time,review_time,progress,comment,score_type,score,temp1,temp2,temp3)
+		values
+		(#{id},#{practice_id},#{stu_id},#{type},#{thesis_name},#{version},#{thesis_desc},#{file_id},#{create_time},#{review_time},#{progress},#{comment},#{score_type},#{score},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<!-- 根据学号查询毕业论文当前版本 by zcg 20141009 -->
+	<select id="getCurrentVersion" parameterType="String"
+		resultType="com.sict.entity.GraduationThesis">
+		select * from sj_thesis where stu_id=#{user_id} and TYPE='毕业论文' order by version desc limit 0,1
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.GraduationThesis"
+		resultType="int">
+		select count(*) from sj_thesis where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="thesis_name != null">
+			and thesis_name = #{thesis_name}
+		</if>
+		<if test="version != null">
+			and version = #{version}
+		</if>
+		<if test="thesis_desc != null">
+			and thesis_desc = #{thesis_desc}
+		</if>
+		<if test="file_id != null">
+			and file_id = #{file_id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="review_time != null">
+			and review_time = #{review_time}
+		</if>
+		<if test="progress != null">
+			and progress = #{progress}
+		</if>
+		<if test="comment != null">
+			and comment = #{comment}
+		</if>
+		<if test="score_type != null">
+			and score_type = #{score_type}
+		</if>
+		<if test="score != null">
+			and score = #{score}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+	</select>
+	<!-- 根据学号 实习任务id 获得版本号最大的那个论文  by 吴敬国 2015-4-20 -->
+	<select id="getMaxVersionByStuAndPraId" parameterType="map" resultType="com.sict.entity.GraduationThesis">
+		<!-- SELECT * from sj_thesis where STU_ID=#{stu_id} and PRACTICE_ID=#{pra_id} 
+		and VERSION=(select MAX(VERSION) from sj_thesis) -->
+		SELECT * from sj_thesis where STU_ID=#{stu_id} 
+		and PRACTICE_ID=#{pra_id}  
+		and type='毕业论文' and 
+		CREATE_TIME=
+		(SELECT MAX(CREATE_TIME) FROM sj_thesis where STU_ID=#{stu_id} and PRACTICE_ID=#{pra_id}  and type='毕业论文')
+	</select>
+	<!-- 根据学生id 实习任务id 获得最新的实训作品信息  by 吴敬国 2015-6-5 -->
+	<select id="getNewTrainByStuAndPraId" parameterType="map" resultType="com.sict.entity.GraduationThesis">
+		SELECT * FROM sj_thesis WHERE STU_ID=#{stu_id} 
+		and TYPE='实训作品' 
+		and PRACTICE_ID=#{pra_id} 
+		ORDER BY  CREATE_TIME DESC LIMIT 0,1
+	</select>
+</mapper>

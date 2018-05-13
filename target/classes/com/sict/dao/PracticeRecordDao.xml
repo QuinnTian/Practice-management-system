@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.PracticeRecordDao">
+	<insert id="insert" parameterType="com.sict.entity.PracticeRecord"
+		statementType="PREPARED">
+		insert into
+		sj_practice_record(id,practice_id,apply_time,stu_id,company_id,post_id,is_netsign,is_contract,leader,com_teacher,com_phone,check_time,check_state,work_time,prct_contract_time,netsign_time,contract_time,dimission_time,com_orgion,work_orgion,note,temp1,temp2,temp3)
+		values
+		(#{id},#{practice_id},#{apply_time},#{stu_id},#{company_id},#{post_id},#{is_netsign},#{is_contract},#{leader},#{com_teacher},#{com_phone},#{check_time},#{check_state},#{work_time},#{prct_contract_time},#{netsign_time},#{contract_time},#{dimission_time},#{com_orgion},#{work_orgion},#{note},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.PracticeRecord"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="apply_time != null">
+			and apply_time = #{apply_time}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="company_id != null">
+			and company_id = #{company_id}
+		</if>
+		<if test="post_id != null">
+			and post_id = #{post_id}
+		</if>
+		<if test="is_netsign != null">
+			and is_netsign = #{is_netsign}
+		</if>
+		<if test="is_contract != null">
+			and is_contract = #{is_contract}
+		</if>
+		<if test="leader != null">
+			and leader = #{leader}
+		</if>
+		<if test="com_teacher != null">
+			and com_teacher = #{com_teacher}
+		</if>
+		<if test="com_phone != null">
+			and com_phone = #{com_phone}
+		</if>
+		<if test="check_time != null">
+			and check_time = #{check_time}
+		</if>
+		<if test="check_state != null">
+			and check_state = #{check_state}
+		</if>
+		<if test="work_time != null">
+			and work_time = #{work_time}
+		</if>
+		<if test="prct_contract_time != null">
+			and prct_contract_time = #{prct_contract_time}
+		</if>
+		<if test="netsign_time != null">
+			and netsign_time = #{netsign_time}
+		</if>
+		<if test="contract_time != null">
+			and contract_time = #{contract_time}
+		</if>
+		<if test="dimission_time != null">
+			and dimission_time = #{dimission_time}
+		</if>
+		<if test="com_orgion != null">
+			and com_orgion = #{com_orgion}
+		</if>
+		<if test="work_orgion != null">
+			and work_orgion = #{work_orgion}
+		</if>
+		<if test="note != null">
+			and note = #{note}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		order by apply_time desc
+	</select>
+	<update id="update" parameterType="com.sict.entity.PracticeRecord">
+		UPDATE sj_practice_record
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="practice_id != null">practice_id=#{practice_id},</if>
+			<if test="apply_time != null">apply_time=#{apply_time},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="company_id != null">company_id=#{company_id},</if>
+			<if test="post_id != null">post_id=#{post_id},</if>
+			<if test="is_netsign != null">is_netsign=#{is_netsign},</if>
+			<if test="is_contract != null">is_contract=#{is_contract},</if>
+			<if test="leader != null">leader=#{leader},</if>
+			<if test="com_teacher != null">com_teacher=#{com_teacher},</if>
+			<if test="com_phone != null">com_phone=#{com_phone},</if>
+			<if test="check_time != null">check_time=#{check_time},</if>
+			<if test="check_state != null">check_state=#{check_state},</if>
+			<if test="work_time != null">work_time=#{work_time},</if>
+			<if test="prct_contract_time != null">prct_contract_time=#{prct_contract_time},</if>
+			<if test="netsign_time != null">netsign_time=#{netsign_time},</if>
+			<if test="contract_time != null">contract_time=#{contract_time},</if>
+			<if test="dimission_time != null">dimission_time=#{dimission_time},</if>
+			<if test="com_orgion != null">com_orgion=#{com_orgion},</if>
+			<if test="work_orgion != null">work_orgion=#{work_orgion},</if>
+			<if test="note != null">note=#{note},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<update id="updateResign" parameterType="com.sict.entity.PracticeRecord">
+		UPDATE sj_practice_record
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="practice_id != null">practice_id=#{practice_id},</if>
+			<if test="apply_time != null">apply_time=#{apply_time},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="company_id != null">company_id=#{company_id},</if>
+			<if test="post_id != null">post_id=#{post_id},</if>
+			<if test="is_netsign != null">is_netsign=#{is_netsign},</if>
+			<if test="is_contract != null">is_contract=#{is_contract},</if>
+			<if test="leader != null">leader=#{leader},</if>
+			<if test="com_teacher != null">com_teacher=#{com_teacher},</if>
+			<if test="com_phone != null">com_phone=#{com_phone},</if>
+			<if test="check_time != null">check_time=#{check_time},</if>
+			<if test="check_state != null">check_state=#{check_state},</if>
+			<if test="work_time != null">work_time=#{work_time},</if>
+			<if test="prct_contract_time != null">prct_contract_time=#{prct_contract_time},</if>
+			<if test="netsign_time != null">netsign_time=#{netsign_time},</if>
+			<if test="contract_time != null">contract_time=#{contract_time},</if>
+			<if test="dimission_time != null">dimission_time=#{dimission_time},</if>
+			<if test="com_orgion != null">com_orgion=#{com_orgion},</if>
+			<if test="work_orgion != null">work_orgion=#{work_orgion},</if>
+			<if test="note != null">note=#{note},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE practice_id=#{practice_id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.PracticeRecord">
+		delete from sj_practice_record
+		where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where id=#{id}
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.PracticeRecord"
+		resultType="int">
+		select count(*) from sj_practice_record where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="apply_time != null">
+			and apply_time = #{apply_time}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="company_id != null">
+			and company_id = #{company_id}
+		</if>
+		<if test="post_id != null">
+			and post_id = #{post_id}
+		</if>
+		<if test="is_netsign != null">
+			and is_netsign = #{is_netsign}
+		</if>
+		<if test="is_contract != null">
+			and is_contract = #{is_contract}
+		</if>
+		<if test="leader != null">
+			and leader = #{leader}
+		</if>
+		<if test="com_teacher != null">
+			and com_teacher = #{com_teacher}
+		</if>
+		<if test="com_phone != null">
+			and com_phone = #{com_phone}
+		</if>
+		<if test="check_time != null">
+			and check_time = #{check_time}
+		</if>
+		<if test="check_state != null">
+			and check_state = #{check_state}
+		</if>
+		<if test="work_time != null">
+			and work_time = #{work_time}
+		</if>
+		<if test="prct_contract_time != null">
+			and prct_contract_time = #{prct_contract_time}
+		</if>
+		<if test="netsign_time != null">
+			and netsign_time = #{netsign_time}
+		</if>
+		<if test="contract_time != null">
+			and contract_time = #{contract_time}
+		</if>
+		<if test="dimission_time != null">
+			and dimission_time = #{dimission_time}
+		</if>
+		<if test="com_orgion != null">
+			and com_orgion = #{com_orgion}
+		</if>
+		<if test="work_orgion != null">
+			and work_orgion = #{work_orgion}
+		</if>
+		<if test="note != null">
+			and note = #{note}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<!-- 根据tea_code查询学生 by郑春光20140916 -->
+	<select id="selectListByTeaCode" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+         <![CDATA[ 
+         SELECT a.* 
+			from  sj_practice_record a,sj_tea_stu b
+			where a.STU_CODE=b.STU_CODE
+			and b.TEA_CODE=#{tea_code}
+         ]]>
+	</select>
+	<!--新增实习申请 byccc20141202 -->
+	<insert id="insertPracticeRecord" parameterType="com.sict.entity.PracticeRecord">
+        <![CDATA[ 
+         insert into sj_practice_record(id,practice_id,apply_time,stu_id,company_id,post_id,is_netsign,is_contract,leader,com_teacher,com_phone,check_time,check_state,work_time,prct_contract_time,netsign_time,contract_time,dimission_time,com_orgion,work_orgion,note,temp1,temp2,temp3)
+		values (#{id},#{practice_id},#{apply_time},#{stu_id},#{company_id},#{post_id},#{is_netsign},#{is_contract},#{leader},#{com_teacher},#{com_phone},#{check_time},#{check_state},#{work_time},#{prct_contract_time},#{netsign_time},#{contract_time},#{dimission_time},#{com_orgion},#{work_orgion},#{note},#{temp1},#{temp2},#{temp3})
+        ]]>
+	</insert>
+	<!-- 查询教师所对应学生实习申请记录 by王磊201401202 -->
+	<select id="selectListByTeaId" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+        <![CDATA[ 
+           select * from sj_practice_record  a join sj_groups
+ 		   b on a.practice_id=b.practice_id  join sj_group_members  c on c.group_id=b.id
+		   where c.USER_ID=#{tea_id};
+        ]]>
+	</select>
+	<update id="updatetime" parameterType="com.sict.entity.PracticeRecord">
+		UPDATE sj_practice_record
+		<set>
+			<if test="practice_id != null">practice_id=#{practice_id},</if>
+			<if test="apply_time != null">apply_time=#{apply_time},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="company_id != null">company_id=#{company_id},</if>
+			<if test="post_id != null">post_id=#{post_id},</if>
+			<if test="is_netsign != null">is_netsign=#{is_netsign},</if>
+			<if test="is_contract != null">is_contract=#{is_contract},</if>
+			<if test="leader != null">leader=#{leader},</if>
+			<if test="com_teacher != null">com_teacher=#{com_teacher},</if>
+			<if test="com_phone != null">com_phone=#{com_phone},</if>
+			<if test="check_time != null">check_time=#{check_time},</if>
+			<if test="check_state != null">check_state=#{check_state},</if>
+			<if test="work_time != null">work_time=#{work_time},</if>
+			<if test="prct_contract_time != null">prct_contract_time=#{prct_contract_time},</if>
+			<if test="netsign_time != null">netsign_time=#{netsign_time},</if>
+			<if test="contract_time != null">contract_time=#{contract_time},</if>
+			<if test="dimission_time != null">dimission_time=#{dimission_time},</if>
+			<if test="com_orgion != null">com_orgion=#{com_orgion},</if>
+			<if test="work_orgion != null">work_orgion=#{work_orgion},</if>
+			<if test="note != null">note=#{note},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+		</set>
+		WHERE stu_id=#{stu_id} and dimission_time is null
+	</update>
+	<!-- 根据学号选出实习就业记录判断是否离职 by ccc2014/12/10 -->
+	<select id="selectByStu_id" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where stu_id=#{stu_id}
+		 and DIMISSION_TIME is null 
+	</select>
+	<!-- 根据学号查出学生通过审核的实习记录 李泽2016/4/12 -->
+	<select id="selectByStuid" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where stu_id=#{stu_id} and
+		DIMISSION_TIME is null and CHECK_TIME is not null and CHECK_STATE ='1'
+	</select>
+	<!-- 根据学号选出实习就业记录判断是否审核 by ccc2014/12/10 -->
+	<select id="selectByStu_ids" parameterType="map"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where stu_id=#{stu_id} and
+		practice_id=#{practice_id} and dimission_time is null and
+		(check_state='1' or check_state='2'or check_state='0') and (check_time
+		is null or check_time=(select max(check_time) from sj_practice_record
+		where stu_id=#{stu_id} and practice_id=#{practice_id}))
+	</select>
+	<!-- 根据学号选出实习就业记录判断是否离职 by ccc2015/1/21 -->
+	<select id="selectByStu_idDisstime" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where stu_id=#{stu_id}
+		and dimission_time is null and APPLY_TIME in(
+		select MAX(APPLY_TIME) from sj_practice_record where stu_id=#{stu_id}
+		and dimission_time is null
+		)
+
+	</select>
+	<!--根据实习任务的id得到这个任务的所有实习就业记录 by wjg2015 01-20 2015-9-1 -->
+	<select id="selectPracticeRecordByPracticeTaskId" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		<!-- select * from sj_practice_record where PRACTICE_ID =#{practice_id} -->
+		select * from sj_practice_record where PRACTICE_ID =#{practice_id} AND
+		STU_ID=#{stu_id} AND
+		APPLY_TIME=(select MAX(APPLY_TIME) from sj_practice_record
+		where stu_id=#{stu_id}
+		and PRACTICE_ID = #{practice_id})
+	</select>
+	<select id="selectPrecordBypraid" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where stu_id=#{stu_id} and
+		PRACTICE_ID =
+		#{practice_id} and check_state="2"
+	</select>
+	<!--查出该学生的就业岗位by王磊2015年5月22日 -->
+	<select id="selectPost" parameterType="map"
+		resultType="com.sict.entity.PracticeRecord">
+		<!-- select post_id from sj_practice_record where stu_id=#{stu_id} and 
+			PRACTICE_ID = #{practice_id} and check_state="1" and dimission_time is null 
+			; -->
+
+		select * from sj_practice_record where
+		stu_id=#{stu_id} and
+		PRACTICE_ID
+		= #{practice_id}
+		and check_state="1"
+		and dimission_time is null
+		AND
+		APPLY_TIME=(
+		select MAX(APPLY_TIME) from sj_practice_record
+		where
+		stu_id=#{stu_id}
+		and PRACTICE_ID = #{practice_id});
+	</select>
+	<!--通过实习id得到该学生的最近的就业的一条记录 by王磊 2015年5月28日 -->
+	<select id="selectListById" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record a
+		where not exists (select
+		1 from sj_practice_record where a.STU_ID=STU_ID
+		and
+		APPLY_TIME>a.APPLY_TIME) and PRACTICE_ID = #{practice_id}
+	</select>
+	<!--根据企业指导老师id，查询在企业中的所有顶岗实习学生 by sl 2015/5/26 -->
+	<select parameterType="map" id="selectByComTeacherId"
+		resultType="java.util.HashMap"> 
+     <![CDATA[
+     SELECT  DIMISSION_TIME,POST_ID,STU_ID,PRACTICE_ID,b.TEA_ID,a.WORK_TIME from sj_practice_record a
+     INNER JOIN sj_practice_task b on a.PRACTICE_ID=b.ID
+     WHERE COMPANY_ID =#{DeptId} 
+     and COM_TEACHER=#{ComTeacherId}
+     	]]>
+	</select>
+	<!--根据实习就业记录表的学生id，更新该学生对应的企业老师的Id by sl 2015/5/26 -->
+	<update id="updateComteacher" parameterType="com.sict.entity.PracticeRecord">
+		UPDATE
+		sj_practice_record SET COM_TEACHER=#{com_teacher}
+		WHERE
+		STU_ID=#{stu_id}
+		AND DIMISSION_TIME is NULL
+	</update>
+	<!--查出学生的最近的实习记录根据学生id by吴敬国2015-6-24 -->
+	<select id="selectPracticeRecordByStuId" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		<!-- select * from sj_practice_record where stu_id=#{stu_id} and check_state="1" 
+			and dimission_time is null ; -->
+		select * from sj_practice_record where
+		stu_id=#{stu_id}
+		and check_state="1"
+		and dimission_time is null
+		AND APPLY_TIME=(
+		select
+		MAX(APPLY_TIME) from sj_practice_record
+		where stu_id=#{stu_id});
+	</select>
+
+	<!--查出学生的实习申请记录用于判断学生是否申请 by吴敬国2015-6-24 -->
+	<!-- <select id="selectPracticeRecordByStuId" parameterType="String" resultType="com.sict.entity.PracticeRecord"> 
+		select * from sj_practice_record where stu_id=#{stu_id} and check_state="1" 
+		and dimission_time is null ; </select> -->
+	<!--根据学号判断，是否有有效的实习任务 -->
+	<select id="getValidPracticeTask" parameterType="String"
+		resultType="com.sict.entity.PracticeRecord">
+		select * from sj_practice_record where
+		stu_id=#{stu_id}
+		and
+		dimission_time is null
+		AND APPLY_TIME=(
+		select MAX(APPLY_TIME) from
+		sj_practice_record
+		where stu_id=#{stu_id});
+	</select>
+
+
+</mapper>
+

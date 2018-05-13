@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.UserDao">
+
+	<select id="select" parameterType="com.sict.entity.User"
+		resultType="com.sict.entity.User">
+		select * from view_sj_all_user where 1 = 1
+		<if test="id != null">
+			and id like #{id}
+		</if>
+		<if test="s_t_code != null">
+			and s_t_code like #{s_t_code}
+		</if>
+		<if test="wx_code != null">
+			and wx_code like #{wx_code}
+		</if>
+		<if test="login_pass != null">
+			and login_pass like #{login_pass}
+		</if>
+		<if test="true_name != null">
+			and true_name like #{true_name}
+		</if>
+		<if test="sex != null">
+			and sex like #{sex}
+		</if>
+		<if test="phone != null">
+			and phone like #{phone}
+		</if>
+		<if test="qqnum != null">
+			and qqnum like #{qqnum}
+		</if>
+		<if test="email != null">
+			and email like #{email}
+		</if>
+		<if test="homepage != null">
+			and homepage like #{homepage}
+		</if>
+		<if test="state != null">
+			and state like #{state}
+		</if>
+		<if test="home_addr != null">
+			and home_addr like #{home_addr}
+		</if>
+		<if test="home_phone != null">
+			and home_phone like #{home_phone}
+		</if>
+		<if test="photo_id != null">
+			and photo_id like #{photo_id}
+		</if>
+		<if test="birthplace != null">
+			and birthplace like #{birthplace}
+		</if>
+		<if test="practice_state != null">
+			and practice_state like #{practice_state}
+		</if>
+		<if test="entry_year != null">
+			and entry_year like #{entry_year}
+		</if>
+		<if test="s_temp1 != null">
+			and s_temp1 like #{s_temp1}
+		</if>
+		<if test="s_temp2 != null">
+			and s_temp2 like #{s_temp2}
+		</if>
+		<if test="s_temp3 != null">
+			and s_temp3 like #{s_temp3}
+		</if>
+		<if test="last_time != null">
+			and last_time like #{last_time}
+		</if>
+		<if test="last_latitude != null">
+			and last_latitude like #{last_latitude}
+		</if>
+		<if test="last_longitude != null">
+			and last_longitude like #{last_longitude}
+		</if>
+		<if test="last_precs != null">
+			and last_precs like #{last_precs}
+		</if>
+		<if test="id_card != null">
+			and id_card like #{id_card}
+		</if>
+		<if test="org_id != null">
+			and org_id like #{org_id}
+		</if>
+		<if test="duties != null">
+			and duties like #{duties}
+		</if>
+		<if test="expertise != null">
+			and expertise like #{expertise}
+		</if>
+		<if test="t_temp1 != null">
+			and t_temp1 like #{t_temp1}
+		</if>
+		<if test="t_temp2 != null">
+			and t_temp2 like #{t_temp2}
+		</if>
+		<if test="t_temp3 != null">
+			and t_temp3 like #{t_temp3}
+		</if>
+		<if test="login_name != null">
+			and login_name like #{login_name}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.User"
+		resultType="int">
+		select count(*) from view_sj_all_user where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="s_t_code != null">
+			and s_t_code = #{s_t_code}
+		</if>
+		<if test="wx_code != null">
+			and wx_code = #{wx_code}
+		</if>
+		<if test="login_pass != null">
+			and login_pass = #{login_pass}
+		</if>
+		<if test="true_name != null">
+			and true_name = #{true_name}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="qqnum != null">
+			and qqnum = #{qqnum}
+		</if>
+		<if test="email != null">
+			and email = #{email}
+		</if>
+		<if test="homepage != null">
+			and homepage = #{homepage}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="home_addr != null">
+			and home_addr = #{home_addr}
+		</if>
+		<if test="home_phone != null">
+			and home_phone = #{home_phone}
+		</if>
+		<if test="photo_id != null">
+			and photo_id = #{photo_id}
+		</if>
+		<if test="birthplace != null">
+			and birthplace = #{birthplace}
+		</if>
+		<if test="practice_state != null">
+			and practice_state = #{practice_state}
+		</if>
+		<if test="entry_year != null">
+			and entry_year = #{entry_year}
+		</if>
+		<if test="s_temp1 != null">
+			and s_temp1 = #{s_temp1}
+		</if>
+		<if test="s_temp2 != null">
+			and s_temp2 = #{s_temp2}
+		</if>
+		<if test="s_temp3 != null">
+			and s_temp3 = #{s_temp3}
+		</if>
+		<if test="last_time != null">
+			and last_time = #{last_time}
+		</if>
+		<if test="last_latitude != null">
+			and last_latitude = #{last_latitude}
+		</if>
+		<if test="last_longitude != null">
+			and last_longitude = #{last_longitude}
+		</if>
+		<if test="last_precs != null">
+			and last_precs = #{last_precs}
+		</if>
+		<if test="id_card != null">
+			and id_card = #{id_card}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="duties != null">
+			and duties = #{duties}
+		</if>
+		<if test="expertise != null">
+			and expertise = #{expertise}
+		</if>
+		<if test="t_temp1 != null">
+			and t_temp1 = #{t_temp1}
+		</if>
+		<if test="t_temp2 != null">
+			and t_temp2 = #{t_temp2}
+		</if>
+		<if test="t_temp3 != null">
+			and t_temp3 = #{t_temp3}
+		</if>
+		<if test="login_name != null">
+			and login_name = #{login_name}
+		</if>
+
+	</select>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.User">
+		select * from view_sj_all_user where id=#{id}
+	</select>
+	
+	<select id="selectBySummaryQnAnswer" parameterType="com.sict.entity.SummaryQnAnswer" resultType="com.sict.entity.User">
+		select * from view_sj_all_user where id in (select user_id from sj_summary_qnanswer where 1 = 1
+		
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="startdate != null">
+			and startdate = #{startdate}
+		</if>
+		<if test="enddate != null">
+			and enddate = #{enddate}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="questionnaire_id != null">
+			and questionnaire_id = #{questionnaire_id}
+		</if>
+		<if test="answerDate != null">
+			and answerDate = #{answerDate}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+		
+		);
+	</select>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.ReportTrainDetailDao">
+	<resultMap id="ReportTrainDetailResult" type="com.sict.entity.ReportTrainDetail">
+		<id property="group_id" column="id" />
+		<result property="group_name" column="GROUP_NAME" />
+		<result property="course_name" column="COURSE_NAME" />
+		<result property="teacher_name" column="TRUE_NAME" />
+		<result property="week_num" column="WEEK_NUM" />
+		<result property="train_time" column="TRAIN_TIME" />
+		<result property="class_num" column="CLASS_NUM" />		
+		<result property="train_place" column="TRAIN_PLACE" />
+	</resultMap>
+	<!-- 管理员 领导-实训安排报表    得到数据  吴敬国 2015-6-12 备注-->
+ 	<select id="selectAllReportTrainDetail" parameterType="Map" resultMap="ReportTrainDetailResult">
+  		<![CDATA[
+				select sj_groups.id,sj_groups.GROUP_NAME,sj_courses.COURSE_NAME,sj_teacher.TRUE_NAME,sj_train_detail.WEEK_NUM,sj_train_detail.TRAIN_TIME,sj_train_detail.CLASS_NUM,sj_train_detail.TRAIN_PLACE
+				from sj_groups,sj_courses,sj_teacher,sj_train_detail,sj_org,sj_practice_task
+				where sj_train_detail.GROUP_ID=sj_groups.ID
+				and sj_groups.PRACTICE_ID=sj_practice_task.ID
+				and sj_practice_task.TEA_ID=sj_teacher.ID
+				and sj_teacher.DEPT_ID=sj_org.ID
+				and sj_train_detail.COURSE_ID=sj_courses.ID`	
+				and sj_train_detail.TEA_ID=sj_teacher.ID
+				and sj_train_detail.TRAIN_TERM=#{term}
+				and sj_train_detail.TRAIN_TIME>#{begin_time}
+				and sj_train_detail.TRAIN_TIME<#{end_time}
+				and FIND_IN_SET(sj_org.id, getChildLst(#{org_id}))
+				order by sj_groups.GROUP_NAME
+  		]]>
+	</select>
+ 	<select id="selectOrgName" parameterType="String" resultType="Map">
+  		<![CDATA[
+				select sj_org.org_name
+				from sj_org
+				where sj_org.ID=#{id}
+  		]]>
+	</select>
+	<!-- 教师-实训安排报表 根据教师id 学期开始时间和结束时间得到数据  吴敬国 2015-6-12 备注-->
+ 	<select id="selectReportTrainDetail" parameterType="Map" resultMap="ReportTrainDetailResult">
+  		<![CDATA[
+				select sj_groups.id,sj_groups.GROUP_NAME,sj_courses.COURSE_NAME,sj_teacher.TRUE_NAME,sj_train_detail.WEEK_NUM,sj_train_detail.TRAIN_TIME,sj_train_detail.CLASS_NUM,sj_train_detail.TRAIN_PLACE
+				from sj_groups,sj_courses,sj_teacher,sj_train_detail,sj_practice_task
+				where sj_train_detail.GROUP_ID=sj_groups.ID
+				and sj_groups.PRACTICE_ID=sj_practice_task.ID
+				and sj_practice_task.TEA_ID=sj_teacher.ID
+				and sj_train_detail.COURSE_ID=sj_courses.ID
+				and sj_train_detail.TEA_ID=sj_teacher.ID
+				and sj_teacher.TEA_CODE=#{tea_code}
+				and sj_train_detail.TRAIN_TERM=#{term}
+				and sj_train_detail.TRAIN_TIME<#{end_time}
+				and sj_train_detail.TRAIN_TIME>#{begin_time}
+  		]]>
+</select>
+</mapper> 

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.KnowledgeDao">
+	<insert id="insert" parameterType="com.sict.entity.Knowledge"
+		statementType="PREPARED">
+		insert into
+		sj_knowledge(id,question,answerer,question_type,answer,messenger_id,scope,category,create_time,temp1,temp2,temp3)
+		values
+		(#{id},#{question},#{answerer},#{question_type},#{answer},#{messenger_id},#{scope},#{category},#{create_time},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Knowledge"
+		resultType="com.sict.entity.Knowledge">
+		select * from sj_knowledge where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="question != null">
+			and question = #{question}
+		</if>
+		<if test="answer != null">
+			and answer = #{answer}
+		</if>
+		<if test="messenger_id != null">
+			and messenger_id = #{messenger_id}
+		</if>
+		<if test="scope != null">
+			and scope = #{scope}
+		</if>
+		<if test="category != null">
+			and category = #{category}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Knowledge"
+		resultType="int">
+		select count(*) from sj_knowledge where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="question != null">
+			and question = #{question}
+		</if>
+		<if test="answer != null">
+			and answer = #{answer}
+		</if>
+		<if test="messenger_id != null">
+			and messenger_id = #{messenger_id}
+		</if>
+		<if test="scope != null">
+			and scope = #{scope}
+		</if>
+		<if test="category != null">
+			and category = #{category}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Knowledge">
+		UPDATE sj_knowledge
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="question != null">question=#{question},</if>
+			<if test="answer != null">answer=#{answer},</if>
+			<if test="answerer != null">answerer=#{answerer},</if>
+			<if test="question_type != null">question_type=#{question_type},</if>
+			<if test="messenger_id != null">messenger_id=#{messenger_id},</if>
+			<if test="scope != null">scope=#{scope},</if>
+			<if test="category != null">category=#{category},</if>
+			<if test="answer_time != null">answer_time=#{answer_time},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="answer_score != null">answer_score=#{answer_score},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Knowledge">
+		delete from sj_knowledge where
+		id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.Knowledge">
+		select * from sj_knowledge where id=#{id}
+	</select>
+	<!-- 查询问题根据id by ccc20150021 -->
+	<select id="findAllKnowledge" parameterType="String"
+		resultType="com.sict.entity.Knowledge">
+         <![CDATA[ 
+        select * from sj_knowledge where scope=#{stu_id}
+         ]]>
+	</select>
+	<!--默认显示本学院和所有系的发布最新20条的问题 by王磊 20150122 -->
+	<select id="ByXyId" parameterType="String" resultType="com.sict.entity.Knowledge">
+         <![CDATA[ 
+             select * from sj_knowledge 
+             where SCOPE=#{id} or  SCOPE IN (select id from sj_org where parent_id=#{id})
+             order by create_time desc limit 0,20;
+         ]]>
+	</select>
+	<!-- 通过学院id查出本学院和所有系的发布的问题 by王磊 2015012 -->
+	<select id="findByXyId" parameterType="String"
+		resultType="com.sict.entity.Knowledge">
+         <![CDATA[ 
+              SELECT * FROM sj_knowledge
+              where SCOPE=#{id} or  SCOPE IN (select id from sj_org where parent_id=#{id})
+              order by scope
+         ]]>
+	</select>
+	<!-- 根据条件查出问题 by王磊2015年3月25日 -->
+	<select id="byConditions" parameterType="map"
+		resultType="com.sict.entity.Knowledge">
+		SELECT * FROM sj_knowledge where 1=1
+		<if test="scope != null">
+			and scope = #{scope}
+		</if>
+		<if test="messenger_id != null">
+			and messenger_id = #{messenger_id}
+		</if>
+		<if test="content != null">
+			and ((question like CONCAT('%',#{content},'%') ) or
+			(answer like CONCAT('%',#{content},'%') ) or (create_time like
+			CONCAT('%',#{content},'%')) )
+		</if>
+		order by create_time desc;
+	</select>
+	<!-- 只通过关键字查出院或系的所有问题 -->
+	<select id="byKey" parameterType="map" resultType="com.sict.entity.Knowledge">
+		SELECT * FROM
+		sj_knowledge where ((scope=#{college_Id}) or (SCOPE IN (select id from
+		sj_org where parent_id=#{college_Id}))) and
+		((question like CONCAT('%',#{content},'%') ) or (answer like
+		CONCAT('%',#{content},'%') ) or (create_time like
+		CONCAT('%',#{content},'%')) )
+		order by create_time desc;
+	</select>
+
+	<!-- 通过教师id查询专家提问所需要的数据，类型为3，未回答过的问题 邢志武 2015年6月9日 09:17:32 -->
+	<select id="getUnAnswerQuestion" parameterType="String"
+		resultType="com.sict.entity.Knowledge">
+		SELECT * FROM sj_knowledge
+		WHERE ANSWERER=#{tea_id}
+		AND QUESTION_TYPE='3'
+		AND LENGTH(MESSENGER_ID)=32
+		order by create_time desc
+	</select>
+	<!-- 通过学生id查询专家提问，某个学生提问的问题，类型为3， 邢志武 2015年6月9日 09:17:32 -->
+	<select id="getUnAnswerQuestionForStu" parameterType="String"
+		resultType="com.sict.entity.Knowledge">
+		SELECT * FROM sj_knowledge
+		WHERE MESSENGER_ID=#{stu_id}
+		AND LENGTH(MESSENGER_ID)=32
+		AND QUESTION_TYPE='3'
+		order by create_time desc
+	</select>
+	<!-- 查询问题 -->
+	<select id="getQustionAnswerByID" parameterType="String"
+		resultType="com.sict.entity.Knowledge">
+		SELECT * FROM sj_knowledge
+		WHERE ID=#{kn_id}
+	</select>
+		<!-- 只通过关键字查出院的所有问题 -->
+	<select id="byWord" parameterType="map" resultType="com.sict.entity.Knowledge">
+		SELECT * FROM
+		sj_knowledge where ((scope=#{college_Id}) or (SCOPE IN (select id from
+		sj_org where parent_id=#{college_Id}))) and
+		((question like CONCAT('%',#{content},'%') ) or (answer like
+		CONCAT('%',#{content},'%') ) )
+		order by create_time desc;
+	</select>
+</mapper>

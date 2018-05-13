@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sang.dao.QAnswerDao">
+
+	<insert id="insertQAnswer" parameterType="com.sict.entity.QAnswer"
+		statementType="PREPARED">
+  		<![CDATA[insert into sj_wjdc_qanswer (id,answertext,qnanswer_id,question_id) 
+  				 values (#{id},#{answertext},#{qnanswer_id},#{question_id})]]>
+	</insert>
+
+	<!-- 根据sign值获取行数 -->
+	<select id="selectQAnswerCount" parameterType="com.sict.entity.QAnswer"
+		resultType="int">
+		select count(id) from sj_wjdc_qanswer where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="answertext != null">
+			and answertext = #{answertext}
+		</if>
+		<if test="qnanswer_id != null">
+			and qnanswer_id = #{qnanswer_id}
+		</if>
+		<if test="question_id != null">
+			and question_id = #{question_id}
+		</if>
+	</select>
+
+	<!-- 根据sign值获取数据 -->
+	<select id="selectQAnswer" parameterType="com.sict.entity.QAnswer"
+		resultType="com.sict.entity.QAnswer">
+		select * from sj_wjdc_qanswer where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="answertext != null">
+			and answertext = #{answertext}
+		</if>
+		<if test="qnanswer_id != null">
+			and qnanswer_id = #{qnanswer_id}
+		</if>
+		<if test="question_id != null">
+			and question_id = #{question_id}
+		</if>
+	</select>
+
+	<!-- 根据sign值更新 -->
+	<update id="updateQAnswer" parameterType="com.sict.entity.QAnswer">
+		update sj_wjdc_qanswer
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="answertext != null">answertext=#{answertext},</if>
+			<if test="qnanswer_id != null">qnanswer_id=#{qnanswer_id},</if>
+			<if test="question_id != null">question_id=#{question_id}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteQAnswer" parameterType="com.sict.entity.QAnswer">
+		delete from
+		sj_wjdc_qanswer
+		where id = #{id}
+	</delete>
+
+	<delete id="deleteQAnswerByAll" parameterType="com.sict.entity.QAnswer">
+		delete from
+		sj_wjdc_qanswer
+		where 1 = 1 
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="answertext != null">
+			and answertext = #{answertext}
+		</if>
+		<if test="qnanswer_id != null">
+			and qnanswer_id = #{qnanswer_id}
+		</if>
+		<if test="question_id != null">
+			and question_id = #{question_id}
+		</if>
+		
+	</delete>
+
+	<select id="distinctQAnswerQuestion_id" parameterType="com.sict.entity.QAnswer"
+		resultType="int">
+		select count(DISTINCT(question_id)) FROM sj_wjdc_qanswer where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="answertext != null">
+			and answertext = #{answertext}
+		</if>
+		<if test="qnanswer_id != null">
+			and qnanswer_id = #{qnanswer_id}
+		</if>
+		<if test="question_id != null">
+			and question_id = #{question_id}
+		</if>
+
+	</select>
+
+	<select id="distinctQAnswerCount" parameterType="com.sict.entity.QAnswer"
+		resultType="int">
+
+		select COUNT(DISTINCT(qnanswer_id)) FROM sj_wjdc_qanswer where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="answertext != null">
+			and answertext = #{answertext}
+		</if>
+		<if test="qnanswer_id != null">
+			and qnanswer_id = #{qnanswer_id}
+		</if>
+		<if test="question_id != null">
+			and question_id = #{question_id}
+		</if>
+
+	</select>
+
+</mapper> 

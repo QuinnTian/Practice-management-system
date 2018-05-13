@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.NoticeDao">
+	<insert id="insert" parameterType="com.sict.entity.Notice"
+		statementType="PREPARED">
+		insert into
+		sj_notice(id,notice_code,notice_type,title,content,tea_id,org_id,stu_id,create_time,temp1,temp2,temp3)
+		values
+		(#{id},#{notice_code},#{notice_type},#{title},#{content},#{tea_id},#{org_id},#{stu_id},#{create_time},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Notice"
+		resultType="com.sict.entity.Notice">
+		select * from sj_notice where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="notice_code != null">
+			and notice_code = #{notice_code}
+		</if>
+		<if test="notice_type != null">
+			and notice_type = #{notice_type}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		order by create_time desc
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Notice"
+		resultType="int">
+		select count(*) from sj_notice where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="notice_code != null">
+			and notice_code = #{notice_code}
+		</if>
+		<if test="notice_type != null">
+			and notice_type = #{notice_type}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+	</select>
+	<update id="update" parameterType="com.sict.entity.Notice">
+		UPDATE sj_notice
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="notice_code != null">notice_code=#{notice_code},</if>
+			<if test="notice_type != null">notice_type=#{notice_type},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="tea_id != null">tea_id=#{tea_id},</if>
+			<if test="org_id != null">org_id=#{org_id},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Notice">
+		delete from sj_notice where
+		id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Notice">
+		select * from sj_notice where id=#{id}
+	</select>
+
+	<select id="selectNotice" parameterType="String" resultType="com.sict.entity.Notice">
+         <![CDATA[ 
+              select * from sj_notice where  find_in_set(#{stu_id},stu_id)
+         ]]>
+	</select>
+	<select id="selectNoticeByType" parameterType="map"
+		resultType="com.sict.entity.Notice">
+         <![CDATA[ 
+              select * from sj_notice where    find_in_set(#{stu_id},stu_id) and notice_type='5'  and create_time>=#{times} order by create_time limit #{pages},1  
+         ]]>
+	</select>
+	<select id="selectNoticeByTypeNotime" parameterType="map"
+		resultType="com.sict.entity.Notice">
+         <![CDATA[ 
+              select * from sj_notice where  find_in_set(#{stu_id},stu_id) and notice_type='5'  order by create_time   limit #{pages},1
+         ]]>
+	</select>
+	<select id="getNoticesByRange" parameterType="map"
+		resultType="com.sict.entity.Notice">
+         <![CDATA[ 
+              select * from sj_notice where find_in_set(#{org_id},org_id)
+         ]]>
+	</select>
+	<!--功能：查出编号最大的一条记录 by 王磊 by20150121 -->
+	<select id="maxNotice" resultType="String" parameterType="String">
+         <![CDATA[ 
+              SELECT max(SubString(notice_code,-3)) FROM sj_notice  
+               where NOTICE_CODE  LIKE CONCAT(#{notice_cur_code},'%')
+		 ]]>
+	</select>
+	<select id="selectNotices" parameterType="map"
+		resultType="com.sict.entity.Notice">
+         <![CDATA[ 
+              select * from sj_notice where create_time>#{t}  and find_in_set(#{stu_code},stu_id)  and notice_type!='5'  order by create_time   limit #{pages},1 
+         ]]>
+	</select>
+	<select id="getNoticesByRanges" parameterType="map"
+		resultType="com.sict.entity.Notice">
+    <![CDATA[ 
+              select * from sj_notice where 
+     (   find_in_set(#{org_id},org_id)  or  find_in_set(#{stu_id},stu_id) ) and notice_type!='5'  order by create_time limit #{pages},1  ;
+       ]]>
+	</select>
+	
+	<select id="stuGetMyNotice" parameterType="map"
+		resultType="com.sict.entity.Notice">
+    <![CDATA[ 
+              select * from sj_notice where 
+     (   find_in_set(#{org_id},org_id)  or  find_in_set(#{stu_id},stu_id) ) and notice_type!='5'  order by create_time DESC;
+       ]]>
+	</select>
+	
+
+	<select id="selectNoticeorg_idcount" parameterType="map"
+		resultType="int">
+         <![CDATA[ 
+              select count(*) from sj_notice where  (find_in_set(#{org_id},org_id) or find_in_set(#{stu_id},stu_id)) and notice_type!='5'  and create_time<=#{t} order by create_time  
+         ]]>
+	</select>
+		<select id="selectCountTime" parameterType="map"
+		resultType="int">
+         <![CDATA[ 
+              select count(*) from sj_notice where   find_in_set(#{stu_id},stu_id)  and notice_type='5'  and create_time<=#{tz}  order by create_time 
+         ]]>
+	</select>
+		<select id="selectALLZnts" parameterType="map"
+		resultType="int">
+         <![CDATA[ 
+              select count(*) from sj_notice where   find_in_set(#{stu_id},stu_id)  and notice_type='5'  order by create_time 
+         ]]>
+	</select>
+		<select id="selectReadNoticecount" parameterType="map"
+		resultType="int">
+         <![CDATA[ 
+              select count(*) from sj_notice where  (find_in_set(#{org_id},org_id) or find_in_set(#{stu_id},stu_id))   and notice_type!='5'  and create_time<=#{t} order by create_time  
+         ]]>
+	</select>
+		<select id="selectNoticecount" parameterType="map"
+		resultType="int">
+              select count(*) from sj_notice where  (find_in_set(#{org_id},org_id) or find_in_set(#{stu_id},stu_id))  and notice_type!='5'
+             	    order by create_time  
+	</select>
+	<select id="getNoticesAll" parameterType="map" resultType="com.sict.entity.Notice">
+    <![CDATA[ 
+              select * from sj_notice where   
+     (   find_in_set(#{college_id},org_id)  or  find_in_set(#{stu_id},stu_id) ) and notice_type!='5' order by create_time   ;
+       ]]>
+	</select>
+	<!--通过招聘信息的id得到相关的通知详情 吴敬国  2015-5-12-->
+	<select id="selectNoticeByRecruitId" parameterType="String"
+		resultType="com.sict.entity.Notice">
+          SELECT * FROM sj_notice WHERE NOTICE_TYPE='5' AND TEMP1=#{recruit_id}
+	</select>
+	
+	
+</mapper>

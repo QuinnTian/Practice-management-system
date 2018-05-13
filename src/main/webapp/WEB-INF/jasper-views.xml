@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	<!-- 管理员-就业材料汇总报表 -->
+	<bean id="graduationmaterialsReport" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="url" value="/WEB-INF/reports/GraduationmaterialsReport.jrxml" />
+	</bean>
+	<!-- 管理员-就业材料汇总报表导出excel -->
+	<bean id="graduationmaterialsReportExcel" class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+		<property name="url" value="/WEB-INF/reports/GraduationmaterialsReport.jrxml" />
+	</bean>
+	<!-- 管理员-实训安排报表 -->
+	<bean id="trainDetail_adminAndLeader" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="url" value="/WEB-INF/reports/TrainDetail_adminAndLeader.jrxml" />
+	</bean>
+	<!-- 管理员-实训安排报表导出excel -->
+	<bean id="trainDetail_adminAndLeader_excel" class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+		<property name="url" value="/WEB-INF/reports/TrainDetail_adminAndLeader.jrxml" />
+	</bean>
+	<!-- 教师-实训安排报表 -->
+	<bean id="trainDetail_teacher" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="url" value="/WEB-INF/reports/TrainDetail_teacher.jrxml" />
+	</bean>
+	<!-- 教师-实训安排报表导出excel -->
+	<bean id="trainDetailExcel_teacher" class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+		<property name="url" value="/WEB-INF/reports/TrainDetail_teacher.jrxml" />
+	</bean>
+	<bean id="stugrade_state" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="url" value="/WEB-INF/reports/StudentStateReport.jrxml" />
+	</bean>
+	<bean id="train_state" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="url" value="/WEB-INF/reports/TrainState.jrxml" />
+	</bean>
+	<!-- 管理员-实习公司统计导出excel -->
+	<bean id="reportStuCompany_excel" class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+		<property name="url" value="/WEB-INF/reports/reportStuCompany_excel.jrxml" />
+	</bean>
+	<!-- 管理员-实习公司统计导出excel -->
+	<bean id="reportStuCompany_pdf" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+		<property name="url" value="/WEB-INF/reports/reportStuCompany_excel.jrxml" />
+	</bean>
+</beans>

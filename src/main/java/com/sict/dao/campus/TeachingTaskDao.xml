@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.campus.TeachingTaskDao">
+	<insert id="insert" parameterType="com.sict.entity.TeachingTask"
+		statementType="PREPARED">
+		insert into
+		SJ_TEACHING_TASK(id,teaching_class_id,tea_id,begin_time,end_time,temp1,temp2,temp3,temp4,temp5)
+		values
+		(#{id},#{teaching_class_id},#{tea_id},#{begin_time},#{end_time},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.TeachingTask"
+		resultType="com.sict.entity.TeachingTask">
+		select * from SJ_TEACHING_TASK where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="teaching_class_id != null">
+			and teaching_class_id = #{teaching_class_id}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="begin_time != null">
+			and begin_time = #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.TeachingTask"
+		resultType="int">
+		select count(*) from SJ_TEACHING_TASK where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="teaching_class_id != null">
+			and teaching_class_id = #{teaching_class_id}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="begin_time != null">
+			and begin_time = #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.TeachingTask">
+		UPDATE SJ_TEACHING_TASK
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="teaching_class_id != null">teaching_class_id=#{teaching_class_id},</if>
+			<if test="tea_id != null">tea_id=#{tea_id},</if>
+			<if test="begin_time != null">begin_time=#{begin_time},</if>
+			<if test="end_time != null">end_time=#{end_time},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.TeachingTask">
+		delete from SJ_TEACHING_TASK
+		where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.TeachingTask">
+		select * from SJ_TEACHING_TASK where id=#{id}
+	</select>
+	<!-- 通过教师id获取当前教师所有授课任务表 by 李达 2016.5.14 -->
+	<select id="selectByTeaId" parameterType="String"
+		resultType="com.sict.entity.TeachingTask">
+		select * from SJ_TEACHING_TASK where tea_id=#{tea_id}
+	</select>
+	<!-- 通过教学班id获取当前教师所有授课任务表 by 李达 2016.5.14 -->
+	<select id="selectByTc_id" parameterType="String"
+		resultType="com.sict.entity.TeachingTask">
+		select * from SJ_TEACHING_TASK where teaching_class_id = #{tc_id}
+	</select>
+	<!-- 通过教学班id和教师id获取教学任务 by 李达 2016.5.15  -->
+	<select id="selectByTc_idAndTea_id" parameterType="map"
+		resultType="com.sict.entity.TeachingTask">
+		select * from SJ_TEACHING_TASK where teaching_class_id = #{tc_id} 
+			and  tea_id = #{tea_id}
+	</select>
+	<!-- 通过开始结束时间和教师id获取教学任务 by 李达 2016.6.13  -->
+	<select id="selectByTimeAndTeaId" parameterType="map"
+		resultType="com.sict.entity.TeachingTask">
+		<![CDATA[
+		select * from SJ_TEACHING_TASK 
+		  where tea_id = #{tea_id}
+		  AND(
+			(TO_DAYS(begin_time) < TO_DAYS(#{begin_time}) AND TO_DAYS(#{begin_time}) < TO_DAYS(end_time) )
+			OR (TO_DAYS(begin_time) < TO_DAYS(#{end_time}) AND TO_DAYS(#{end_time}) < TO_DAYS(end_time) )
+			OR (TO_DAYS(begin_time) < TO_DAYS(#{begin_time}) AND TO_DAYS(#{end_time}) < TO_DAYS(end_time))
+			OR (TO_DAYS(#{begin_time}) < TO_DAYS(begin_time) AND TO_DAYS(end_time) < TO_DAYS(#{end_time}))
+		  )
+		]]>
+	</select>
+</mapper>

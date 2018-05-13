@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.CourseDao">
+	<insert id="insert" parameterType="com.sict.entity.Courses"
+		statementType="PREPARED">
+		insert into
+		sj_courses(id,course_code,course_name,org_id,class_object,class_hour,description,create_time,state,temp1,temp2,temp3)
+		values
+		(#{id},#{course_code},#{course_name},#{org_id},#{class_object},#{class_hour},#{description},#{create_time},#{state},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Courses"
+		resultType="com.sict.entity.Courses">
+		select * from sj_courses where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="course_code != null">
+			and course_code = #{course_code}
+		</if>
+		<if test="course_name != null">
+			and course_name = #{course_name}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="class_object != null">
+			and class_object = #{class_object}
+		</if>
+		<if test="class_hour != null">
+			and class_hour = #{class_hour}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Courses"
+		resultType="int">
+		select count(*) from sj_courses where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="course_code != null">
+			and course_code = #{course_code}
+		</if>
+		<if test="course_name != null">
+			and course_name = #{course_name}
+		</if>
+		<if test="org_id != null">
+			and org_id = #{org_id}
+		</if>
+		<if test="class_object != null">
+			and class_object = #{class_object}
+		</if>
+		<if test="class_hour != null">
+			and class_hour = #{class_hour}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Courses">
+		UPDATE sj_courses
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="course_code != null">course_code=#{course_code},</if>
+			<if test="course_name != null">course_name=#{course_name},</if>
+			<if test="org_id != null">org_id=#{org_id},</if>
+			<if test="class_object != null">class_object=#{class_object},</if>
+			<if test="class_hour != null">class_hour=#{class_hour},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Courses">
+		delete from sj_courses where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Courses">
+		select * from sj_courses where id=#{id}
+	</select>
+	
+	<select id="getCourseBycollege" parameterType="String" resultType="com.sict.entity.Courses">
+		select * from sj_courses where college_id=#{college_id}
+	</select>
+	
+	<select id="getCourse" parameterType="String" resultType="com.sict.entity.Courses" >
+		select * from  sj_courses where ORG_ID in( 
+												select DISTINCT ID
+												from sj_org org 
+												where PARENT_ID  = #{college_id} ) and state = '1'
+	</select>
+</mapper>

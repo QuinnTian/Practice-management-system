@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+	<!-- <mapping path="/*" decorator="/decorators/decorator.jsp"/>
+	 -->
+	 <mapping path="/admin/*" decorator="/decorators/decorator_admin.jsp"/>
+	<mapping path="/student/*" decorator="/decorators/decorator_student.jsp"/>
+	<mapping path="/teacher/*" decorator="/decorators/decorator_teacher.jsp"/>
+	<mapping path="/leader/*" decorator="/decorators/decorator_leader.jsp"/>
+	<mapping path="/company/*" decorator="/decorators/decorator_company.jsp"/> 
+	<mapping path="/sysadmin/*" decorator="/decorators/decorator_sysadmin.jsp"/>
+	<mapping path="/schooladmin/*" decorator="/decorators/decorator_schooladmin.jsp"/>
+	<mapping path="/campusTeacher/web/*" decorator="/decorators/decorator_teacher.jsp"/>
+ 	<mapping path="/campusStudent/web/*" decorator="/decorators/decorator_student.jsp"/> 
+ 	<mapping path="/campusAdmin/web/*" decorator="/decorators/decorator_admin.jsp"/>
+ 	<mapping path="/CampusLeader/web/*" decorator="/decorators/decorator_leader.jsp"/>
+	<!-- <mapping path="/campusTeacher/*" decorator="/decorators/decorator_teacher.jsp"/>
+	<mapping path="/campusTeacher/*" decorator="/decorators/decorator_teacher.jsp"/> -->
+	
+	
+	
+	<!-- <mapping path="/login.jsp" decorator="/decorators/decorator_login.jsp"/> -->
+	<!-- <mapping path="/teacherList.htm.do" decorator="/decorators/decorator_guanliyuan.jsp"/> -->
+</sitemesh> 
+
+
+<!-- <sitemesh>
+	<mapping>
+		<path>/middle.jsp</path>
+		<decorator>/decorator/decoratorLeft.html</decorator>
+		<decorator>/decorator/decoratorRight.html</decorator>
+	</mapping>
+	<mapping>
+		<path>/index.jsp</path>
+		<decorator>/decorator/decorator.html</decorator>
+		<decorator>/decorator/decorator.jsp</decorator>
+	</mapping>
+</sitemesh> -->

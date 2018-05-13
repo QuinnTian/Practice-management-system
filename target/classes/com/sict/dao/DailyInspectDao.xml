@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.DailyInspectDao">
+	<insert id="insert" parameterType="com.sict.entity.DailyInspect"
+		statementType="PREPARED">
+		insert into
+		sj_daily_inspect(id,inspect_type,sdi_college_id,department_id,sdi_class_id,sdi_index_id,stu_union_section,inspect_person,class_contact,inspect_time,input_person,sum_grade,temp1,temp2,temp3,temp4,temp5)
+		values
+		(#{id},#{inspect_type},#{sdi_college_id},#{department_id},#{sdi_class_id},#{sdi_index_id},#{stu_union_section},#{inspect_person},#{class_contact},#{inspect_time},#{input_person},#{sum_grade},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.DailyInspect"
+		resultType="com.sict.entity.DailyInspect">
+		select * from sj_daily_inspect where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="inspect_type != null">
+			and inspect_type = #{inspect_type}
+		</if>
+		<if test="sdi_college_id != null">
+			and sdi_college_id = #{sdi_college_id}
+		</if>
+		<if test="department_id != null">
+			and department_id = #{department_id}
+		</if>
+		<if test="sdi_class_id != null">
+			and sdi_class_id = #{sdi_class_id}
+		</if>
+		<if test="sdi_index_id != null">
+			and sdi_index_id = #{sdi_index_id}
+		</if>
+		<if test="stu_union_section != null">
+			and stu_union_section = #{stu_union_section}
+		</if>
+		<if test="inspect_person != null">
+			and inspect_person = #{inspect_person}
+		</if>
+		<if test="class_contact != null">
+			and class_contact = #{class_contact}
+		</if>
+		<if test="inspect_time != null">
+			and inspect_time = #{inspect_time}
+		</if>
+		<if test="input_person != null">
+			and input_person = #{input_person}
+		</if>
+		<if test="sum_grade != null">
+			and sum_grade = #{sum_grade}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.DailyInspect"
+		resultType="int">
+		select count(*) from sj_daily_inspect where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="inspect_type != null">
+			and inspect_type = #{inspect_type}
+		</if>
+		<if test="sdi_college_id != null">
+			and sdi_college_id = #{sdi_college_id}
+		</if>
+		<if test="department_id != null">
+			and department_id = #{department_id}
+		</if>
+		<if test="sdi_class_id != null">
+			and sdi_class_id = #{sdi_class_id}
+		</if>
+		<if test="sdi_index_id != null">
+			and sdi_index_id = #{sdi_index_id}
+		</if>
+		<if test="stu_union_section != null">
+			and stu_union_section = #{stu_union_section}
+		</if>
+		<if test="inspect_person != null">
+			and inspect_person = #{inspect_person}
+		</if>
+		<if test="class_contact != null">
+			and class_contact = #{class_contact}
+		</if>
+		<if test="inspect_time != null">
+			and inspect_time = #{inspect_time}
+		</if>
+		<if test="input_person != null">
+			and input_person = #{input_person}
+		</if>
+		<if test="sum_grade != null">
+			and sum_grade = #{sum_grade}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.DailyInspect">
+		UPDATE sj_daily_inspect
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="inspect_type != null">inspect_type=#{inspect_type},</if>
+			<if test="sdi_college_id != null">sdi_college_id=#{sdi_college_id},</if>
+			<if test="department_id != null">department_id=#{department_id},</if>
+			<if test="sdi_class_id != null">sdi_class_id=#{sdi_class_id},</if>
+			<if test="sdi_index_id != null">sdi_index_id=#{sdi_index_id},</if>
+			<if test="stu_union_section != null">stu_union_section=#{stu_union_section},</if>
+			<if test="inspect_person != null">inspect_person=#{inspect_person},</if>
+			<if test="class_contact != null">class_contact=#{class_contact},</if>
+			<if test="inspect_time != null">inspect_time=#{inspect_time},</if>
+			<if test="input_person != null">input_person=#{input_person},</if>
+			<if test="sum_grade != null">sum_grade=#{sum_grade},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.DailyInspect">
+		delete from sj_daily_inspect where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.DailyInspect">
+		select * from sj_daily_inspect where id=#{id}
+	</select>
+	<!-- 根据学生id查询检查记录 by李达、师杰 20160301 -->
+	<select id="getDailyInspectByStuIdAndType" parameterType="map"
+		resultType="com.sict.entity.DailyInspect">
+  		<![CDATA[
+  			select * from sj_daily_inspect where INSPECT_TYPE=#{type} and INPUT_PERSON LIKE CONCAT('%', #{stu_id}, '%')ORDER BY INSPECT_TIME DESC
+  		]]>
+	</select>
+	<!-- 通过时间获取数据库中存在的班级id by师杰 2016-04-15 -->
+	<!-- select * from SJ_DAILY_INSPECT where  inspect_time LIKE CONCAT('%',#{date},'%') -->
+	<select id="getDailyInspectByDate" parameterType="map"
+		resultType="com.sict.entity.DailyInspect">
+  		<![CDATA[
+  			select * from sj_daily_inspect where  inspect_time LIKE CONCAT('%',#{date},'%')
+  		]]>
+	</select>
+	<!-- 通过导员ID、学年、类型、时间获取数据库中日常检查表中的记录 by张邦卿 2016-05-09 -->
+	<select id="getDailyInspectByDYId" parameterType="map"
+		resultType="com.sict.entity.DailyInspect">
+  		<![CDATA[
+			SELECT * FROM sj_daily_inspect WHERE SDI_CLASS_ID IN(
+			SELECT ID FROM sj_org WHERE COUNSELOR_ID=#{Id}) and INSPECT_TIME LIKE  CONCAT(#{date},'%') and INSPECT_TYPE=#{type} and SDI_CLASS_ID IN(SELECT ID FROM sj_org WHERE BEGIN_TIME LIKE CONCAT(#{year},'%'))
+			ORDER BY SUM_GRADE DESC		
+  		]]>
+	</select>
+	<!-- 通过班主任ID、查询时间、类别、学年获取数据库中日常检查表中的记录 by宋浩 2016-05-16 -->
+	<select id="getHeadteaDailyInspectByDYId" parameterType="map"
+		resultType="com.sict.entity.DailyInspect">
+  		<![CDATA[			
+			SELECT * FROM sj_daily_inspect d,sj_org o WHERE d.SDI_CLASS_ID=o.ID 
+			and d.SDI_CLASS_ID IN(
+			SELECT ID FROM sj_org WHERE o.HEAD_TEA_ID=#{Id})
+			and d.INSPECT_TIME LIKE   CONCAT(#{date},'%') 
+			and d.INSPECT_TYPE=#{type} 
+			and  o.begin_time LIKE CONCAT('%',#{year},'%')
+			
+  		]]>
+	</select>
+	<!-- 通过班长ID、查询时间、类别获取数据库中日常检查表中的记录 by宋浩 2016-05-17 -->
+	<select id="getMonitorDailyInspectByDYId" parameterType="map"
+		resultType="com.sict.entity.DailyInspect">
+  		<![CDATA[			
+			SELECT * FROM sj_daily_inspect d,sj_student s WHERE d.SDI_CLASS_ID=s.CLASS_ID
+			and d.SDI_CLASS_ID IN(
+			SELECT CLASS_ID FROM sj_student WHERE s.ID=#{Id})
+			and d.INSPECT_TIME LIKE   CONCAT(#{date},'%') 
+			and d.INSPECT_TYPE=#{type}   
+			
+  		]]>
+	</select>
+	
+</mapper>

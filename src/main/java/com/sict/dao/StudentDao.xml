@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.StudentDao">
+
+	<!-- 查询所有student by郑春光20140910 -->
+	<select id="select" parameterType="com.sict.entity.Student"
+		resultType="com.sict.entity.Student">
+		select * from sj_student where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="stu_code != null">
+			and stu_code = #{stu_code}
+		</if>
+		<if test="wx_code != null">
+			and wx_code = #{wx_code}
+		</if>
+		<if test="login_pass != null">
+			and login_pass = #{login_pass}
+		</if>
+		<if test="true_name != null">
+			and true_name = #{true_name}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex}
+		</if>
+		<if test="id_card != null">
+			and id_card = #{id_card}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="class_id != null">
+			and class_id = #{class_id}
+		</if>
+		<if test="home_addr != null">
+			and home_addr = #{home_addr}
+		</if>
+		<if test="home_phone != null">
+			and home_phone = #{home_phone}
+		</if>
+		<if test="photo_id != null">
+			and photo_id = #{photo_id}
+		</if>
+		<if test="birthplace != null">
+			and birthplace = #{birthplace}
+		</if>
+		<if test="qqnum != null">
+			and qqnum = #{qqnum}
+		</if>
+		<if test="email != null">
+			and email = #{email}
+		</if>
+		<if test="homepage != null">
+			and homepage = #{homepage}
+		</if>
+		<if test="entry_year != null">
+			and entry_year = #{entry_year}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="practice_state != null">
+			and practice_state=#{practice_state}
+		</if>
+		<if test="current_notice_read != null">
+			and current_notice_read=#{current_notice_read}
+		</if>
+		<if test="current_recruit_read != null">
+			and current_recruit_read=#{current_recruit_read}
+		</if>
+		<if test="group_id != null">
+			and group_id=#{group_id}
+		</if>
+		<if test="com_teacher_id != null">
+			and com_teacher_id=#{com_teacher_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+	</select>
+	<!-- 根据id查询学生 by郑春光20140916 -->
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Student">
+         <![CDATA[ 
+              select * from sj_student where id=#{id} and state=1
+         ]]>
+	</select>
+
+
+	<!-- 修改学生信息 by吴敬国20140918 -->
+	<update id="update" parameterType="com.sict.entity.Student">
+		UPDATE sj_student
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="stu_code != null">stu_code=#{stu_code},</if>
+			<if test="wx_code != null">wx_code=#{wx_code},</if>
+			<if test="login_pass != null">login_pass=#{login_pass},</if>
+			<if test="true_name != null">true_name=#{true_name},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="group_id != null">group_id=#{group_id},</if>
+			<if test="id_card != null">id_card=#{id_card},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="class_id != null">class_id=#{class_id},</if>
+			<if test="home_addr != null">home_addr=#{home_addr},</if>
+			<if test="home_phone != null">home_phone=#{home_phone},</if>
+			<if test="photo_id != null">photo_id=#{photo_id},</if>
+			<if test="birthplace != null">birthplace=#{birthplace},</if>
+			<if test="qqnum != null">qqnum=#{qqnum},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="homepage != null">homepage=#{homepage},</if>
+			<if test="entry_year != null">entry_year=#{entry_year},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="practice_state != null">practice_state=#{practice_state},</if>
+			<if test="current_notice_read != null">current_notice_read=#{current_notice_read},</if>
+			<if test="current_recruit_read != null">current_recruit_read=#{current_recruit_read},</if>
+			<if test="com_teacher_id != null">com_teacher_id=#{com_teacher_id},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<!-- 修改学生信息 学生实习状态 byccc20141221 -->
+	<update id="updatePersonal" parameterType="com.sict.entity.Student">
+		UPDATE sj_student
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="stu_code != null">stu_code=#{stu_code},</if>
+			<if test="wx_code != null">wx_code=#{wx_code},</if>
+			<if test="login_pass != null">login_pass=#{login_pass},</if>
+			<if test="true_name != null">true_name=#{true_name},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="group_id != null">group_id=#{group_id},</if>
+			<if test="id_card != null">id_card=#{id_card},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="class_id != null">class_id=#{class_id},</if>
+			<if test="home_addr != null">home_addr=#{home_addr},</if>
+			<if test="home_phone != null">home_phone=#{home_phone},</if>
+			<if test="photo_id != null">photo_id=#{photo_id},</if>
+			<if test="birthplace != null">birthplace=#{birthplace},</if>
+			<if test="qqnum != null">qqnum=#{qqnum},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="homepage != null">homepage=#{homepage},</if>
+			<if test="entry_year != null">entry_year=#{entry_year},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="practice_state != null">practice_state=#{practice_state},</if>
+			<if test="current_notice_read != null">current_notice_read=#{current_notice_read},</if>
+			<if test="current_recruit_read != null">current_recruit_read=#{current_recruit_read},</if>
+			<if test="com_teacher_id != null">com_teacher_id=#{com_teacher_id},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		where stu_code=#{stu_code} and state="1"
+	</update>
+	<!-- 修改学生实习状态 byccc20141222 -->
+	<update id="updatePractice" parameterType="com.sict.entity.Student">
+		update sj_student set
+		practice_state=#{practice_state} where
+		stu_code=#{stu_code} and
+		state="1"
+	</update>
+
+	<!-- 新增学生 by郑春光20140917 -->
+	<insert id="insert" parameterType="com.sict.entity.Student"
+		statementType="PREPARED">
+		insert into
+		sj_student(id,stu_code,wx_code,login_pass,true_name,sex,id_card,phone,class_id,home_addr,home_phone,photo_id,birthplace,qqnum,email,homepage,entry_year,state,practice_state,current_notice_read,current_recruit_read,com_teacher_id,temp1,temp2,temp3)
+		values
+		(#{id},#{stu_code},#{wx_code},#{login_pass},#{true_name},#{sex},#{id_card},#{phone},#{class_id},#{home_addr},#{home_phone},#{photo_id},#{birthplace},#{qqnum},#{email},#{homepage},#{entry_year},#{state},#{practice_state},#{current_notice_read},#{current_recruit_read},#{com_teacher_id},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<update id="delete" parameterType="String">
+		update sj_student set
+		state='2' where id=#{id}
+	</update>
+	<!-- 删除学生更新学生状态 by郑春光20140917 -->
+	<delete id="deleteStudent" parameterType="com.sict.entity.Student">
+		delete from
+		sj_student
+		where id = #{id}
+	</delete>
+
+	<!-- 根据code查询学生 by郑春光20140916 -->
+	<select id="selectByCode" parameterType="String"
+		resultType="com.sict.entity.Student">
+         <![CDATA[ 
+              select * from sj_student where stu_code=#{code} and state='1'
+         ]]>
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Student"
+		resultType="int">
+		select count(*) from sj_student where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="stu_code != null">
+			and stu_code = #{stu_code}
+		</if>
+		<if test="wx_code != null">
+			and wx_code = #{wx_code}
+		</if>
+		<if test="login_pass != null">
+			and login_pass = #{login_pass}
+		</if>
+		<if test="true_name != null">
+			and true_name = #{true_name}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex}
+		</if>
+		<if test="group_id != null">
+			and group_id = #{group_id}
+		</if>
+		<if test="id_card != null">
+			and id_card = #{id_card}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="class_id != null">
+			and class_id = #{class_id}
+		</if>
+		<if test="home_addr != null">
+			and home_addr = #{home_addr}
+		</if>
+		<if test="home_phone != null">
+			and home_phone = #{home_phone}
+		</if>
+		<if test="photo_id != null">
+			and photo_id = #{photo_id}
+		</if>
+		<if test="birthplace != null">
+			and birthplace = #{birthplace}
+		</if>
+		<if test="qqnum != null">
+			and qqnum = #{qqnum}
+		</if>
+		<if test="email != null">
+			and email = #{email}
+		</if>
+		<if test="homepage != null">
+			and homepage = #{homepage}
+		</if>
+		<if test="entry_year != null">
+			and entry_year = #{entry_year}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="last_time != null">
+			and last_time = #{last_time}
+		</if>
+		<if test="last_precs != null">
+			and last_precs = #{last_precs}
+		</if>
+		<if test="last_latitude != null">
+			and last_latitude = #{last_latitude}
+		</if>
+		<if test="last_longitude != null">
+			and last_longitude = #{last_longitude}
+		</if>
+		<if test="practice_state != null">
+			and practice_state = #{practice_state}
+		</if>
+		<if test="current_recruit_read != null">
+			and current_recruit_read = #{current_recruit_read}
+		</if>
+		<if test="current_notice_read != null">
+			and current_notice_read = #{current_notice_read}
+		</if>
+		<if test="com_teacher_id != null">
+			and com_teacher_id = #{com_teacher_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<!-- 根据微信号查询学生 by孟凡朕 20140917 -->
+	<select id="studentByWx" parameterType="java.lang.String"
+		resultType="com.sict.entity.Student">
+         <![CDATA[ 
+              select * from sj_student where wx_code=#{fromUserName} and state=1
+         ]]>
+	</select>
+
+	<!-- 验证输入的信息是否正确 by孟凡朕 20140917 -->
+	<select id="isStudentByMap" parameterType="map"
+		resultType="com.sict.entity.Student">
+         <![CDATA[ 
+              select * from sj_student where stu_code=#{stu_code} and true_name=#{true_name} and id_card=#{id_card} and login_pass=#{login_pass} and state=1
+         ]]>
+	</select>
+
+	<!-- 绑定微信号与学生账号 -->
+	<update id="studentBind" parameterType="map">
+        <![CDATA[ 
+           UPDATE sj_student 
+           SET wx_code=#{wx_code}
+           WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 根据code查询学生 byccc20141208 -->
+	<select id="getStu_id" parameterType="String" resultType="String">
+         <![CDATA[ 
+              select id from sj_student where stu_code=#{stu_id}
+         ]]>
+	</select>
+	<!-- 根据code查询学生 byccc20141208 -->
+	<select id="getStu_idBywx" parameterType="String" resultType="String">
+         <![CDATA[ 
+              select id from sj_student where wx_code=#{wx_code}
+         ]]>
+	</select>
+	<!-- 根据微信号查询学生 byccc 20141215 -->
+	<select id="studentByWxc" parameterType="java.lang.String"
+		resultType="com.sict.entity.Student">
+         <![CDATA[ 
+              select * from sj_student where wx_code=#{fromUserName} and state=1
+         ]]>
+	</select>
+	<!-- 根据class_id查询学生 by邢志武 20141216 -->
+	<select id="getStudentsByClassId" parameterType="String"
+		resultType="com.sict.entity.Student">
+         <![CDATA[ 
+               select * from sj_student where class_id=#{class_id} AND STATE='1'
+ 			   order by stu_code asc
+         ]]>
+	</select>
+	<!-- 更新学生地理位置 by ccc 20150117 -->
+	<update id="updateLastPlace" parameterType="com.sict.entity.Student">
+        <![CDATA[ 
+           UPDATE sj_student 
+           SET last_precs=#{last_precs},last_latitude=#{last_latitude},last_time=#{last_time},last_longitude=#{last_longitude}
+           WHERE stu_code=#{stu_code}  ;  
+        ]]>
+	</update>
+
+
+
+	<!-- 根据stu_code判断学生是否存在 by wl 20150117 -->
+	<select resultType="int" id="selectByStuCode" parameterType="String"> 
+		<![CDATA[ select count(*) from sj_student where stu_code=#{stu_code} and state=1 ]]>
+	</select>
+	<!-- 根据id_card判断学生身份证号是否已经存在 by wl 20150117 -->
+	<select resultType="int" id="selectByStuCard" parameterType="String"> 
+		<![CDATA[ select count(*) from sj_student where id_card=#{id_card} and state=1 ]]>
+	</select>
+	<!-- 根据院部id找出该院所有的学生 by wl 20150118 -->
+	<select id="getStudentsByYuanId" resultType="com.sict.entity.Student"
+		parameterType="String"> 
+		<![CDATA[select * from sj_student where CLASS_ID in (
+				SELECT id from sj_org where PARENT_ID in(SELECT id from sj_org where PARENT_ID=#{id})) ]]>
+	</select>
+
+	<!-- 功能：得到全校实习任务学生各实习状态的人数，用于饼图 参数：年级 by 郑春光 2015年2月3日 -->
+	<select id="getSchoolStudentStateCountByGrade" resultType="java.util.HashMap"
+		parameterType="String"> 
+		<![CDATA[
+					SELECT d.PRACTICE_STATE stateCode,count(*) stuCount 
+					from sj_practice_task a 
+					INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+					INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+					INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+					where a.GRADE=#{grade} and a.TASK_TYPE = 1 and a.state=1
+					group by d.PRACTICE_STATE
+		]]>
+	</select>
+	<!-- 功能：得到学院或系的实习任务学生各实习状态的人数,用于柱状图 参数：年级、学院id或系id by 郑春光 2015年2月3日 -->
+	<select id="getStuStateCountByGradeAndOrg" resultType="com.sict.entity.StuGraStateCount"
+		parameterType="map"> 
+		<![CDATA[
+				SELECT #{deptId} deptId,d.PRACTICE_STATE stateCode,count(*) stuCount
+					from sj_practice_task a 
+					INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+					INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+					INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+					where a.GRADE=#{grade} and a.TASK_TYPE = 1 and a.state=1 and a.SCOPE in (SELECT #{deptId} UNION SELECT id from sj_org where PARENT_ID=#{deptId} and org_level=3 )
+					group by d.PRACTICE_STATE 
+		]]>
+	</select>
+
+	<!-- 功能：得到系的实习任务学生各实习状态的人数,用于柱状图 参数：年级、学院id或系id 去掉任务所属系的判断：and a.SCOPE in 
+		(SELECT #{deptId} UNION SELECT PARENT_ID from sj_org where ID=#{deptId}and 
+		ORG_LEVEL='3' ) -->
+	<select id="getXiStuStateCountByGradeAndOrg" resultType="com.sict.entity.StuGraStateCount"
+		parameterType="map"> 
+			<![CDATA[
+					SELECT #{deptId}  deptId,d.PRACTICE_STATE stateCode,count(*) stuCount
+					from sj_practice_task a 
+					INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+					INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+					INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+					where a.GRADE=#{grade} and a.TASK_TYPE = 1 and a.state=1 
+					and d.CLASS_ID IN (SELECT ID from sj_org 	
+					where PARENT_ID=#{deptId} and ORG_LEVEL='5'and BEGIN_TIME LIKE CONCAT('%', #{grade}, '%') )
+					group by d.PRACTICE_STATE 
+			]]>
+	</select>
+
+
+
+	<!-- 功能：得到教师带的实习学生各实习状态的人数，用于饼图 参数：年级、老师id by 郑春光 2015-2-9 -->
+	<select id="getStuStateCountByGradeAndTeaId" resultType="java.util.HashMap"
+		parameterType="map"> 
+		<![CDATA[
+					SELECT d.PRACTICE_STATE stateCode,count(*) stuCount
+						from sj_practice_task a 
+						INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID  and DISMISS_TIME is null
+						INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+						INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+						where a.GRADE=#{grade} and a.TASK_TYPE = 1 and a.state=1 and a.TEA_ID=#{teaId}
+						group by d.PRACTICE_STATE 
+		]]>
+	</select>
+	<!-- 功能：得到教师带的实习学生各实习状态的学生详情 -->
+	<select id="getStusByGradeAndTeaIdAndState" resultType="com.sict.entity.Student"
+		parameterType="map"> 
+		<![CDATA[
+			SELECT s.* FROM sj_group_members m, sj_groups g ,sj_practice_task t ,sj_student s
+			WHERE m.GROUP_ID=g.ID
+			AND g.PRACTICE_ID=t.ID 
+			AND s.ID=m.USER_ID
+			AND t.GRADE LIKE CONCAT('%', #{grade}, '%') AND g.DISMISS_TIME is NULL
+			AND length(USER_ID)=32 
+			AND s.PRACTICE_STATE=#{curStateCode}
+			AND t.ID=#{pk_id}	
+		]]>
+	</select>
+
+
+
+	<select id="selectCountByID" parameterType="String" resultType="int">
+		select count(*) from sj_student where id = #{id}
+	</select>
+	<!--查询学生的入学年份的年份集合 by 王磊 2015年4月7日 -->
+	<select id="getYears" resultType="String">
+	<![CDATA[
+		SELECT DISTINCT entry_year from sj_student ORDER BY entry_year
+	]]>
+	</select>
+	<!--通过学生学号得到其对应的id by王磊 2015年4月17日 -->
+	<select id="getId" resultType="String">
+	<![CDATA[
+		SELECT id from sj_student where stu_code=#{stuCode}
+	]]>
+	</select>
+
+	<!--通过学生学号得到其对应的id -->
+	<select id="selectByName" resultType="com.sict.entity.Student">
+	<![CDATA[
+		SELECT * from sj_student where TRUE_NAME=#{stuName}
+	]]>
+	</select>
+	<!--通过班级查询这个班级有没有学生 by吴敬国 2015-5-29 -->
+	<select id="selectCountByClassId" resultType="int"
+		parameterType="String">
+	<![CDATA[
+		select count(*) from sj_student where  class_id =#{class_id}
+	]]>
+	</select>
+	<!--通过实习任务id得到所对应的学生 by吴敬国 2015-6-12 -->
+	<select id="getStuByPracticeTaskId" resultType="com.sict.entity.Student"
+		parameterType="String">
+	<![CDATA[
+		SELECT * FROM sj_student where id IN (
+		select b.USER_ID from sj_groups a,sj_group_members b 
+		where a.id=b.GROUP_ID and length(b.user_id)=32 
+		and a.practice_id=#{practice_id}) ORDER BY CLASS_ID DESC,STU_CODE 
+	]]>
+	</select>
+
+	<!-- 功能：得到教师带的实习学生某种实习状态的人数，用于饼图 参数：年级、老师id,状态 -->
+	<select id="getStateStuCount" resultType="int" parameterType="map"> 
+		<![CDATA[
+			SELECT count(*) stuCount
+			from sj_practice_task a 
+			INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID  and DISMISS_TIME is null
+			INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+			INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 AND d.PRACTICE_STATE=#{state}
+			where a.GRADE=#{grade} and a.TASK_TYPE = 1 and a.state=1 and a.TEA_ID=#{teaId}
+			group by d.PRACTICE_STATE 
+		]]>
+	</select>
+	<!-- 功能：查询某个系的所有学生 -->
+	<select id="getDepartmentStus" resultType="com.sict.entity.Student"
+		parameterType="map"> 
+		<![CDATA[
+			SELECT * FROM sj_student 
+			WHERE CLASS_ID IN (SELECT ID from sj_org 	
+			where PARENT_ID=#{depart_id} and ORG_LEVEL='5'
+			and BEGIN_TIME LIKE CONCAT('%', #{grade}, '%') );
+		]]>
+	</select>
+	<!--查询某系某个签到学生的所有信息（根据班级） -->
+	<select id="getDepartmentSinStusMes" parameterType="map"
+		resultType="com.sict.entity.Student">
+		 <![CDATA[ 
+		SELECT  a.*,b.*,c.*,d.*
+		from sj_student a , sj_sign b , sj_right_region c , sj_org d
+		WHERE a.ID=b.STU_ID 
+		AND a.CLASS_ID=d.ID 
+		AND  b.STU_ID=c.STU_ID 
+		And a.ID= #{stu_id} AND 
+		b.SIGN_TIME=( select MAX(SIGN_TIME) from sj_sign where STU_ID=#{stu_id})
+		AND a.CLASS_ID IN (SELECT ID from sj_org 	
+		where PARENT_ID=#{depart_id} and ORG_LEVEL='5'and BEGIN_TIME LIKE CONCAT('%', #{grade}, '%') );
+		]]>
+	</select>
+
+	<!--根据学生年级得到该年级中所有学生的公司情况 -->
+	<select id="getStuCompanyReport" parameterType="String"
+		resultType="com.sict.entity.ReportStuCompany">
+		 <![CDATA[ 
+		SELECT a.STU_CODE,a.TRUE_NAME,a.SEX,a.PHONE,d.ORG_NAME class_name,
+		ifnull(
+		(
+		select c.COM_NAME from sj_practice_record b 
+		INNER JOIN sj_company c on b.COMPANY_ID=c.id
+		where b.STU_ID =a.ID  
+		ORDER BY APPLY_TIME desc 
+		limit 0,1
+		),'无') company_name
+		from sj_student a 
+		INNER JOIN sj_org d on d.id=a.CLASS_ID
+		where a.ENTRY_YEAR=#{year} 
+		and GROUP_ID is not null
+		and a.STATE =1
+		ORDER BY d.ORG_NAME,a.STU_CODE
+		]]>
+	</select>
+
+
+	<!--根据学生姓名或者学号模糊查询学生信息 byzxy -->
+	<select id="getStudentIdByNameOrId" parameterType="map"
+		resultType="com.sict.entity.Student">
+		 <![CDATA[ 
+		select s.ID,s.TRUE_NAME,s.HOME_PHONE,s.STU_CODE,s.SEX,s.ID_CARD,s.PHONE,s.CLASS_ID, s.HOMEPAGE,s.BIRTHPLACE,s.HOMEPAGE,s.STATE
+		from  sj_student s ,sj_org o ,sj_org o1
+		where 
+		 ( TRUE_NAME  LIKE CONCAT('%', #{keyword}, '%') OR
+		 STU_CODE LIKE CONCAT('%', #{keyword}, '%') )  
+		AND 
+		s.CLASS_ID =o.ID
+		AND o.PARENT_ID = o1.ID
+		AND o1.PARENT_ID =  #{collegeId}
+
+		]]>
+	</select>
+	<!-- 根据学生会部门id查找此学生会所有学生 -->
+	<select id="getStuUnionStus" parameterType="String"
+		resultType="com.sict.entity.Student">
+		 <![CDATA[ select * from sj_student where temp1 like CONCAT('%', #{union_id}, '%')
+		]]>
+	</select>
+	<!-- 修改所选班级所有学生状态为不可用  周睿20160606 -->
+	<update id="deleteAllStuByClassID" parameterType="String">
+		UPDATE sj_student SET STATE='2'
+		WHERE CLASS_ID=#{classID}
+	</update>
+
+	<!-- 根据id更新学生 -用于注销学生微信号   by syj 20160620 -->
+	<update id="updateByStuId" parameterType="String" >
+         UPDATE sj_student SET WX_CODE=null
+		 WHERE id=#{id}
+	</update>
+	
+</mapper> 

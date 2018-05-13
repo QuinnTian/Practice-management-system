@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.SummaryQuestionDao">
+	<insert id="insert" parameterType="com.sict.entity.SummaryQuestion" statementType="PREPARED">
+	insert into
+	sj_summary_question(id,type,other,answer,title,style,depend,questionnaire_id,qindex,type_student,temp1,temp2,temp3,temp4,temp5)
+	values
+	(#{id},#{type},#{other},#{answer},#{title},#{style},#{depend},#{questionnaire_id},#{qindex},#{type_student},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.SummaryQuestion"
+		resultType="com.sict.entity.SummaryQuestion">
+		select * from sj_summary_question where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="other != null">
+			and other = #{other}
+		</if>
+		<if test="answer != null">
+			and answer = #{answer}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="style != null">
+			and style = #{style}
+		</if>
+		<if test="depend != null">
+			and depend = #{depend}
+		</if>
+		<if test="questionnaire_id != null">
+			and questionnaire_id = #{questionnaire_id}
+		</if>
+		<if test="qindex != null">
+			and qindex = #{qindex}
+		</if>
+		<if test="type_student != null">
+			and type_student = #{type_student}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.SummaryQuestion"
+		resultType="int">
+		select count(*) from sj_summary_question where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="other != null">
+			and other = #{other}
+		</if>
+		<if test="answer != null">
+			and answer = #{answer}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="style != null">
+			and style = #{style}
+		</if>
+		<if test="depend != null">
+			and depend = #{depend}
+		</if>
+		<if test="questionnaire_id != null">
+			and questionnaire_id = #{questionnaire_id}
+		</if>
+		<if test="qindex != null">
+			and qindex = #{qindex}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.SummaryQuestion">
+		UPDATE sj_summary_question
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="type != null">type=#{type},</if>
+			<if test="other != null">other=#{other},</if>
+			<if test="answer != null">answer=#{answer},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="style != null">style=#{style},</if>
+			<if test="depend != null">depend=#{depend},</if>
+			<if test="questionnaire_id != null">questionnaire_id=#{questionnaire_id},</if>
+			<if test="qindex != null">qindex=#{qindex},</if>
+			<if test="type_student != null">type_student=#{type_student},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5},</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="com.sict.entity.SummaryQuestion">
+		delete from sj_summary_question where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="other != null">
+			and other = #{other}
+		</if>
+		<if test="answer != null">
+			and answer = #{answer}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="style != null">
+			and style = #{style}
+		</if>
+		<if test="depend != null">
+			and depend = #{depend}
+		</if>
+		<if test="questionnaire_id != null">
+			and questionnaire_id = #{questionnaire_id}
+		</if>
+		<if test="qindex != null">
+			and qindex = #{qindex}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.SummaryQuestion">
+		select * from sj_summary_question where id=#{id}
+	</select>
+	<select id="selectByQuestionnaireId" parameterType="map"
+		resultType="com.sict.entity.SummaryQuestion">
+		select * from sj_summary_question WHERE
+		questionnaire_id=#{questionnaire_id} and (type_student='4' OR
+		type_student=#{type_student})
+	</select>
+
+
+</mapper>

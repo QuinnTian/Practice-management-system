@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.LogDao">
+	<insert id="insert" parameterType="com.sict.entity.Log"
+		statementType="PREPARED">
+		insert into
+		sj_log(id,log_type,user_id,stu_id,practice_id,practice_state,operate_time,end_time,operate_type,operate_module,operate_obj,content,temp1,temp2,temp3)
+		values
+		(#{id},#{log_type},#{user_id},#{stu_id},#{practice_id},#{practice_state},#{operate_time},#{end_time},#{operate_type},#{operate_module},#{operate_obj},#{content},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Log"
+		resultType="com.sict.entity.Log">
+		select * from sj_log where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="log_type != null">
+			and log_type = #{log_type}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="practice_state != null">
+			and practice_state = #{practice_state}
+		</if>
+		<if test="operate_time != null">
+			and operate_time = #{operate_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="operate_type != null">
+			and operate_type = #{operate_type}
+		</if>
+		<if test="operate_module != null">
+			and operate_module = #{operate_module}
+		</if>
+		<if test="operate_obj != null">
+			and operate_obj = #{operate_obj}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Log"
+		resultType="int">
+		select count(*) from sj_log where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="log_type != null">
+			and log_type = #{log_type}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+		<if test="practice_state != null">
+			and practice_state = #{practice_state}
+		</if>
+		<if test="operate_time != null">
+			and operate_time = #{operate_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="operate_type != null">
+			and operate_type = #{operate_type}
+		</if>
+		<if test="operate_module != null">
+			and operate_module = #{operate_module}
+		</if>
+		<if test="operate_obj != null">
+			and operate_obj = #{operate_obj}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Log">
+		UPDATE sj_log
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="log_type != null">log_type=#{log_type},</if>
+			<if test="user_id != null">user_id=#{user_id},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="practice_id != null">practice_id=#{practice_id},</if>
+			<if test="practice_state != null">practice_state=#{practice_state},</if>
+			<if test="operate_time != null">operate_time=#{operate_time},</if>
+			<if test="end_time != null">end_time=#{end_time},</if>
+			<if test="operate_type != null">operate_type=#{operate_type},</if>
+			<if test="operate_module != null">operate_module=#{operate_module},</if>
+			<if test="operate_obj != null">operate_obj=#{operate_obj},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Log">
+		delete from sj_log where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Log">
+		select * from sj_log where id=#{id}
+	</select>
+	<select id="selectStateByOneStuIdAndTime" parameterType="String"
+		resultType="com.sict.entity.Log">
+		select * FROM sj_log WHERE STU_ID =#{stu_id} 
+		AND #{time}  BETWEEN OPERATE_TIME AND IFNULL(END_TIME,SYSDATE())
+		<!-- SELECT * FROM sj_log WHERE STU_ID=#{stu_id} -->
+	</select>
+	<!-- 查询上条未完结的学生日志信息 邢志武 2015年6月16日 14:27:45 -->
+	<select id="getOldLog" parameterType="String" resultType="com.sict.entity.Log">
+		SELECT
+		* FROM sj_log WHERE STU_ID=#{stu_id} AND END_TIME IS NULL
+	</select>
+	<!-- 查询上条未完结的学生日志信息 邢志武 2015年6月16日 14:27:45 -->
+	<select id="getStuLogCont" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM sj_log WHERE STU_ID=#{stu_id}
+	</select>
+
+</mapper>

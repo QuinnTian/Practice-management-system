@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.ShortTimeDao"><insert id="insert" parameterType="com.sict.entity.ShortTime" statementType="PREPARED">
+insert into sj_shorttime (id,org_id,allnum,signnum,yearmouth,year,grade)
+values (#{id},#{org_id},#{allnum},#{signnum},#{yearmouth},#{year},#{grade})
+</insert>
+<select id="select" parameterType="com.sict.entity.ShortTime" resultType="com.sict.entity.ShortTime">
+select * from sj_shorttime  where 1 = 1 
+<if test="id != null">
+and id = #{id}
+</if><if test="org_id != null">
+and org_id = #{org_id}
+</if><if test="allnum != null">
+and allnum = #{allnum}
+</if><if test="signnum != null">
+and signnum = #{signnum}
+</if><if test="yearmouth != null">
+and yearmouth = #{yearmouth}
+</if><if test="year != null">
+and year = #{year}
+</if><if test="grade != null">
+and grade = #{grade}
+</if>
+
+</select>
+<select id="selectCount" parameterType="com.sict.entity.ShortTime" resultType="int">
+select count(*) from sj_shorttime  where 1 = 1 
+<if test="id != null">
+and id = #{id}
+</if><if test="org_id != null">
+and org_id = #{org_id}
+</if><if test="allnum != null">
+and allnum = #{allnum}
+</if><if test="signnum != null">
+and signnum = #{signnum}
+</if><if test="yearmouth != null">
+and yearmouth = #{yearmouth}
+</if><if test="year != null">
+and year = #{year}
+</if><if test="grade != null">
+and grade = #{grade}
+</if>
+
+</select>
+<update id="update" parameterType="com.sict.entity.ShortTime">
+UPDATE sj_shorttime 
+<set>
+<if test="id != null">id=#{id},</if>
+<if test="org_id != null">org_id=#{org_id},</if>
+<if test="allnum != null">allnum=#{allnum},</if>
+<if test="signnum != null">signnum=#{signnum},</if>
+<if test="yearmouth != null">yearmouth=#{yearmouth},</if>
+<if test="year != null">year=#{year},</if>
+<if test="grade != null">grade=#{grade}</if>
+
+</set>
+ WHERE id=#{id} 
+</update>
+<delete id="delete" parameterType="com.sict.entity.ShortTime">
+delete from sj_shorttime  where id=#{id}
+</delete>
+<select id="selectByID" parameterType="String" resultType="com.sict.entity.ShortTime">
+select * from sj_shorttime  where id=#{id}
+</select>
+<!--删除临时表中所有的内容  -->
+	<delete id="deleteAll">
+	<![CDATA[ 
+			delete FROM sj_shorttime WHERE 1=1	
+         ]]>
+	</delete>
+		<!--获取某年学院签到使用情况 参数 年纪 学院id 查询的年份 -->
+	<select id="getCollegeSignstuUsePro" parameterType="map"
+		resultType="map">
+		 <![CDATA[ 
+		SELECT SIGNNUM, YEARMOUTH FROM sj_shorttime   
+		where  org_id=#{org_id}  and  grade=#{grade}   and   year=#{year};
+		]]>
+	</select>
+	<!--删除临时表中没有xxxx-xxxx数据 -->
+	<delete id="deleteYearMouth">
+	<![CDATA[ 
+			delete FROM sj_shorttime WHERE yearmouth='';	
+         ]]>
+	</delete>
+</mapper>

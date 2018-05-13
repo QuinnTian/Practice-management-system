@@ -1,0 +1,153 @@
+
+
+/* menu::base */
+#menu1 {
+	height: 40px;
+	float: left;
+	width: 25%;
+	line-height: 40px;
+	background: url(../images/bg-a.png) repeat-x;
+}
+
+div#menu {
+	height: 40px;
+	float: left;
+	width: 75%;
+	background: url(../images/bg-a.png) repeat-x;
+}
+
+div#menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+}
+
+div#menu ul.menu {
+	padding-left: 30px;
+}
+
+div#menu li {
+	position: relative;
+	z-index: 9;
+	margin: 0;
+	padding: 0;
+	display: block;
+	float: left;
+}
+
+div#menu li:hover>ul {
+	left: -2px;
+}
+
+/*下拉大div*/
+div#menu li div {
+	list-style: none;
+	float: left;
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 208px;
+	z-index: 11;
+	visibility: hidden;
+	padding: 0 0 9px 7px;
+	_padding: 0 0 9px 3px;
+	/*下拉大背景颜色*/
+	margin: 0 0 0 -9px;
+}
+
+div#menu li:hover>div {
+	visibility: visible;
+}
+
+/* menu::level1 */
+div#menu a {
+	position: relative;
+	z-index: 10;
+	height: 40px;
+	display: block;
+	float: left;
+	padding: 0 10px 0 10px;
+	line-height: 40px;
+	text-decoration: none;
+}
+
+div#menu span,div#menu1 span {
+	font: normal 14px 'Lucida Sans Unicode', 'Lucida Grande', Helvetica,
+		Arial, sans-serif;
+	padding-top: 14px;
+	color: #787878;
+	font-weight: bold;
+	text-transform: uppercase;
+	display: block;
+	cursor: pointer;
+	background-repeat: no-repeat;
+}
+
+div#menu ul a:hover span {
+	color: #353535;
+}
+
+/* 分割图 */
+div#menu li { background: url(../images/new.png) top left no-repeat; }
+
+
+/* menu::level2 */
+div#menu ul ul li {
+	background: url(../images/bg-a.png) repeat-x;
+	padding: 4px 0;
+	z-index: 9;
+}
+
+div#menu ul ul {
+	z-index: 12;
+	padding: 0;
+	background: url(../images/bg-a.png) repeat-x;
+	margin-top: 0px;
+	margin-left: 4px;
+	margin-right: 5px;
+}
+
+div#menu ul ul a {
+	width: 184px;
+	padding: 0px 7px 3px 8px;
+	height: auto;
+	float: none;
+	display: block;
+	background: none;
+	margin-bottom: 2px;
+	z-index: -1;
+}
+
+div#menu ul ul a span {
+	padding: 0 10px 0px 10px;
+	line-height: 18px;
+	color: #454545;
+	font-weight: normal;
+	text-transform: none;
+	background: none;
+}
+
+div#menu ul ul a:hover {
+	background: #b63b4d;
+}
+
+div#menu ul ul a:hover span {
+	background: #b63b4d;
+	color: #fff;
+}
+
+div#menu ul ul li {
+	width: 100%;
+}
+
+/* menu::level3 */
+div#menu ul ul div {
+    width: 208px;
+    margin: -40px 0 0 190px !important;
+    height: auto;
+    _padding: 0 0 9px 3px;
+}
+div#menu ul ul ul {
+	_padding-right:1px;
+}

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.SignDao">
+
+	<!-- -->
+	<insert id="stuQd" parameterType="com.sict.entity.Sign">
+        <![CDATA[ 
+         insert into sj_sign(id,sign_time,stu_id,sign_place,login_time,latitude,longitude,precs,temp1,temp2,temp3)
+		 values (#{id},#{sign_time},#{stu_id},#{sign_place},#{login_time},#{latitude},#{longitude},#{precs},#{temp1},#{temp2},#{temp3})
+        ]]>
+	</insert>
+
+	<!-- 检查是否签到成功 by孟凡朕 20140917 -->
+	<select id="isQd" parameterType="map" resultType="com.sict.entity.Sign">
+         <![CDATA[ 
+              
+              select * from sj_sign where stu_id=#{stu_id} and date_format(login_time,'%Y-%m-%d')=#{sign_time}
+         ]]>
+	</select>
+
+	<!-- <resultMap id="BaseResultMap" type="com.dingxun.tiku.vo.Area"> <id 
+		column="area_id" jdbcType="INTEGER" property="areaId" /> <result column="code" 
+		jdbcType="VARCHAR" property="code" /> <result column="parent" jdbcType="INTEGER" 
+		property="parent" /> </resultMap> -->
+	<insert id="insert" parameterType="com.sict.entity.Sign"
+		statementType="PREPARED">
+		insert into
+		sj_sign(id,sign_time,stu_id,sign_place,latitude,longitude,login_time,precs,temp1,temp2,temp3)
+		values
+		(#{id},#{sign_time},#{stu_id},#{sign_place},#{latitude},#{longitude},#{login_time},#{precs},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Sign"
+		resultType="com.sict.entity.Sign">
+		select * from sj_sign where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="sign_time != null">
+			and sign_time = #{sign_time}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="sign_place != null">
+			and sign_place = #{sign_place}
+		</if>
+		<if test="latitude != null">
+			and latitude = #{latitude}
+		</if>
+		<if test="longitude != null">
+			and longitude = #{longitude}
+		</if>
+		<if test="login_time != null">
+			and login_time = #{login_time}
+		</if>
+		<if test="precs != null">
+			and precs = #{precs}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Sign"
+		resultType="int">
+		select count(*) from sj_sign where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="sign_time != null">
+			and sign_time = #{sign_time}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="sign_place != null">
+			and sign_place = #{sign_place}
+		</if>
+		<if test="latitude != null">
+			and latitude = #{latitude}
+		</if>
+		<if test="longitude != null">
+			and longitude = #{longitude}
+		</if>
+		<if test="login_time != null">
+			and login_time = #{login_time}
+		</if>
+		<if test="precs != null">
+			and precs = #{precs}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Sign">
+		UPDATE sj_sign
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="sign_time != null">sign_time=#{sign_time},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="sign_place != null">sign_place=#{sign_place},</if>
+			<if test="latitude != null">latitude=#{latitude},</if>
+			<if test="longitude != null">longitude=#{longitude},</if>
+			<if test="login_time != null">login_time=#{login_time},</if>
+			<if test="precs != null">precs=#{precs},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Sign">
+		delete from sj_sign where
+		id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Sign">
+		select * from sj_sign where id=#{id}
+	</select>
+	<!-- 根据tea_code查询学生 by吴敬国20141104 -->
+	<select id="selectsignListByTeaCode" parameterType="String"
+		resultType="java.util.HashMap">
+         <![CDATA[ 
+         SELECT a.* ,b.CLASS_NAME
+			from  sj_sign a,sj_tea_stu b
+			where a.STU_CODE=b.STU_CODE
+			and b.TEA_CODE=#{tea_code}
+			and  DATE_FORMAT(a.SIGN_TIME, '%Y-%m-%d')=DATE_FORMAT(sysdate(), '%Y-%m-%d')
+         ]]>
+	</select>
+	<!-- 根据tea_code，系统当前时间查询当天签到的学生个数 by吴敬国20141104 -->
+	<select id="selectSignedCountByTeaCode" parameterType="String"
+		resultType="int">
+	 <![CDATA[ 
+	       select count(*)
+           from sj_sign a ,sj_tea_stu b
+           where a.STU_CODE=b.STU_CODE
+           and b.TEA_CODE=#{tea_code}
+           and DATE_FORMAT(a.SIGN_TIME, '%Y-%m-%d')=DATE_FORMAT(sysdate(), '%Y-%m-%d')
+	     ]]>
+	</select>
+	<!-- 根据tea_code查询的学生个数 by吴敬国20141104 -->
+	<select id="selectStuCountByTeaCode" parameterType="String"
+		resultType="int">
+	 <![CDATA[ 
+	       select count(Distinct STU_CODE)
+            from sj_tea_stu b
+            WHERE b.TEA_CODE=#{tea_code}
+	     ]]>
+	</select>
+	<!-- 根据未签到的学生的列表信息 by吴敬国20141104 -->
+	<select id="selectUnSignListByTeaCode" parameterType="String"
+		resultType="com.sict.entity.TeaStu">
+	 <![CDATA[ 
+	      select *
+          from sj_tea_stu b
+          where b.TEA_CODE=#{tea_code}
+          and b.stu_code not in(
+          select a.STU_CODE
+          from sj_sign a ,sj_tea_stu b
+          where a.STU_CODE=b.STU_CODE
+          and b.TEA_CODE=#{tea_code}
+          and DATE_FORMAT(a.SIGN_TIME, '%Y-%m-%d')=DATE_FORMAT(sysdate(), '%Y-%m-%d')
+          )
+	     ]]>
+	</select>
+	<!--查询该教师管理的所有学生中签到的学生的stu_id by邢志武 20141114 -->
+	<select id="selectAllSignStuIdByTeaCode" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+		 <![CDATA[ 
+	 	SELECT DISTINCT(gm.USER_ID) FROM sj_group_members gm 
+ 	 	WHERE GROUP_ID IN (select g.GROUP_ID FROM sj_group_members g 
+ 	 	WHERE USER_ID= #{tea_id}) 
+     	AND length(USER_ID) = 32 
+ 	 	AND gm.USER_ID in( SELECT s.STU_ID from sj_sign s)
+     ]]>
+	</select>
+	<!-- 查询从未签到过学生的stu_id by邢志武 20141114 -->
+	<select id="selectNeverSignStuIdByTeaCode" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+	 	SELECT DISTINCT(gm.USER_ID) FROM sj_group_members gm 
+		WHERE GROUP_ID IN (select g.GROUP_ID FROM sj_group_members g 
+		WHERE USER_ID= #{tea_id})
+		AND length(USER_ID) = 32 
+		AND gm.USER_ID NOT in( SELECT s.STU_ID from sj_sign s);
+	     ]]>
+	</select>
+	<!-- 根据STU_ID，查询签到学生的全部信息 by邢志武20141115 -->
+	<!-- SELECT a.*,b.*,c.*,d.* from sj_student a , sj_sign b , sj_right_region 
+		c , sj_org d WHERE a.ID=b.STU_ID AND a.CLASS_ID=d.ID AND b.STU_ID=c.STU_ID 
+		And a.ID=#{stu_id} AND b.SIGN_TIME=( select MAX(SIGN_TIME) from sj_sign where 
+		STU_ID=#{stu_id}); -->
+	<select id="selectAllStuByStuID" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+		SELECT * FROM sj_student a
+		INNER JOIN sj_sign b ON b.STU_ID=a.ID
+		INNER JOIN sj_right_region c ON a.ID=c.STU_ID  
+		INNER JOIN sj_org d ON d.ID =a.CLASS_ID
+		WHERE b.SIGN_TIME =(SELECT MAX(SIGN_TIME) FROM sj_sign WHERE STU_ID=#{stu_id})
+		AND c.END_TIME =(SELECT MAX(END_TIME) FROM sj_right_region WHERE STU_ID=#{stu_id})		
+	     ]]>
+	</select>
+	<!-- 根据STU_CODE，查询所需学生的经度 by邢志武20141115 -->
+	<select id="selectStuLatitudeByStuId" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+	     SELECT  b.LATITUDE
+ 		 from sj_student a , sj_sign b , sj_right_region c 
+ 		 WHERE a.ID=b.STU_ID AND b.STU_ID=c.STU_ID And a.ID=#{stu_id} AND 
+ 		 b.SIGN_TIME=( select MAX(SIGN_TIME) from sj_sign where STU_ID=#{stu_id});
+	     ]]>
+	</select>
+	<!-- 根据STU_CODE，查询所需学生的纬度 by邢志武20141115 -->
+	<select id="selectStuLongitudeByStuId" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+	     SELECT  b.LONGITUDE
+ 		 from sj_student a , sj_sign b , sj_right_region c 
+ 		 WHERE a.ID=b.STU_ID AND b.STU_ID=c.STU_ID And a.ID=#{stu_id} AND 
+ 		 b.SIGN_TIME=( select MAX(SIGN_TIME) from sj_sign where STU_ID=#{stu_id});
+	     ]]>
+	</select>
+	<!-- 根据STU_CODE，查询从未签到过的学生的全部信息 by邢志武20141115 -->
+
+	<select id="selectUnSignAllStuByStuId" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+	   SELECT * from sj_student s ,sj_org o  where s.id=#{stu_id}
+	   AND s.CLASS_ID=o.ID
+	   ]]>
+	</select>
+
+
+	<!-- 根据STU_CODE，查询签到情况，本月签到次数 -->
+	<select id="selectSignAllStuStateByStuId" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+	  SELECT s.id, s.TRUE_NAME,s.STU_CODE,s.CLASS_ID,s.PHONE,COUNT(*) 
+      signCount from sj_student s ,sj_sign g 
+	  where s.id=#{stu_id}
+	  AND s.ID=g.STU_ID
+	  AND date_format(g.SIGN_TIME,'%Y-%m')=date_format(now(),'%Y-%m') 
+	   ]]>
+	</select>
+
+
+	<!-- 根据STU_id 和 月份，查询签到情况，签到次数 -->
+	<select id="selectSignAllStuStateByStuIdAndMoth" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+	  SELECT s.id, s.TRUE_NAME,s.STU_CODE,s.CLASS_ID,s.PHONE,COUNT(*) 
+      signCount from sj_student s ,sj_sign g 
+	  where s.id=#{stu_id}
+	  AND s.ID=g.STU_ID
+	  AND date_format(g.SIGN_TIME,'%Y-%m')=#{year} 
+	   ]]>
+	</select>
+
+	<!-- 根据STU_id 和 月份，查询签到情况，签到详情 -->
+	<select id="selectSignStuStateByStuIdAndMothMes" parameterType="String"
+		resultType="com.sict.entity.BMapEntity">
+	 <![CDATA[ 
+	  SELECT s.id, s.TRUE_NAME,s.STU_CODE,s.CLASS_ID,s.PHONE ,g.SIGN_TIME
+      from sj_student s ,sj_sign g 
+	  where s.id=#{stu_id}
+	  AND s.ID=g.STU_ID
+	  AND date_format(g.SIGN_TIME,'%Y-%m')=#{year} ORDER BY g.SIGN_TIME 
+	   ]]>
+	</select>
+
+
+
+	<!--根據學號更新 -->
+	<update id="updateSignPlace" parameterType="com.sict.entity.Sign">
+		UPDATE sj_sign
+		<set>
+			<if test="sign_time != null">sign_time=#{sign_time},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="sign_place != null">sign_place=#{sign_place},</if>
+			<if test="longitude != null">longitude=#{longitude},</if>
+			<if test="precs != null">precs=#{precs},</if>
+			<if test="latitude != null">latitude=#{latitude},</if>
+			<if test="login_time != null">login_time=#{login_time},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+		</set>
+		WHERE stu_id=#{stu_id} and DATE_FORMAT(login_time,
+		'%Y-%m-%d')=DATE_FORMAT(sysdate(), '%Y-%m-%d')
+	</update><!--根據學號更新 -->
+	<update id="updateSign_Time" parameterType="com.sict.entity.Sign">
+		UPDATE sj_sign
+		set
+		sign_time=#{sign_time}
+		WHERE stu_id=#{stu_id} and
+		DATE_FORMAT(login_time, '%Y-%m-%d')=DATE_FORMAT(sysdate(), '%Y-%m-%d')
+	</update>
+	<!-- 根据STU_id，查询 byccc20150117 -->
+	<select id="selectByStuID" parameterType="String" resultType="com.sict.entity.Sign">
+	 <![CDATA[  
+ 	   SELECT * from sj_sign  where stu_id=#{stu_id} 
+ 	   and DATE_FORMAT(login_time, '%Y-%m-%d')=DATE_FORMAT(sysdate(), '%Y-%m-%d')
+	   
+	   ]]>
+	</select>
+
+
+	<!-- 根据实践任务开始时间，查询该小组中从未签到的学生id by 邢志武 2015-01-24 -->
+	<select id="selectNeverSinStusByPk_time" resultType="String">
+	 <![CDATA[  
+ 	  
+			SELECT USER_ID 
+			FROM sj_group_members a,sj_groups b
+			WHERE a.GROUP_ID=b.ID
+			and b.PRACTICE_ID=#{pk_id}
+			AND a.USER_ID>16 AND a.STATE=1
+			and a.USER_ID NOT IN (SELECT DISTINCT(stu_id) from sj_sign WHERE SIGN_TIME >#{ts} )
+	   ]]>
+	</select>
+
+	<!-- 根据学生的ID，查询签到表学生的经纬度 by 孙磊 2015-03-21 -->
+	<select id="changeLaById" parameterType="String" resultType="com.sict.entity.Sign">
+		 <![CDATA[ 
+		select LATITUDE,LONGITUDE from sj_sign 
+		 where DATE_FORMAT(SIGN_TIME, '%Y-%m-%d')=DATE_FORMAT(sysdate(), '%Y-%m-%d')
+		and  stu_id =#{sid} 
+		    ]]>
+	</select>
+
+	<!-- 根据小组id查询该小组本周签到学生的数量 邢志武 2015-03-26 -->
+	<select id="getSinStusSizeByGroupId" parameterType="String"
+		resultType="int">
+		 <![CDATA[ 
+		select COUNT(DISTINCT(STU_ID))from sj_sign 
+		where 
+		YEARWEEK(date_format(SIGN_TIME,'%Y-%m-%d')) = YEARWEEK(now())
+		AND STU_ID IN
+		( SELECT DISTINCT(USER_ID) FROM sj_group_members 
+		WHERE GROUP_ID=#{group_id} 
+		AND length(user_id)=32)
+		]]>
+	</select>
+	<!-- 查询某系本周签到学生的数量 邢志武 2015年9月10日 (按班级) -->
+	<select id="getNewDepartmentSignStusSize" parameterType="String"
+		resultType="int">
+		 <![CDATA[ 
+		SELECT count(DISTINCT(e.STU_ID)) sinStu
+		from sj_practice_task a 
+		INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+		INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+		INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+		INNER JOIN sj_sign e ON d.ID=e.STU_ID
+		where a.GRADE=#{grade}  and a.TASK_TYPE = 1 and a.state=1 
+		AND d.CLASS_ID IN (SELECT ID from sj_org 	
+		where PARENT_ID=#{org_id}  and ORG_LEVEL='5'and BEGIN_TIME LIKE CONCAT('%', #{grade}, '%') )
+		and year(SIGN_TIME)=year(now()) 
+		and month(SIGN_TIME)=month(now()) 
+		and YEARWEEK(date_format(SIGN_TIME,'%Y-%m-%d')) 
+		]]>
+	</select>
+
+
+	<!-- 查询商职学院本周签到学生的数量 邢志武 2015年9月10日 (按班级) -->
+	<select id="getNewSchoolSignStusSize" parameterType="String"
+		resultType="int">
+		 <![CDATA[ 
+		SELECT count(DISTINCT(e.STU_ID)) sinStu
+		from sj_practice_task a 
+		INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+		INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+		INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+		INNER JOIN sj_sign e ON d.ID=e.STU_ID
+		where a.GRADE=#{grade}  and a.TASK_TYPE = 1 and a.state=1 
+		AND d.CLASS_ID IN (SELECT ID from sj_org 	
+		where PARENT_ID in (SELECT ID FROM sj_org 
+		WHERE PARENT_ID in (SELECT ID FROM sj_org 
+		WHERE PARENT_ID='szxy' ) AND ORG_LEVEL='3')  
+		and ORG_LEVEL='5'and BEGIN_TIME LIKE CONCAT('%', #{grade}, '%')  )
+		and year(SIGN_TIME)=year(now()) 
+		and month(SIGN_TIME)=month(now()) 
+		and YEARWEEK(date_format(SIGN_TIME,'%Y-%m-%d')) 
+		]]>
+	</select>
+
+	<!-- 查询某学院本周签到学生的数量 邢志武 2015年9月10日 (按班级) -->
+	<select id="getNewCollegeSignStusSize" parameterType="String"
+		resultType="int">
+		 <![CDATA[ 
+		SELECT count(DISTINCT(e.STU_ID)) sinStu
+		from sj_practice_task a 
+		INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+		INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+		INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+		INNER JOIN sj_sign e ON d.ID=e.STU_ID
+		where a.GRADE=#{grade}  and a.TASK_TYPE = 1 and a.state=1 
+		AND d.CLASS_ID IN (SELECT ID from sj_org 	
+		where PARENT_ID in (SELECT ID FROM sj_org 
+		WHERE PARENT_ID =#{org_id}
+		and ORG_LEVEL='3')  
+		and ORG_LEVEL='5'and BEGIN_TIME LIKE CONCAT('%', #{grade}, '%')  )
+		and year(SIGN_TIME)=year(now()) 
+		and month(SIGN_TIME)=month(now()) 
+		and YEARWEEK(date_format(SIGN_TIME,'%Y-%m-%d')) 
+		]]>
+	</select>
+
+	<!--获取系校外实习人数（根据班级） -->
+	<select id="getNewDepartmentStusSize" parameterType="String"
+		resultType="int">
+		 <![CDATA[ 
+
+		SELECT COUNT(d.TRUE_NAME)
+		from sj_practice_task a 
+		INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+		INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+		INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+		where a.GRADE=#{grade} and a.TASK_TYPE = 1 and a.state=1 
+		AND d.CLASS_ID IN (SELECT ID from sj_org where PARENT_ID=#{org_id}  
+		and ORG_LEVEL='5'and BEGIN_TIME LIKE CONCAT('%', #{grade}, '%') )
+		]]>
+	</select>
+
+	<!--获取某年学院签到使用情况 参数 年纪 学院id 查询的年份 -->
+	<select id="getCollegeSignstuUsePro" parameterType="map"
+		resultType="map">
+		 <![CDATA[ 
+		SELECT COUNT(DISTINCT(STU_ID)) count , DATE_FORMAT(SIGN_TIME,'%Y-%m') date FROM sj_sign 
+		WHERE DATE_FORMAT(SIGN_TIME,'%Y-%m') LIKE CONCAT('%', #{year}, '%')
+		AND STU_ID in 
+		(
+				SELECT  d.ID
+				from sj_practice_task a 
+				INNER JOIN sj_groups b on b.PRACTICE_ID=a.ID and DISMISS_TIME is null
+				INNER JOIN sj_group_members c on c.GROUP_ID=b.ID
+				INNER JOIN sj_student d on d.ID=c.USER_ID and d.state=1 
+				where a.GRADE=#{grade}  and a.TASK_TYPE = 1 and a.state=1 
+				AND d.CLASS_ID IN (SELECT ID from sj_org 	
+				where PARENT_ID in (SELECT ID FROM sj_org 
+				WHERE PARENT_ID =#{org_id}
+				and ORG_LEVEL='3')  
+				and ORG_LEVEL='5')
+				
+		)
+		GROUP BY DATE_FORMAT(SIGN_TIME, '%Y%m') 
+		]]>
+	</select>
+	
+	<!--获取某年学院签到使用情况 参数 年纪 学院id 查询的年份 -->
+	<select id="getNewCollegeSignstuUsePro" resultType="map" parameterMap="getStuProlistMap" statementType="CALLABLE">
+		 <![CDATA[
+		CALL test3(?,?,?)
+		]]>
+	</select>
+	<parameterMap type="map" id="getStuProlistMap">
+		<parameter property="year" mode="IN" jdbcType="VARCHAR"/>
+		<parameter property="grade" mode="IN" jdbcType="VARCHAR"/>
+		<parameter property="org_id" mode="IN" jdbcType="VARCHAR"/>
+	</parameterMap>
+	<!-- 根据选中年份查找一共有多少个月提交了月总结 李泽 2016/04/21 -->
+	<select id="getMonthByGrade" parameterType="String" resultType="String">
+	<![CDATA[
+	select DISTINCT(SUBSTR(endDate,6,7)) from sj_summary_questionnaire where endDate like #{year} and department='dzxxxy' and endDate <> '2016-07';
+	]]>
+	</select>
+	<!-- 查找每个学院每个月提交月总结的人数  李泽 2016/04/21 -->
+	<select id="getCountByYearAndDpt" parameterType="String" resultType="int">
+	<![CDATA[
+	select count(a.user_id) count
+    from sj_summary_qnanswer a,sj_summary_questionnaire b
+    where  a.questionnaire_id=b.id
+    and a.user_id in(
+    select ID
+    from sj_student
+    where ENTRY_YEAR=#{grade})
+    and b.department=#{department}
+    group by answerDate 
+    HAVING answerDate LIKE #{year}
+    ORDER BY a.answerDate;
+	]]>
+	</select>
+</mapper> 
+    

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.GroupsDao">
+	<insert id="insert" parameterType="com.sict.entity.Groups"
+		statementType="PREPARED">
+		insert into
+		sj_groups(id,group_name,purpose,description,create_time,dismiss_time,tea_id,practice_id)
+		values
+		(#{id},#{group_name},#{purpose},#{description},#{create_time},#{dismiss_time},#{tea_id},#{practice_id})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Groups"
+		resultType="com.sict.entity.Groups">
+		select * from sj_groups where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="group_name != null">
+			and group_name = #{group_name}
+		</if>
+		<if test="purpose != null">
+			and purpose = #{purpose}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="dismiss_time != null">
+			and dismiss_time = #{dismiss_time}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Groups"
+		resultType="int">
+		select count(*) from sj_groups where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="group_name != null">
+			and group_name = #{group_name}
+		</if>
+		<if test="purpose != null">
+			and purpose = #{purpose}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="dismiss_time != null">
+			and dismiss_time = #{dismiss_time}
+		</if>
+		<if test="tea_id != null">
+			and tea_id = #{tea_id}
+		</if>
+		<if test="practice_id != null">
+			and practice_id = #{practice_id}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Groups">
+		UPDATE sj_groups
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="group_name != null">group_name=#{group_name},</if>
+			<if test="purpose != null">purpose=#{purpose},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="dismiss_time != null">dismiss_time=#{dismiss_time},</if>
+			<if test="tea_id != null">tea_id=#{tea_id},</if>
+			<if test="practice_id != null">practice_id=#{practice_id}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Groups">
+		delete from sj_groups where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Groups">
+		select * from sj_groups where id=#{id}
+	</select>
+	
+	
+	<!-- 根据学生id查询实习id by ccc 20141128 -->
+	<select id="getPractice_id" parameterType="String"
+		resultType="String">
+		select b.practice_id from sj_groups   b join sj_group_members  a on a.GROUP_ID=b.ID      
+     where a.USER_ID=#{user_id};
+	</select>
+    <!-- 根据学生id查询实习id by ccc 20141128 -->
+	<select id="getPractice_ids" parameterType="String"
+		resultType="com.sict.entity.Groups">
+	select b.*from sj_groups   b join sj_group_members  a on a.GROUP_ID=b.ID      
+     where a.USER_ID=#{user_id} ;
+	
+	</select>
+	
+	<!-- 根据老师部门id获得同部门老师创建的小组 by 吴敬国 20141209  邢志武修改 2015-01-24-->
+	<select id="getGroupsByDeptId" parameterType="String"
+		resultType="com.sict.entity.Groups">
+		select * from sj_groups where TEA_ID in (select ID from
+		sj_teacher where DEPT_ID=#{dept_id} AND DISMISS_TIME is NULL)
+	</select>
+
+    <!-- 根据老师的id获取到相应的小组 by 吴敬国 20141209 -->
+	<select id="getGroupsByTeaId" parameterType="String"
+		resultType="com.sict.entity.Groups">
+		select a.* from sj_groups a,sj_practice_task b where a.PRACTICE_ID=b.ID and b.TEA_ID=#{tea_id} AND a.DISMISS_TIME IS  NULL
+	</select>
+	    <!--根据部门id 获取该部门的所有小组 by 邢志武 2015-01-29-->
+	<select id="selectGroupsBydept_id" parameterType="String"
+		resultType="com.sict.entity.Groups">
+		SELECT * FROM sj_groups WHERE ID IN
+		(SELECT GROUP_ID FROM sj_group_members WHERE PRACTICE_ID IN 
+		(SELECT ID FROM sj_practice_task WHERE GRADE LIKE CONCAT( #{grade}, '%') ) AND USER_ID IN 
+		(SELECT ID FROM sj_teacher WHERE DEPT_ID=#{dept_id})) AND DISMISS_TIME is NULL
+ 		order by CREATE_TIME DESC
+	</select>
+	
+	    <!--根据teacher_id ,年级查询该老师负责的小组 2015年5月10日 11:37:23 邢志武-->
+		<select id="selectGroupsByTea_idAndGrade" parameterType="String"
+		resultType="com.sict.entity.Groups">
+		SELECT * FROM sj_groups WHERE ID IN
+		(SELECT GROUP_ID FROM sj_group_members WHERE PRACTICE_ID IN 
+		(SELECT ID FROM sj_practice_task WHERE GRADE LIKE CONCAT( #{grade}, '%') AND TASK_TYPE='2' )
+		AND USER_ID=#{tea_id}) AND DISMISS_TIME is NULL
+		order by CREATE_TIME DESC
+		</select>
+	
+	
+	
+	<!-- 根据实践任务id获取小组id 邢志武 2015-03-26 -->
+	<select id="getGroupId" parameterType="String"
+		resultType="String">
+		SELECT Id FROM sj_groups WHERE PRACTICE_ID=#{pra_id}
+	</select> 
+	<!-- 根据praid查询是否有小组  by 吴敬国 2015-3-25-->
+	<select resultType="int" id="selectCountByPraid"
+		parameterType="String"> 
+		<![CDATA[ select count(*) from sj_groups where  PRACTICE_ID=#{pra_id}  ]]>
+	</select>
+	<!-- 判断小组名是否重复 邢志武 2015年5月10日 14:26:43-->
+	<select resultType="int" id="selectCountByGroup_name"
+		parameterType="String"> 
+		<![CDATA[ SELECT COUNT(*) FROM sj_groups WHERE GROUP_NAME=#{group_name} AND DISMISS_TIME is NULL ]]>
+	</select>
+
+	<!-- 根据实习任务id和学生id查询实习分组 by ccc 20150621 -->
+	<select id="getGroupByPracIdAndStuId" parameterType="map"
+		resultType="com.sict.entity.Groups">
+		select b.* from sj_groups   b join sj_group_members  a on a.GROUP_ID=b.ID      
+     where a.USER_ID=#{stu_id} and b.practice_id=#{praid};
+	</select>
+</mapper>

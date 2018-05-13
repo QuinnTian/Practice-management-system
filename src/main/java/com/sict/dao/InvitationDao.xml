@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.InvitationDao">
+	<insert id="insert" parameterType="com.sict.entity.Invitation"
+		statementType="PREPARED">
+		insert into
+		sj_bbs_invitation(id,title,content,user_id,type_id,create_time,update_time,parents_id,top,state,temp1,temp2,temp3)
+		values
+		(#{id},#{title},#{content},#{user_id},#{type_id},#{create_time},#{update_time},#{parents_id},#{top},#{state},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Invitation"
+		resultType="com.sict.entity.Invitation">
+		select * from sj_bbs_invitation where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="type_id != null">
+			and type_id = #{type_id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="update_time != null">
+			and update_time = #{update_time}
+		</if>
+		<if test="parents_id != null">
+			and parents_id = #{parents_id}
+		</if>
+		<if test="top != null">
+			and top = #{top}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Invitation"
+		resultType="int">
+		select count(*) from sj_bbs_invitation where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="content != null">
+			and content = #{content}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="type_id != null">
+			and type_id = #{type_id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="update_time != null">
+			and update_time = #{update_time}
+		</if>
+		<if test="parents_id != null">
+			and parents_id = #{parents_id}
+		</if>
+		<if test="top != null">
+			and top = #{top}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Invitation">
+		UPDATE sj_bbs_invitation
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="user_id != null">user_id=#{user_id},</if>
+			<if test="type_id != null">type_id=#{type_id},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="update_time != null">update_time=#{update_time},</if>
+			<if test="parents_id != null">parents_id=#{parents_id},</if>
+			<if test="top != null">top=#{top},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Invitation">
+		delete from sj_bbs_invitation where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.Invitation">
+		select * from sj_bbs_invitation where id=#{id}
+	</select>
+
+	<!--根据类型查询主题 -->
+	<select id="selectParentInvititons" parameterType="String"
+		resultType="com.sict.entity.Invitation">
+		select * from sj_bbs_invitation where type_id=#{type} and top='2' and title is NOT NULL
+		ORDER BY update_time DESC
+	</select>
+	
+	<!--根据类型查询置顶帖 两条 -->
+	<select id="selectTapInvititons" parameterType="String"
+		resultType="com.sict.entity.Invitation">
+		select * from sj_bbs_invitation WHERE top='1' and type_id=#{type} ORDER BY create_time DESC limit 2 
+	</select>
+	<!--查询主题回复 -->
+	<select id="selectSonInvititons" parameterType="String"
+		resultType="com.sict.entity.Invitation">
+		select * from sj_bbs_invitation where Parents_id =#{id} AND state='1' ORDER
+		BY create_time
+	</select>
+	<!--查询单个人的主题 -->
+	<select id="selcetPersonInvititons" parameterType="String"
+		resultType="com.sict.entity.Invitation">
+		select * from sj_bbs_invitation
+		WHERE user_id=#{id} AND state='1'
+		AND title IS NOT NULL	
+		ORDER BY create_time DESC
+	</select>
+
+	<!--查询主题回复数量 -->
+	<select id="selcetPerCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM sj_bbs_invitation WHERE parents_id =#{id}
+	</select>
+	<!--根据起始页实现分页功能查看-->
+	<select id="getPageDate" parameterType="map" resultType="com.sict.entity.Invitation">
+		SELECT * FROM sj_bbs_invitation WHERE top='2'and type_id=#{type} AND title is  NOT  NULL ORDER BY  update_time DESC LIMIT #{startPage} ,#{endPage}
+	</select>
+	
+	<!--根据主贴查询参与的人-->
+	<select id="getUserIdByinId" parameterType="String" resultType="String">
+		SELECT DISTINCT(user_id) FROM sj_bbs_invitation WHERE Parents_id =#{Inid} OR id =#{Inid}
+	</select>
+</mapper>

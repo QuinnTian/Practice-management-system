@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.UserRoleDao">
+	<insert id="insert" parameterType="com.sict.entity.UserRole"
+		statementType="PREPARED">
+		insert into
+		sj_user_role(id,user_id,role_id,state,custom_menu_ids,temp1,temp2,temp3,temp4,temp5,temp6)
+		values
+		(#{id},#{user_id},#{role_id},#{state},#{custom_menu_ids},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5},#{temp6})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.UserRole"
+		resultType="com.sict.entity.UserRole">
+		select * from sj_user_role where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="role_id != null">
+			and role_id = #{role_id}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="custom_menu_ids != null">
+			and custom_menu_ids = #{custom_menu_ids}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+		<if test="temp6 != null">
+			and temp6 = #{temp6}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.UserRole"
+		resultType="int">
+		select count(*) from sj_user_role where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="role_id != null">
+			and role_id = #{role_id}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="custom_menu_ids != null">
+			and custom_menu_ids = #{custom_menu_ids}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+		<if test="temp6 != null">
+			and temp6 = #{temp6}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.UserRole">
+		UPDATE sj_user_role
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="user_id != null">user_id=#{user_id},</if>
+			<if test="role_id != null">role_id=#{role_id},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="custom_menu_ids != null">custom_menu_ids=#{custom_menu_ids},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5},</if>
+			<if test="temp6 != null">temp6=#{temp6}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<update id="updateState" parameterType="String">
+		update sj_user_role set
+		state='2' where id=#{id}
+	</update>
+	<!-- 根据用户id更新用户权限表自定义导航（custom_menu_ids） -->
+	<update id="updatecustomMenuIds" parameterType="com.sict.entity.UserRole">
+		update
+		sj_user_role set custom_menu_ids=#{custom_menu_ids} WHERE
+		user_id=#{user_id} and role_id =#{role_id}
+	</update>
+
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.UserRole">
+		select * from sj_user_role where id=#{id}
+	</select>
+	<delete id="delete" parameterType="com.sict.entity.UserRole">
+	delete from sj_user_role where
+	user_id=#{user_id} AND role_id=#{role_id}
+	</delete>
+
+	<!-- 查询用户权限 by吴敬国20141104 -->
+	<select id="selectUserRoleList" parameterType="map"
+		resultType="com.sict.entity.UserRole">
+         <![CDATA[ 
+          SELECT a.*
+         from sj_user_role a,sj_teacher b
+         where  a.USER_ID=b.ID
+         AND b.DEPT_ID=#{dept_id} and b.TEA_CODE<>#{tea_code}
+           ]]>
+	</select>
+	<!-- 查询角色，没有学生角色和没有管理员  by吴敬国2015-12-28 -->
+	<select id="selectRole" parameterType="com.sict.entity.Role"
+		resultType="com.sict.entity.Role">
+         <![CDATA[ 
+           select * from sj_role where 
+			state='1' 
+			and COLLEGE_ID=#{college_id} 
+			and ID NOT IN 
+			(SELECT ID FROM sj_role 
+			WHERE ROLE_CODE LIKE '%ROLE_ADMIN_COLLEGE%' OR ROLE_CODE LIKE '%ROLE_STUDENT%')
+           ]]>
+	</select>
+	<!--  select * from sj_role where 
+			state='1' 
+			and COLLEGE_ID=#{college_id} 
+			and ID NOT IN (SELECT ID FROM sj_role WHERE COLLEGE_ID=#{college_id} AND ROLE_CODE  like '%ROLE_ADMIN%'  OR ROLE_CODE LIKE '%ROLE_STUDENT%' )  
+			ORDER BY ROLE_CODE;2016-1-5 -->
+	<!-- 查询这个部门不包含当前用户的没有该权限的教师 by吴敬国20141104 -->
+	<select id="selectTeacherByRoleId" parameterType="map"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+         SELECT  DISTINCT b.*
+         from sj_user_role a
+         right JOIN  sj_teacher b
+         on a.USER_ID=b.ID
+         where b.DEPT_ID=#{dept_id}
+		 and b.ID not in(select USER_ID from sj_user_role where ROLE_ID=#{role_id})
+           ]]>
+	</select>
+	 <!-- SELECT  DISTINCT b.*
+         from sj_user_role a
+         right JOIN  sj_teacher b
+         on a.USER_ID=b.ID
+         where b.DEPT_ID IN (SELECT ID from sj_org where (ID =#{dept_id} 
+         or ID in (select ID from sj_org where PARENT_ID=#{dept_id}))
+		 and state='1')
+		 and b.ID not in(select USER_ID from sj_user_role where ROLE_ID=#{role_id}) -->
+	<!--  SELECT  DISTINCT b.*
+         from sj_user_role a
+         right JOIN  sj_teacher b
+         on a.USER_ID=b.ID
+         where b.DEPT_ID=#{dept_id}  and b.ID not in(select USER_ID from sj_user_role where ROLE_ID=#{role_id})2016-1-5 -->
+	<select id="selectview_user_by_username" parameterType="String"
+		resultType="java.util.HashMap">
+         <![CDATA[ 
+			select username,role_name from view_user where username = #{username}
+           ]]>
+	</select>
+	<!--根据部门的id和role的id(管理员或教师等)得到用户权限  -->
+	<select id="selectUserRoleByDeptIdAndRoleId" parameterType="map"
+		resultType="com.sict.entity.UserRole">
+         <![CDATA[ 
+         SELECT * from sj_user_role where ROLE_ID=#{role_id} 
+         and USER_ID IN (SELECT id FROM sj_teacher where DEPT_ID=#{dept_id}) and state='1'
+           ]]>
+	</select>
+	<!--根据部门的id得到给部门所有的用户权限信息  -->
+	<select id="selectUserRoleByDeptId" parameterType="String"
+		resultType="com.sict.entity.UserRole">
+         <![CDATA[ 
+         SELECT * from sj_user_role where USER_ID IN 
+         (SELECT id FROM sj_teacher where DEPT_ID=#{dept_id}) 
+         	AND ROLE_ID <>'ROLE_TEACHER'  
+			AND ROLE_ID <>'ROLE_ADMIN'  
+			AND  ROLE_ID <>'ROLE_COMPANY'   
+			AND  ROLE_ID <>'ROLE_STUDENT'  
+			AND  ROLE_ID <>'ROLE_LEADER'
+         	and state='1' ORDER BY USER_ID
+           ]]>
+	</select>
+
+	<!--根据USER_ID找该学生已有的角色信息 -->
+	<select id="selectnowroleByStu_Id" parameterType="String"
+		resultType="com.sict.entity.UserRole">
+         <![CDATA[ 
+			select * from sj_user_role where USER_ID = #{stu_id}
+           ]]>
+	</select>
+	
+	<!--根据role_ID找User_ID -->
+	<select id="selectUser_IdByRole_Id" parameterType="String"
+		resultType="String">
+         <![CDATA[ 
+			select user_id from sj_user_role where ROLE_ID = #{role_id}
+           ]]>
+	</select>
+</mapper>

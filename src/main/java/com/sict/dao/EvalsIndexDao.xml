@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.EvalsIndexDao">
+	<insert id="insert" parameterType="com.sict.entity.EvalsIndex"
+		statementType="PREPARED">
+		insert into
+		sj_evals_index(id,standard_id,index_code,index_name,description,score,create_time,temp1,temp2,temp3)
+		values
+		(#{id},#{standard_id},#{index_code},#{index_name},#{description},#{score},#{create_time},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.EvalsIndex"
+		resultType="com.sict.entity.EvalsIndex">
+		select * from sj_evals_index where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="standard_id != null">
+			and standard_id = #{standard_id}
+		</if>
+		<if test="index_code != null">
+			and index_code = #{index_code}
+		</if>
+		<if test="index_name != null">
+			and index_name = #{index_name}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="score != null">
+			and score = #{score}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.EvalsIndex"
+		resultType="int">
+		select count(*) from sj_evals_index where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="standard_id != null">
+			and standard_id = #{standard_id}
+		</if>
+		<if test="index_code != null">
+			and index_code = #{index_code}
+		</if>
+		<if test="index_name != null">
+			and index_name = #{index_name}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="score != null">
+			and score = #{score}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.EvalsIndex">
+		UPDATE sj_evals_index
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="standard_id != null">standard_id=#{standard_id},</if>
+			<if test="index_code != null">index_code=#{index_code},</if>
+			<if test="index_name != null">index_name=#{index_name},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="score != null">score=#{score},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.EvalsIndex">
+		delete from sj_evals_index where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.EvalsIndex">
+		select * from sj_evals_index where id=#{id}
+	</select>
+	<!--功能查出本学院奖惩指标标准 by 王磊2015-1-24 -->
+	<select id="selectById" parameterType="String"
+		resultType="com.sict.entity.EvalsIndex">
+         <![CDATA[ 												
+        select * from sj_evals_index WHERE STANDARD_ID in(
+         SELECT id from sj_evaluate_standard where SCOPE In(select id FROM sj_org where parent_id=#{xy_id} OR id=#{xy_id}) )
+         order by create_time desc
+		 ]]>
+	</select>
+	<!--功能查出奖惩指标的年份 by 王磊2015-1-26 -->
+	<select id="selectYears" resultType="String">
+         <![CDATA[ 												
+        SELECT DISTINCT LEFT(CREATE_TIME,4) from sj_evals_index order by CREATE_TIME
+		 ]]>
+	</select>
+	<!--功能通过year 和范围查出记录 王磊2015-1-26 -->
+	<select id="selectByYearAndScore" parameterType="map"
+		resultType="com.sict.entity.EvalsIndex">
+ 	<![CDATA[ 
+	 	SELECT * FROM sj_evals_index where standard_id in(
+	 	SELECT id from sj_evaluate_standard WHERE scope=#{scope}) and CREATE_TIME like CONCAT(#{year},'%') 
+	 	 order by create_time desc 
+ 	 ]]>
+	</select>
+	<!--功能通过标准id 删除指标 by王磊2015年5月13日 -->
+	<select id="evalByStandId" parameterType="String" resultType="int">
+ 	<![CDATA[ 
+ 	 delete from sj_evals_index where standard_id=#{standId}]]>
+	</select>
+		<!--功能: 根据指标id查询所有详细奖惩指标  by 李达、师杰 20160329 -->
+	<select id="selectByStandId" parameterType="String"
+		resultType="com.sict.entity.EvalsIndex">
+ 	<![CDATA[ 
+	 	SELECT * FROM sj_evals_index where standard_id = #{standId} ]]>
+	</select>
+</mapper>

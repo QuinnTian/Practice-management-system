@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.PositionDao">
+<resultMap id="TreeNodeResult" type="com.sict.entity.TreeNode">
+		<id property="key" column="id" />
+		<result property="title" column="post_name" />
+		<result property="childNum" column="c" />
+	</resultMap>
+	<select id="selectPositionsByParent" parameterType="int" resultMap="TreeNodeResult">
+  		<![CDATA[
+  		SELECT id, post_name, (SELECT count(*) FROM sj_position p1 WHERE p1.parent_id = p2.id  and p1.state=1) C
+  		FROM sj_position p2
+ 		WHERE parent_id = #{parentPosition}  and p2.state=1
+  		]]>
+ 	</select>
+ 	
+ 	<select id="selectPresidentPositions" resultMap="TreeNodeResult">
+  		<![CDATA[
+  		SELECT id, post_name, c
+  		FROM sj_position p1,
+	       (select parent_id, count(*) c
+	          FROM sj_position
+	         WHERE parent_id IN (SELECT id FROM sj_position WHERE POST_TYPE=1 and state=1) and state=1
+	         GROUP BY parent_id) p2
+ 		WHERE p1.id = p2.parent_id and p1.state=1
+  		]]>
+ 	</select>
+
+
+
+	<insert id="insert" parameterType="com.sict.entity.Position"
+		statementType="PREPARED">
+		insert into
+		sj_position(id,post_type,post_code,post_name,post_duties,parent_id,check_state,check_note,state,temp1,temp2,temp3)
+		values
+		(#{id},#{post_type},#{post_code},#{post_name},#{post_duties},#{parent_id},#{check_state},#{check_note},#{state},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Position"
+		resultType="com.sict.entity.Position">
+		select * from sj_position where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="post_type != null">
+			and post_type = #{post_type}
+		</if>
+		<if test="post_code != null">
+			and post_code = #{post_code}
+		</if>
+		<if test="post_name != null">
+			and post_name = #{post_name}
+		</if>
+		<if test="post_duties != null">
+			and post_duties = #{post_duties}
+		</if>
+		<if test="parent_id != null">
+			and parent_id = #{parent_id}
+		</if>
+		<if test="check_state != null">
+			and check_state = #{check_state}
+		</if>
+		<if test="check_note != null">
+			and check_note = #{check_note}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Position"
+		resultType="int">
+		select count(*) from sj_position where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="post_type != null">
+			and post_type = #{post_type}
+		</if>
+		<if test="post_code != null">
+			and post_code = #{post_code}
+		</if>
+		<if test="post_name != null">
+			and post_name = #{post_name}
+		</if>
+		<if test="post_duties != null">
+			and post_duties = #{post_duties}
+		</if>
+		<if test="parent_id != null">
+			and parent_id = #{parent_id}
+		</if>
+		<if test="check_state != null">
+			and check_state = #{check_state}
+		</if>
+		<if test="check_note != null">
+			and check_note = #{check_note}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Position">
+		UPDATE sj_position
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="post_type != null">post_type=#{post_type},</if>
+			<if test="post_code != null">post_code=#{post_code},</if>
+			<if test="post_name != null">post_name=#{post_name},</if>
+			<if test="post_duties != null">post_duties=#{post_duties},</if>
+			<if test="parent_id != null">parent_id=#{parent_id},</if>
+			<if test="check_state != null">check_state=#{check_state},</if>
+			<if test="check_note != null">check_note=#{check_note},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Position">
+		delete from sj_position where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Position">
+		select * from sj_position where id=#{id}
+	</select>
+	<!-- 查询所有教师 by郑春光20140910 -->
+	<select resultType="com.sict.entity.Position" id="selectAllPositions"> 
+<![CDATA[ select * from sj_position ]]>
+	</select>
+</mapper>
+
+
+

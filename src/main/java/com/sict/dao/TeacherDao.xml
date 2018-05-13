@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.TeacherDao">
+	<resultMap id="TreeNodeResult" type="com.sict.entity.TreeNode">
+		<id property="key" column="id" />
+		<result property="title" column="true_name" />
+		<result property="childNum" column="c" />
+	</resultMap>
+	<select id="selectTeaByOrgId" parameterType="String" resultMap="TreeNodeResult">
+  		<![CDATA[
+  		select id,true_name,(select count(*) from sj_teacher where DEPT_ID=#{org_id}) C  
+  		 from sj_teacher where DEPT_ID=#{org_id}
+  		]]>
+	</select>
+
+
+
+	<!-- 查询所有教师 by郑春光20140910 -->
+	<select id="selectAllTeachers" resultType="com.sict.entity.Teacher">
+  		<![CDATA[
+  			select * from sj_teacher order by tea_code
+  		]]>
+	</select>
+
+	<!-- 新增教师 by郑春光20140910 -->
+	<insert id="insertTeacher" parameterType="com.sict.entity.Teacher">
+        <![CDATA[ 
+          insert into sj_teacher(id,tea_code,login_name,login_pass,true_name,sex,phone,dept_id,duties,expertise,qqnum,homepage,email,state,temp1,temp2,temp3,wx_code,course_id,parents_tea_id)
+		values (#{id},#{tea_code},#{login_name},#{login_pass},#{true_name},#{sex},#{phone},#{dept_id},#{duties},#{expertise},#{qqnum},#{homepage},#{email},#{state},#{temp1},#{temp2},#{temp3},#{wx_code},#{course_id},#{parents_tea_id})
+        ]]>
+	</insert>
+
+	<!-- 根据id查询教师 by郑春光20140910 -->
+	<select id="teacherById" parameterType="int" resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+              select * from sj_teacher where id=#{id} 
+         ]]>
+	</select>
+
+	<!-- 修改教师信息 by郑春光20140910 -->
+	<update id="updateTeacher" parameterType="com.sict.entity.Teacher">
+        <![CDATA[ 
+           UPDATE sj_teacher SET tea_code=#{tea_code},true_name=#{true_name},sex=#{sex},phone=#{phone} ,dept_id=#{dept_id},qqnum=#{qqnum},homepage=#{homepage},email=#{email},wx_code=#{wx_code},${parents_tea_id} WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 删除教师 by郑春光20140910 -->
+	<delete id="deleteTeacher" parameterType="int">
+        <![CDATA[ 
+           delete from sj_teacher where id=#{id}
+        ]]>
+	</delete>
+
+	<!-- ↓增删查改↓ by桑博 -->
+
+	<insert id="insert" parameterType="com.sict.entity.Teacher"
+		statementType="PREPARED">
+  		<![CDATA[insert into sj_teacher(id,tea_code,login_name,login_pass,true_name,sex,phone,dept_id,duties,expertise,state,temp1,temp2,temp3,wx_code,course_id,tea_type)
+values (#{id},#{tea_code},#{login_name},#{login_pass},#{true_name},#{sex},#{phone},#{dept_id},#{duties},#{expertise},#{state},#{temp1},#{temp2},#{temp3},#{wx_code},#{course_id},#{tea_type})]]>
+	</insert>
+
+	<select id="select" parameterType="com.sict.entity.Teacher"
+		resultType="com.sict.entity.Teacher">
+		select * from sj_teacher where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="tea_code != null">
+			and tea_code = #{tea_code}
+		</if>
+		<if test="login_name != null">
+			and login_name = #{login_name}
+		</if>
+		<if test="login_pass != null">
+			and login_pass = #{login_pass}
+		</if>
+		<if test="wx_code != null">
+			and wx_code = #{wx_code}
+		</if>
+		<if test="true_name != null">
+			and true_name = #{true_name}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="dept_id != null">
+			and dept_id = #{dept_id}
+		</if>
+		<if test="duties != null">
+			and duties = #{duties}
+		</if>
+		<if test="expertise != null">
+			and expertise = #{expertise}
+		</if>
+		<if test="qqnum != null">
+			and qqnum = #{qqnum}
+		</if>
+		<if test="email != null">
+			and email = #{email}
+		</if>
+		<if test="homepage != null">
+			and homepage = #{homepage}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="course_id != null">
+			and course_id = #{course_id}
+		</if>
+		<if test="parents_tea_id != null">
+			and parents_tea_id = #{parents_tea_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+
+	<select id="selectCount" parameterType="com.sict.entity.Teacher"
+		resultType="int">
+		select count(*) from sj_teacher where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="tea_code != null">
+			and tea_code = #{tea_code}
+		</if>
+		<if test="login_name != null">
+			and login_name = #{login_name}
+		</if>
+		<if test="login_pass != null">
+			and login_pass = #{login_pass}
+		</if>
+		<if test="wx_code != null">
+			and wx_code = #{wx_code}
+		</if>
+		<if test="true_name != null">
+			and true_name = #{true_name}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="dept_id != null">
+			and dept_id = #{dept_id}
+		</if>
+		<if test="duties != null">
+			and duties = #{duties}
+		</if>
+		<if test="expertise != null">
+			and expertise = #{expertise}
+		</if>
+		<if test="qqnum != null">
+			and qqnum = #{qqnum}
+		</if>
+		<if test="email != null">
+			and email = #{email}
+		</if>
+		<if test="homepage != null">
+			and homepage = #{homepage}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="course_id != null">
+			and course_id = #{course_id}
+		</if>
+		<if test="parents_tea_id != null">
+			and parents_tea_id = #{parents_tea_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+	</select>
+
+	<update id="update" parameterType="com.sict.entity.Teacher">
+		UPDATE sj_teacher
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="tea_code != null">tea_code=#{tea_code},</if>
+			<if test="login_name != null">login_name=#{login_name},</if>
+			<if test="login_pass != null">login_pass=#{login_pass},</if>
+			<if test="wx_code != null">wx_code=#{wx_code},</if>
+			<if test="true_name != null">true_name=#{true_name},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="dept_id != null">dept_id=#{dept_id},</if>
+			<if test="duties != null">duties=#{duties},</if>
+			<if test="expertise != null">expertise=#{expertise},</if>
+			<if test="qqnum != null">qqnum=#{qqnum},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="homepage != null">homepage=#{homepage},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="course_id != null">course_id=#{course_id},</if>
+			<if test="parents_tea_id != null">parents_tea_id=#{parents_tea_id},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="com.sict.entity.Teacher">
+		delete from sj_teacher where
+		id=#{id}
+	</delete>
+
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Teacher">
+		select * from sj_teacher where id=#{id}
+	</select>
+
+	<!-- ↑增删查改↑ by桑博 -->
+
+	<!-- 根据code查询教师 by郑春光20141011 -->
+	<select id="selectByCode" parameterType="String"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+              select * from sj_teacher where tea_code=#{code} 
+         ]]>
+	</select>
+
+	<!-- 根据tea_code查询学生 bywtt 20141125 -->
+	<select resultType="com.sict.entity.Teacher" id="selectListByTeaCode"
+		parameterType="String"> 
+       <![CDATA[ select * from sj_teacher where tea_code=#{tea_code} ]]>
+	</select>
+
+
+	<!-- 根据DEPT_ID查询教师 by邢志武 20141216 -->
+	<select id="getTeachersByDeptId" parameterType="String"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+            select * from sj_teacher t where t.DEPT_ID=#{dept_id} order by TRUE_NAME
+         ]]>
+	</select>
+	<!-- 根据tea_code判断老师是否存在 by wl 20141226 -->
+	<!-- <select resultType="int" id="selectByTeaCode" parameterType="String"> 
+		<![CDATA[ select count(*) from sj_teacher where tea_code=#{tea_code} ]]>
+	</select> -->
+	<!--根据学院id得到本学院的所有老师信息 by王磊 2015年1月29日 -->
+	<select id="selectByDeptId" parameterType="String"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+              SELECT *from sj_teacher 
+              where DEPT_ID IN(SELECT ID from sj_org WHERE parent_id=#{dept_id}) or DEPT_ID=#{dept_id}
+              order by tea_code
+         ]]>
+	</select>
+	<!--根据部门id 查询教师专长 2015年6月7日 15:33:13 邢志武 -->
+	<select id="getSpecialityBycollege" parameterType="String"
+		resultType="String">
+         <![CDATA[ 
+            SELECT DISTINCT(EXPERTISE) FROM sj_teacher WHERE DEPT_ID=#{college_id}
+         ]]>
+	</select>
+	<!--根据教师专长查询教师 2015年6月7日 15:33:08 邢志武 -->
+	<select id="getTeachersByExpertise" parameterType="String"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+            SELECT * FROM sj_teacher WHERE lower(EXPERTISE ) LIKE CONCAT( '%',#{expertise}, '%') AND TEA_TYPE='1' AND EXPERTISE !=''
+         ]]>
+	</select>
+	<!--检查企业老师的登陆信息是否存在 sl -->
+	<select id="selectTeacode" resultType="com.sict.entity.Teacher"
+		parameterType="String">
+	    <![CDATA[
+	    SELECT * FROM sj_teacher WHERE ID=#{Com_teacher_id}
+	      ]]>
+	</select>
+	<!--分配企业老师的登陆信息 sl -->
+	<select id="getLoginAndPass" resultType="String" parameterType="String">
+	    <![CDATA[
+	    SELECT max(SubString(TEA_CODE,-4)) FROM sj_teacher  
+               where TEA_CODE  LIKE CONCAT(#{Com_teacher_id},'%')
+	      ]]>
+	</select>
+	<!-- 根据微信号查询老师 by邢志武 2015年6月24日 -->
+	<select id="selectTeacherByWx" parameterType="java.lang.String"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+              select * from sj_teacher where wx_code=#{fromUserName} and state=1
+         ]]>
+	</select>
+	<!-- 验证输入的信息是否正确 by邢志武 2015年6月24日 -->
+	<select id="isTeacherByMap" parameterType="map"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+              select * from sj_teacher where tea_code=#{tea_code} and true_name=#{true_name}  and login_pass=#{login_pass} and state=1
+         ]]>
+	</select>
+	<!-- 绑定微信号与老师账号 -->
+	<update id="teacherBind" parameterType="map">
+        <![CDATA[ 
+           UPDATE sj_teacher 
+           SET wx_code=#{wx_code}
+           WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!--根据教师id 查询教师的权限 邢志武 2015年7月10日 09:00:19 -->
+	<select id="getTea_role" parameterType="String" resultType="String">
+         <![CDATA[ 
+            SELECT ROLE_ID FROM sj_user_role WHERE USER_ID=#{tea_id}
+         ]]>
+	</select>
+	<!--根据学生id找老师id 杨梦肖 2016年3月4日 09:00:19 -->
+	<select id="selectTeaByStuID" parameterType="string" resultType="string">
+		select p.tea_id from sj_student s , sj_practice_task p where
+		s.group_id=p.task_name and s.id=#{stuId}
+	</select>
+
+	<!-- 学员管理员根据姓名或者教工号查询教师 by周睿 20160520 -->
+	<select id="getTeachersByNameOrCode" parameterType="map"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+            SELECT * FROM sj_teacher 
+            WHERE (TEA_CODE LIKE #{name} 
+            OR TRUE_NAME LIKE #{name})
+			AND ((DEPT_ID=#{college_id} 
+			OR DEPT_ID IN(
+			SELECT ID FROM sj_org WHERE PARENT_ID=#{college_id})))
+			AND STATE='1'
+            order by TRUE_NAME
+         ]]>
+	</select>
+	<!-- 系统管理员根据姓名或者教工号查询教师 by周睿 20160527 -->
+	<select id="sysAdminGetTeachersByNameOrCode" parameterType="String"
+		resultType="com.sict.entity.Teacher">
+         <![CDATA[ 
+            SELECT * FROM sj_teacher 
+            WHERE (TEA_CODE LIKE #{name} 
+            OR TRUE_NAME LIKE #{name})
+			AND STATE='1'
+            order by TRUE_NAME
+         ]]>
+	</select>
+</mapper> 

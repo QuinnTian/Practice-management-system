@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.RegionDao">
+	<insert id="insert" parameterType="com.sict.entity.Region"
+		statementType="PREPARED">
+		insert into
+		sj_region(id,region_code,region_cn,parent_id,region_level,region_fullname_code,region_fullname_cn,area_code,post_code,temp1,temp2,temp3)
+		values
+		(#{id},#{region_code},#{region_cn},#{parent_id},#{region_level},#{region_fullname_code},#{region_fullname_cn},#{area_code},#{post_code},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Region"
+		resultType="com.sict.entity.Region">
+		select * from sj_region where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="region_code != null">
+			and region_code = #{region_code}
+		</if>
+		<if test="region_cn != null">
+			and region_cn = #{region_cn}
+		</if>
+		<if test="parent_id != null">
+			and parent_id = #{parent_id}
+		</if>
+		<if test="region_level != null">
+			and region_level = #{region_level}
+		</if>
+		<if test="region_fullname_code != null">
+			and region_fullname_code = #{region_fullname_code}
+		</if>
+		<if test="region_fullname_cn != null">
+			and region_fullname_cn = #{region_fullname_cn}
+		</if>
+		<if test="area_code != null">
+			and area_code = #{area_code}
+		</if>
+		<if test="post_code != null">
+			and post_code = #{post_code}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Region"
+		resultType="int">
+		select count(*) from sj_region where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="region_code != null">
+			and region_code = #{region_code}
+		</if>
+		<if test="region_cn != null">
+			and region_cn = #{region_cn}
+		</if>
+		<if test="parent_id != null">
+			and parent_id = #{parent_id}
+		</if>
+		<if test="region_level != null">
+			and region_level = #{region_level}
+		</if>
+		<if test="region_fullname_code != null">
+			and region_fullname_code = #{region_fullname_code}
+		</if>
+		<if test="region_fullname_cn != null">
+			and region_fullname_cn = #{region_fullname_cn}
+		</if>
+		<if test="area_code != null">
+			and area_code = #{area_code}
+		</if>
+		<if test="post_code != null">
+			and post_code = #{post_code}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.Region">
+		UPDATE sj_region
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="region_code != null">region_code=#{region_code},</if>
+			<if test="region_cn != null">region_cn=#{region_cn},</if>
+			<if test="parent_id != null">parent_id=#{parent_id},</if>
+			<if test="region_level != null">region_level=#{region_level},</if>
+			<if test="region_fullname_code != null">region_fullname_code=#{region_fullname_code},</if>
+			<if test="region_fullname_cn != null">region_fullname_cn=#{region_fullname_cn},</if>
+			<if test="area_code != null">area_code=#{area_code},</if>
+			<if test="post_code != null">post_code=#{post_code},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Region">
+		delete from sj_region where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Region">
+		select * from sj_region where id=#{id}
+	</select>
+	<select id="selectAllRegions" resultType="com.sict.entity.Region">
+  		<![CDATA[
+  			select * from sj_region where region_level = 3
+  		]]>
+	</select>
+
+
+
+
+</mapper> 

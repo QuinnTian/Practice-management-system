@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.OptionDao">
+
+	<insert id="insertOption" parameterType="com.sict.entity.Option"
+		statementType="PREPARED">
+  		<![CDATA[insert into sj_wjdc_option (id,title,depend,question_id,temp1,temp2,temp3,temp4,temp5) 
+  				 values (#{id},#{title},#{depend},#{question_id},#{temp1},#{temp2},#{temp3},#{temp4},#{temp5})]]>
+	</insert>
+
+	<select id="selectOptionCount" parameterType="com.sict.entity.Option"
+		resultType="int">
+
+		select count(*) from sj_wjdc_option where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="depend != null">
+			and depend = #{depend}
+		</if>
+		<if test="question_id != null">
+			and question_id = #{question_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+
+	</select>
+
+
+	<select id="selectOption" parameterType="com.sict.entity.Option"
+		resultType="com.sict.entity.Option">
+		select * from sj_wjdc_option where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="title != null">
+			and title = #{title}
+		</if>
+		<if test="depend != null">
+			and depend = #{depend}
+		</if>
+		<if test="question_id != null">
+			and question_id = #{question_id}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="temp4 != null">
+			and temp4 = #{temp4}
+		</if>
+		<if test="temp5 != null">
+			and temp5 = #{temp5}
+		</if>
+	</select>
+
+	<update id="updateOption" parameterType="com.sict.entity.Option">
+		update sj_wjdc_option
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="depend != null">depend=#{depend},</if>
+			<if test="question_id != null">question_id=#{question_id},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="temp4 != null">temp4=#{temp4},</if>
+			<if test="temp5 != null">temp5=#{temp5}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteOption" parameterType="com.sict.entity.Option">
+		delete from
+		sj_wjdc_option
+		where id = #{id}
+	</delete>
+	<delete id="deleteOptionByQid" parameterType="String">
+		delete from
+		sj_wjdc_option
+		where question_id = #{question_id}
+	</delete>
+
+</mapper> 

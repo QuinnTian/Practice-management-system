@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.OrgDao">
+	<resultMap id="TreeNodeResult" type="com.sict.entity.TreeNode">
+		<id property="key" column="id" />
+		<result property="title" column="org_name" />
+		<result property="childNum" column="c" />
+	</resultMap>
+	<insert id="insert" parameterType="com.sict.entity.Org"
+		statementType="PREPARED">
+		insert into
+		sj_org(id,org_code,org_name,org_level,contacts,director,vice_director,phone,parent_id,state,head_tea_id,counselor_id,temp1,temp2,temp3,begin_time,end_time)
+		values
+		(#{id},#{org_code},#{org_name},#{org_level},#{contacts},#{director},#{vice_director},#{phone},#{parent_id},#{state},#{head_tea_id},#{counselor_id},#{temp1},#{temp2},#{temp3},#{begin_time},#{end_time})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.Org"
+		resultType="com.sict.entity.Org">
+		select * from sj_org where 1 = 1
+		<if test="id != null">
+			and id like #{id}
+		</if>
+		<if test="org_code != null">
+			and org_code like #{org_code}
+		</if>
+		<if test="org_name != null">
+			and org_name like #{org_name}
+		</if>
+		<if test="org_level != null">
+			and org_level like #{org_level}
+		</if>
+		<if test="contacts != null">
+			and contacts like #{contacts}
+		</if>
+		<if test="director != null">
+			and director like #{director}
+		</if>
+		<if test="vice_director != null">
+			and vice_director like #{vice_director}
+		</if>
+		<if test="phone != null">
+			and phone like #{phone}
+		</if>
+		<if test="parent_id != null">
+			and parent_id like #{parent_id}
+		</if>
+		<if test="state != null">
+			and state like #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 like #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 like #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 like #{temp3}
+		</if>
+		<if test="begin_time != null">
+			and begin_time like #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time like #{end_time}
+		</if>
+		<if test="head_tea_id != null">
+			and head_tea_id like #{head_tea_id}
+		</if>
+		<if test="counselor_id != null">
+			and counselor_id like #{counselor_id}
+		</if>
+		and STATE ='1'
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.Org"
+		resultType="int">
+		select count(*) from sj_org where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="org_code != null">
+			and org_code = #{org_code}
+		</if>
+		<if test="org_name != null">
+			and org_name = #{org_name}
+		</if>
+		<if test="org_level != null">
+			and org_level = #{org_level}
+		</if>
+		<if test="contacts != null">
+			and contacts = #{contacts}
+		</if>
+		<if test="director != null">
+			and director = #{director}
+		</if>
+		<if test="vice_director != null">
+			and vice_director = #{vice_director}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone}
+		</if>
+		<if test="parent_id != null">
+			and parent_id = #{parent_id}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+		<if test="head_tea_id != null">
+			and head_tea_id = #{head_tea_id}
+		</if>
+		<if test="counselor_id != null">
+			and counselor_id = #{counselor_id}
+		</if>
+	</select>
+	<update id="update" parameterType="com.sict.entity.Org">
+		UPDATE sj_org
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="org_code != null">org_code=#{org_code},</if>
+			<if test="org_name != null">org_name=#{org_name},</if>
+			<if test="org_level != null">org_level=#{org_level},</if>
+			<if test="contacts != null">contacts=#{contacts},</if>
+			<if test="head_tea_id != null">head_tea_id=#{head_tea_id},</if>
+			<if test="counselor_id != null">counselor_id=#{counselor_id},</if>
+			<if test="director != null">director=#{director},</if>
+			<if test="vice_director != null">vice_director=#{vice_director},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="parent_id != null">parent_id=#{parent_id},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3},</if>
+			<if test="begin_time != null">begin_time=#{begin_time},</if>
+			<if test="end_time != null">end_time=#{end_time}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.Org">
+		delete from sj_org where
+		id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.Org">
+		select * from sj_org where id=#{id}
+	</select>
+
+	<select id="selectOrgsByParent" parameterType="String"
+		resultMap="TreeNodeResult">
+  		<![CDATA[
+  		SELECT id, org_name, (SELECT count(*) FROM sj_org o1 WHERE o1.parent_id = o2.id and o1.state=1) C
+  		FROM sj_org o2
+ 		WHERE parent_id = #{parentOrg} and o2.state=1
+  		]]>
+	</select>
+
+	<!-- 检查是否签到成功 by孟凡朕 20140917 -->
+	<select id="selectOrgByCocde" parameterType="map"
+		resultType="com.sict.entity.Org">
+         <![CDATA[ 
+              select * from sj_org where org_code=#{org_code} and org_level=#{org_level} and state=1
+         ]]>
+	</select>
+	<select id="getAllClassByGradeAndDeptId" resultType="com.sict.entity.Org"
+		parameterType="map">
+		<![CDATA[ 
+		SELECT * FROM sj_org 
+		WHERE PARENT_ID=#{dept_id} 
+		AND BEGIN_TIME LIKE CONCAT(#{grade},'%') 
+		AND ORG_LEVEL=5 AND STATE='1'
+		]]>
+	</select>
+	<!-- 根据编号查出该老师编号是否符合要求 -->
+	<select id="checkDeptId" parameterType="map" resultType="int"> 
+		<![CDATA[
+		select count(*) from sj_org
+		where #{deptId} in(
+				select id from sj_org where parent_id =#{college_id}) or #{deptId} = #{college_id}
+		]]>
+	</select>
+	<!-- 根据学院id查出该学院和系 -->
+	<select id="selectByCollegeId" parameterType="String"
+		resultType="com.sict.entity.Org">
+	<![CDATA[
+		SELECT * from sj_org 
+		where (ID =#{collegeId} or ID in (select ID from sj_org where PARENT_ID=#{collegeId}))
+		and state='1' order by org_level
+	]]>
+	</select>
+	<!-- 获取系及学院自身 -->
+	<select id="getOrgDeptByCollegeId" parameterType="String"
+		resultType="com.sict.entity.Org">
+  		<![CDATA[
+  			select * from sj_org where id= #{college_id}
+			UNION
+  			select * from sj_org where PARENT_ID= #{college_id} AND ORG_LEVEL=3 and STATE=1
+  		]]>
+	</select>
+	<!-- 查询学院 -->
+	<select id="selectCollege" resultType="com.sict.entity.Org">
+		select * from sj_org where
+		1 = 1 and org_level=2;
+	</select>
+	<!-- 查询学院的id通过班级 -->
+	<select id="getCollegeIdByClassId" parameterType="String"
+		resultType="String">
+		select id from sj_org where id=(
+		select parent_id from
+		sj_org where id= (select PARENT_ID from sj_org where id=#{class_id}
+		AND ORG_LEVEL=5))
+	</select>
+	<!-- 查询所有学院 -->
+	<select id="getColleges" parameterType="String" resultType="String">
+		select id FROM sj_org WHERE ORG_LEVEL='2'
+	</select>
+	<!-- 查询所有学院 -->
+	<select id="selectListByCode" parameterType="String" resultType="String">
+		select id FROM sj_org WHERE org_code like CONCAT(#{org_code},'%') AND
+		ORG_LEVEL='2'
+	</select>
+	<!-- 通过学院的id和年份得到这一年的所有班级 -->
+	<select id="getClassByCollegesAndGrade" parameterType="map"
+		resultType="com.sict.entity.Org">
+		select * from sj_org where PARENT_ID IN(
+		select id from
+		sj_org where PARENT_ID=#{coll_id} ) AND BEGIN_TIME LIKE
+		CONCAT('%',#{grade},'%') and STATE ='1' order by parent_id
+	</select>
+	<!-- 根据学院id查出该学院的系部 -->
+	<select id="selectByXyId" parameterType="String" resultType="com.sict.entity.Org">
+		<![CDATA[select * from sj_org where parent_id = #{XyId}]]>
+	</select>
+	<!--得到班级创建年份 -->
+	<select id="getYears" resultType="String">
+		<![CDATA[
+		SELECT DISTINCT(LEFT(begin_time,4)) from sj_org where ORG_LEVEL='5' ORDER BY begin_time
+		]]>
+	</select>
+	<select id="selectCollegeByclassId" parameterType="String"
+		resultType="com.sict.entity.Org">
+		<![CDATA[
+		select * from sj_org where id=(select parent_id from sj_org where id= (select PARENT_ID from sj_org where id=#{class_id} AND ORG_LEVEL=5))
+		]]>
+	</select>
+	<!--系统管理员得到组织级别为0 1 2的所有组织和联系人 -->
+	<select id="getTopOrgListAndContacts" resultType="java.util.HashMap">
+		<![CDATA[
+		SELECT a.ORG_CODE,a.ORG_NAME,a.ORG_LEVEL,b.TEA_CODE,b.LOGIN_PASS,b.TRUE_NAME
+		from sj_org a ,sj_teacher b 
+		where a.CONTACTS=b.ID  and (a.ORG_LEVEL='1'  or a.ORG_LEVEL='2' or a.ORG_LEVEL='0')  
+		ORDER BY ORG_LEVEL
+		]]>
+	</select>
+	<!-- 根据org_code判断班级是否存在 by syj 20160326 !!!!!!!! -->
+	<select resultType="int" id="selectByOrgCode" parameterType="String"> 
+		<![CDATA[ select count(*) from sj_org where org_code=#{org_code} ]]>
+	</select>
+	<!-- 通过系统管理员ID查出所有组织和子组织 by 宋浩 20160324 -->
+	<select id="getOrgSon" parameterType="String" resultType="com.sict.entity.Org">
+		SELECT
+		* FROM sj_org WHERE ORG_LEVEL="1" or ORG_LEVEL ="2"
+	</select>
+	<!-- 查询所有校级部门 by 师杰 20160321 -->
+	<select id="selectSchoolOrg" parameterType="String" resultType="com.sict.entity.Org">
+		select * FROM sj_org WHERE ORG_LEVEL='1'
+	</select>
+
+	<!-- 通过上级部门id查出该部门所有班级 by 李达、师杰 20160302 -->
+	<select id="selectClassByXyId" parameterType="String"
+		resultType="com.sict.entity.Org">
+		<![CDATA[SELECT * FROM sj_org WHERE parent_id in (
+		SELECT id FROM sj_org WHERE parent_id = #{Xy1Id} AND ORG_LEVEL='3') AND ORG_LEVEL='5';]]>
+	</select>
+	<select id="selectOrderByOrgLevel" parameterType="com.sict.entity.Org"
+		resultType="com.sict.entity.Org">
+		select * from sj_org where 1 = 1
+		<if test="id != null">
+			and id like #{id}
+		</if>
+		<if test="org_code != null">
+			and org_code like #{org_code}
+		</if>
+		<if test="org_name != null">
+			and org_name like #{org_name}
+		</if>
+		<if test="org_level != null">
+			and org_level like #{org_level}
+		</if>
+		<if test="contacts != null">
+			and contacts like #{contacts}
+		</if>
+		<if test="director != null">
+			and director like #{director}
+		</if>
+		<if test="vice_director != null">
+			and vice_director like #{vice_director}
+		</if>
+		<if test="phone != null">
+			and phone like #{phone}
+		</if>
+		<if test="parent_id != null">
+			and parent_id like #{parent_id}
+		</if>
+		<if test="state != null">
+			and state like #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 like #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 like #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 like #{temp3}
+		</if>
+		<if test="begin_time != null">
+			and begin_time like #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time like #{end_time}
+		</if>
+		<if test="head_tea_id != null">
+			and head_tea_id like #{head_tea_id}
+		</if>
+		<if test="counselor_id != null">
+			and counselor_id like #{counselor_id}
+		</if>
+		order by org_level,PARENT_ID
+	</select>
+	<select id="getChildOrgListByParentId" parameterType="String"
+		resultType="com.sict.entity.Org">
+		SELECT * FROM sj_org WHERE PARENT_ID= #{parent_id} and
+		state='1'
+	</select>
+	<!--系统管理员得到组织级别为0 1 2 3的所有组织 -->
+	<select id="getAllOrg3" parameterType="String" resultType="com.sict.entity.Org">
+		SELECT * FROM sj_org WHERE (ORG_LEVEL='3' OR ORG_LEVEL='2' OR
+		ORG_LEVEL='1' OR ORG_LEVEL='0') AND STATE='1' ORDER BY ORG_LEVEL
+	</select>
+
+</mapper>

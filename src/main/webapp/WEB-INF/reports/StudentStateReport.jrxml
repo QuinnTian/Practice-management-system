@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentStateReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02a6b5e8-2907-4551-b6bb-89dba5dd83ef">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="avg_score" class="java.lang.Double">
+		<fieldDescription><![CDATA[avg_score]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="deptortea_name" class="java.lang.String">
+		<fieldDescription><![CDATA[deptortea_name]]></fieldDescription>
+	</field>
+	<field name="time" class="java.lang.String">
+		<fieldDescription><![CDATA[time]]></fieldDescription>
+	</field>
+	<field name="total_score" class="java.lang.Double">
+		<fieldDescription><![CDATA[total_score]]></fieldDescription>
+	</field>
+	<field name="total_stu_num" class="java.lang.Double">
+		<fieldDescription><![CDATA[total_stu_num]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<summary>
+		<band height="147">
+			<lineChart>
+				<chart evaluationTime="Report">
+					<reportElement x="17" y="0" width="509" height="147" uuid="567d0b62-a093-479a-bc4a-ef0b4404ceb6"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{deptortea_name}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{time}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{avg_score}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.GroupMembersDao">
+	<insert id="insert" parameterType="com.sict.entity.GroupMembers"
+		statementType="PREPARED">
+		insert into
+		sj_group_members(id,group_id,begin_time,end_time,user_id,duty,state,temp1,temp2,temp3)
+		values
+		(#{id},#{group_id},#{begin_time},#{end_time},#{user_id},#{duty},#{state},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.GroupMembers"
+		resultType="com.sict.entity.GroupMembers">
+		select * from sj_group_members where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="group_id != null">
+			and group_id = #{group_id}
+		</if>
+		<if test="begin_time != null">
+			and begin_time = #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="duty != null">
+			and duty = #{duty}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.GroupMembers"
+		resultType="int">
+		select count(*) from sj_group_members where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="group_id != null">
+			and group_id = #{group_id}
+		</if>
+		<if test="begin_time != null">
+			and begin_time = #{begin_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="user_id != null">
+			and user_id = #{user_id}
+		</if>
+		<if test="duty != null">
+			and duty = #{duty}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.GroupMembers">
+		UPDATE sj_group_members
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="group_id != null">group_id=#{group_id},</if>
+			<if test="begin_time != null">begin_time=#{begin_time},</if>
+			<if test="end_time != null">end_time=#{end_time},</if>
+			<if test="user_id != null">user_id=#{user_id},</if>
+			<if test="duty != null">duty=#{duty},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.GroupMembers">
+		delete from sj_group_members where id=#{id}
+	</delete>
+	
+	
+	
+	<!-- 根据group_id 删除小组成员 邢志武 20150120 -->
+		<delete id="deleteByGroup_id" parameterType="String">
+		delete from sj_group_members where GROUP_ID=#{GROUP_ID}
+	</delete>
+	<!-- 根据group_id 更新小组成员状态 邢志武 20150120 -->
+	<!-- <update id="deleteByGroup_id" parameterType="String">
+		UPDATE sj_group_members SET STATE='2' 
+		WHERE GROUP_ID=#{GROUP_ID}
+	</update> -->
+	
+	
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.GroupMembers">
+		select * from sj_group_members where id=#{id}
+	</select>
+	<!-- 根据实践任务的id查询这个任务对应小组的小组成员（学生）的所有信息    by王磊20141203 -->
+	<select id="selectGroupMemberListByPraTaskId" parameterType="String"
+		resultType="com.sict.entity.GroupMembers">
+        <![CDATA[ 
+          SELECT gm.*
+		  FROM sj_practice_task pt INNER JOIN sj_groups g
+		  ON pt.ID=g.PRACTICE_ID 
+		  INNER JOIN sj_group_members gm
+	      ON g.ID=gm.GROUP_ID
+		  where pt.id=#{Practice_id} and LENGTH(gm.user_id)=32
+        ]]>
+	</select>
+	<!-- 根据教师id查询教师所对应学生 byccc20141215 -->
+	<select id="selectBytea_id" parameterType="String"
+		resultType="com.sict.entity.GroupMembers">
+        <![CDATA[ 
+        SELECT c.USER_ID  from sj_practice_task a,sj_groups b,sj_group_members c 
+        where a.ID=b.PRACTICE_ID and b.ID=c.GROUP_ID and a.TEA_ID=#{tea_id} and  length(c.USER_ID) = 32
+        ]]>
+	</select>
+	<!-- 根据实践教学任务的id获得小组成员的学生的id列表  by吴敬国20141203 -->
+	<select id="selectStuIdListByPracticeId" parameterType="String"
+		resultType="com.sict.entity.GroupMembers">
+   		select b.USER_ID from sj_groups a,sj_group_members b 
+		where a.id=b.GROUP_ID and length(b.user_id)=32 
+		and a.practice_id=#{practice_id} 
+	</select>
+	<!-- 根据小组的id获得小组的成员信息     by吴敬国20141203 -->
+	<select id="selectGroupMembersByGroupId" parameterType="String"
+		resultType="com.sict.entity.GroupMembers">
+        <![CDATA[ 
+         select * from sj_group_members where GROUP_ID=#{group_id} 
+        ]]>
+	</select>
+		<!-- 根据小组的id获得小组成员表的id    by邢志武2015-01-24 -->
+	<select id="selectGroupMembersIdByGroupId" parameterType="String"
+		resultType="String">
+        <![CDATA[ 
+         select id from sj_group_members b where GROUP_ID=#{group_id} and length(b.user_id)=32 
+        ]]>
+	</select>
+	
+		<!-- 根据小组的id获得小组中学生的id   by邢志武2015-01-25 -->
+	<select id="selectGroupMembersStuIdByGroupId" parameterType="String" resultType="String">
+        <![CDATA[ 
+         select DISTINCT(USER_ID) from sj_group_members 
+         where GROUP_ID=#{group_id} AND length(USER_ID)=32
+        ]]>
+	</select>
+	
+	<!-- 根据小组的id获得小组中学生的数量   by邢志武2015-03-21	是否可以根据组员列表.size()得到，删除该sql？？？ -->
+	<select id="getStudentsSize" parameterType="String"
+		resultType="int">
+        <![CDATA[ 
+        SELECT DISTINCT(COUNT(ID)) FROM sj_group_members 
+        WHERE GROUP_ID=#{group_id} AND length(user_id)=32
+        ]]>
+	</select>
+	
+	<!--查询所有全校所有实习生的数量   by邢志武2015-03-21	是否可以根据组员列表.size()得到，删除该sql？？？ -->
+	<select id="getSchoolStudentsSize" parameterType="String"
+		resultType="int">
+        <![CDATA[ 
+			 SELECT COUNT(*) FROM sj_group_members 
+			 WHERE GROUP_ID in (SELECT id  FROM sj_groups 
+			 WHERE PRACTICE_ID in( 
+			 SELECT ID FROM sj_practice_task WHERE SCOPE in 
+			(SELECT ID FROM sj_org WHERE PARENT_ID in
+			(SELECT ID FROM sj_org WHERE PARENT_ID='szxy') 
+			 AND ORG_LEVEL='3' 
+			 UNION
+			(SELECT ID FROM sj_org WHERE PARENT_ID='szxy' )
+			 )
+			 AND STATE='1' 
+			 AND GRADE=#{grade}
+			 AND TASK_TYPE='1')) 
+			 AND length(user_id)=32
+			 AND STATE='1'        
+        ]]>
+	</select>
+	<!-- 根据小组的id获得小组中老师的数量   by邢志武2015-03-21 -->
+	<select id="getTeachersSize" parameterType="String"
+		resultType="int">
+        <![CDATA[ 
+        SELECT DISTINCT(COUNT(ID)) FROM sj_group_members 
+        WHERE GROUP_ID=#{group_id} AND length(user_id)=16
+        ]]>
+	</select>
+	<!-- 根据实践任务的id查询这个任务对应小组的小组成员（学生）的所有信息     by吴敬国20141203 -->
+	<select id="getStuListByPraId" parameterType="String"
+		resultType="com.sict.entity.Student">
+        <![CDATA[ 
+          SELECT * FROM sj_student where id IN(SELECT gm.USER_ID
+		  FROM sj_practice_task pt INNER JOIN sj_groups g
+		  ON pt.ID=g.PRACTICE_ID 
+		  INNER JOIN sj_group_members gm
+	      ON g.ID=gm.GROUP_ID
+		  where pt.id=#{Practice_id} and LENGTH(gm.user_id)=32)
+		  ORDER BY STU_CODE
+        ]]>
+	</select>
+	<!-- 根据user_id获取分组  by 李达 2016-07-18 -->
+	<select id="selectByUser_id" parameterType="String"
+		resultType="com.sict.entity.GroupMembers">
+        <![CDATA[ 
+          SELECT * FROM sj_group_members where user_id = #{user_id} limit 1 
+        ]]>
+	</select>
+</mapper>

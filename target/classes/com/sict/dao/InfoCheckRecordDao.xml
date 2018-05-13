@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.InfoCheckRecordDao">
+	<insert id="insert" parameterType="com.sict.entity.InfoCheckRecord"
+		statementType="PREPARED">
+		insert into
+		sj_infocheck_record(id,checktask_id,stu_id,check_time,check_result,note,temp1,temp2,temp3)
+		values
+		(#{id},#{checktask_id},#{stu_id},#{check_time},#{check_result},#{note},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.InfoCheckRecord"
+		resultType="com.sict.entity.InfoCheckRecord">
+		select * from sj_infocheck_record where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="checktask_id != null">
+			and checktask_id = #{checktask_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="check_time != null">
+			and check_time = #{check_time}
+		</if>
+		<if test="check_result != null">
+			and check_result = #{check_result}
+		</if>
+		<if test="note != null">
+			and note = #{note}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.InfoCheckRecord"
+		resultType="int">
+		select count(*) from sj_infocheck_record where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="checktask_id != null">
+			and checktask_id = #{checktask_id}
+		</if>
+		<if test="stu_id != null">
+			and stu_id = #{stu_id}
+		</if>
+		<if test="check_time != null">
+			and check_time = #{check_time}
+		</if>
+		<if test="check_result != null">
+			and check_result = #{check_result}
+		</if>
+		<if test="note != null">
+			and note = #{note}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.InfoCheckRecord">
+		UPDATE sj_infocheck_record
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="checktask_id != null">checktask_id=#{checktask_id},</if>
+			<if test="stu_id != null">stu_id=#{stu_id},</if>
+			<if test="check_time != null">check_time=#{check_time},</if>
+			<if test="check_result != null">check_result=#{check_result},</if>
+			<if test="note != null">note=#{note},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="com.sict.entity.InfoCheckRecord">
+		delete from
+		sj_infocheck_record where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String" resultType="com.sict.entity.InfoCheckRecord">
+		select * from sj_infocheck_record where id=#{id}
+	</select>
+	<!--修改核对信息 by ccc2014/11/20 -->
+	<update id="updateInfo" parameterType="com.sict.entity.InfoCheckRecord">
+        <![CDATA[ 
+         UPDATE sj_infocheck_record SET check_time = #{check_time},check_result=#{check_result},note=#{note} WHERE id=#{checktask_id} and stu_id=#{stu_id}
+        ]]>
+	</update>
+	<!--学生查询自己未审核的信息核对记录   by ccc2014/11/20 -->
+	<select id="selectByStu" parameterType="map"
+		resultType="com.sict.entity.InfoCheckRecord">
+		select * from sj_infocheck_record where stu_id=#{stu_ids}
+		and check_result='0'
+	</select>
+	<!-- 根据老师的id和实践任务的id获取到相应的小组的学生的信息核对情况  by ccc 20150129 -->
+	<select id="selectcheckStudent" parameterType="map"
+		resultType="com.sict.entity.InfoCheckRecord">
+		select * from sj_infocheck_record where stu_id IN( select USER_ID from
+		sj_group_members where group_id IN(select a.id from sj_groups
+		a,sj_practice_task b where a.PRACTICE_ID=b.id and b.TEA_ID=#{tea_id} AND
+		a.DISMISS_TIME IS NULL and b.task_type='3'))   and checktask_id=#{practice_id} ORDER BY CHECK_TIME DESC
+	</select>
+</mapper>

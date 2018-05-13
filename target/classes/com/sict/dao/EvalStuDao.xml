@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.EvalStuDao"><insert id="insert" parameterType="com.sict.entity.EvalStu" statementType="PREPARED">
+insert into sj_eval_stu(id,eval_type,eval_title,eval_score,eval_content,eval_time,tea_id,stu_id,temp1,temp2,temp3)
+values (#{id},#{eval_type},#{eval_title},#{eval_score},#{eval_content},#{eval_time},#{tea_id},#{stu_id},#{temp1},#{temp2},#{temp3})
+</insert>
+<select id="select" parameterType="com.sict.entity.EvalStu" resultType="com.sict.entity.EvalStu">
+select * from sj_eval_stu where 1 = 1 
+<if test="id != null">
+and id = #{id}
+</if><if test="eval_type != null">
+and eval_type = #{eval_type}
+</if><if test="eval_title != null">
+and eval_title = #{eval_title}
+</if><if test="eval_score != null">
+and eval_score = #{eval_score}
+</if><if test="eval_content != null">
+and eval_content = #{eval_content}
+</if><if test="eval_time != null">
+and eval_time = #{eval_time}
+</if><if test="tea_id != null">
+and tea_id = #{tea_id}
+</if><if test="stu_id != null">
+and stu_id = #{stu_id}
+</if><if test="temp1 != null">
+and temp1 = #{temp1}
+</if><if test="temp2 != null">
+and temp2 = #{temp2}
+</if><if test="temp3 != null">
+and temp3 = #{temp3}
+</if>
+
+</select>
+<select id="selectCount" parameterType="com.sict.entity.EvalStu" resultType="int">
+select count(*) from sj_eval_stu where 1 = 1 
+<if test="id != null">
+and id = #{id}
+</if><if test="eval_type != null">
+and eval_type = #{eval_type}
+</if><if test="eval_title != null">
+and eval_title = #{eval_title}
+</if><if test="eval_score != null">
+and eval_score = #{eval_score}
+</if><if test="eval_content != null">
+and eval_content = #{eval_content}
+</if><if test="eval_time != null">
+and eval_time = #{eval_time}
+</if><if test="tea_id != null">
+and tea_id = #{tea_id}
+</if><if test="stu_id != null">
+and stu_id = #{stu_id}
+</if><if test="temp1 != null">
+and temp1 = #{temp1}
+</if><if test="temp2 != null">
+and temp2 = #{temp2}
+</if><if test="temp3 != null">
+and temp3 = #{temp3}
+</if>
+
+</select>
+<update id="update" parameterType="com.sict.entity.EvalStu">
+UPDATE sj_eval_stu
+<set>
+<if test="id != null">id=#{id},</if>
+<if test="eval_type != null">eval_type=#{eval_type},</if>
+<if test="eval_title != null">eval_title=#{eval_title},</if>
+<if test="eval_score != null">eval_score=#{eval_score},</if>
+<if test="eval_content != null">eval_content=#{eval_content},</if>
+<if test="eval_time != null">eval_time=#{eval_time},</if>
+<if test="tea_id != null">tea_id=#{tea_id},</if>
+<if test="stu_id != null">stu_id=#{stu_id},</if>
+<if test="temp1 != null">temp1=#{temp1},</if>
+<if test="temp2 != null">temp2=#{temp2},</if>
+<if test="temp3 != null">temp3=#{temp3}</if>
+
+</set>
+ WHERE id=#{id} 
+</update>
+<delete id="delete" parameterType="com.sict.entity.EvalStu">
+delete from sj_eval_stu where id=#{id}
+</delete>
+<select id="selectByID" parameterType="String" resultType="com.sict.entity.EvalStu">
+select * from sj_eval_stu where id=#{id}
+</select>
+
+	<!--根据学生id，查询学生历史的评价 by sl 2015/5/26 -->
+     <select parameterType="String" id="selectByStuid" resultType="com.sict.entity.EvalStu"> 
+     <![CDATA[
+   select * from sj_eval_stu where STU_ID=#{stu_id}
+   order by EVAL_TIME desc
+     	]]>
+      </select>
+
+
+</mapper>

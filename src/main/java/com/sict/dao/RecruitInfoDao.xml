@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.RecruitInfoDao">
+	<insert id="insert" parameterType="com.sict.entity.RecruitInfo"
+		statementType="PREPARED">
+		insert into
+		sj_recruit_info(id,create_time,com_id,type1,type2,type3,post_id,recruit_prof,effect_time,end_time,recruit_desc,recruit_num,college_id,state,temp1,temp2,temp3)
+		values
+		(#{id},#{create_time},#{com_id},#{type1},#{type2},#{type3},#{post_id},#{recruit_prof},#{effect_time},#{end_time},#{recruit_desc},#{recruit_num},#{college_id},#{state},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.RecruitInfo"
+		resultType="com.sict.entity.RecruitInfo">
+		select * from sj_recruit_info where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="com_id != null">
+			and com_id = #{com_id}
+		</if>
+		<if test="type1 != null">
+			and type1 = #{type1}
+		</if>
+		<if test="type2 != null">
+			and type2 = #{type2}
+		</if>
+		<if test="type3 != null">
+			and type3 = #{type3}
+		</if>
+		<if test="post_id != null">
+			and post_id = #{post_id}
+		</if>
+		<if test="recruit_prof != null">
+			and recruit_prof = #{recruit_prof}
+		</if>
+		<if test="effect_time != null">
+			and effect_time = #{effect_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="recruit_desc != null">
+			and recruit_desc = #{recruit_desc}
+		</if>
+		<if test="recruit_num != null">
+			and recruit_num = #{recruit_num}
+		</if>
+		<if test="college_id != null">
+			and college_id = #{college_id}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.RecruitInfo"
+		resultType="int">
+		select count(*) from sj_recruit_info where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="com_id != null">
+			and com_id = #{com_id}
+		</if>
+		<if test="type1 != null">
+			and type1 = #{type1}
+		</if>
+		<if test="type2 != null">
+			and type2 = #{type2}
+		</if>
+		<if test="type3 != null">
+			and type3 = #{type3}
+		</if>
+		<if test="post_id != null">
+			and post_id = #{post_id}
+		</if>
+		<if test="recruit_prof != null">
+			and recruit_prof = #{recruit_prof}
+		</if>
+		<if test="effect_time != null">
+			and effect_time = #{effect_time}
+		</if>
+		<if test="end_time != null">
+			and end_time = #{end_time}
+		</if>
+		<if test="recruit_desc != null">
+			and recruit_desc = #{recruit_desc}
+		</if>
+		<if test="recruit_num != null">
+			and recruit_num = #{recruit_num}
+		</if>
+		<if test="college_id != null">
+			and college_id = #{college_id}
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<!-- <update id="update" parameterType="com.sict.entity.RecruitInfo"> UPDATE 
+		sj_recruit_info <set> <if test="id != null">id=#{id},</if> <if test="create_time 
+		!= null">create_time=#{create_time},</if> <if test="com_id != null">com_id=#{com_id},</if> 
+		<if test="type1 != null">type1=#{type1},</if> <if test="type2 != null">type2=#{type2},</if> 
+		<if test="type3 != null">type3=#{type3},</if> <if test="post_id != null">post_id=#{post_id},</if> 
+		<if test="recruit_prof != null">recruit_prof=#{recruit_prof},</if> <if test="recruit_desc 
+		!= null">recruit_desc=#{recruit_desc},</if> <if test="effect_time != null">effect_time=#{effect_time},</if> 
+		<if test="end_time != null">end_time=#{end_time},</if> <if test="recruit_num 
+		!= null">recruit_num=#{recruit_num},</if> <if test="state != null">state=#{state},</if> 
+		<if test="temp1 != null">temp1=#{temp1},</if> <if test="temp2 != null">temp2=#{temp2},</if> 
+		<if test="temp3 != null">temp3=#{temp3}</if> </set> WHERE id=#{id} </update> -->
+	<update id="update" parameterType="com.sict.entity.RecruitInfo">
+		UPDATE sj_recruit_info
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="com_id != null">com_id=#{com_id},</if>
+			<if test="type1 != null">type1=#{type1},</if>
+			<if test="type2 != null">type2=#{type2},</if>
+			<if test="type3 != null">type3=#{type3},</if>
+			<if test="post_id != null">post_id=#{post_id},</if>
+			<if test="recruit_prof != null">recruit_prof=#{recruit_prof},</if>
+			<if test="effect_time != null">effect_time=#{effect_time},</if>
+			<if test="end_time != null">end_time=#{end_time},</if>
+			<if test="recruit_desc != null">recruit_desc=#{recruit_desc},</if>
+			<if test="recruit_num != null">recruit_num=#{recruit_num},</if>
+			<if test="college_id != null">college_id=#{college_id},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.RecruitInfo">
+		delete from sj_recruit_info
+		where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.RecruitInfo">
+		select * from sj_recruit_info where id=#{id}
+	</select>
+	<select id="getAllRecruitInfosByCollege" parameterType="map" resultType="com.sict.entity.RecruitInfo">
+		select * from sj_recruit_info where College_id=#{CollegeCode}   order by create_time   
+	</select>
+	<select id="getAllRecruitInfosByCollegeAndPage" parameterType="map" resultType="com.sict.entity.RecruitInfo">
+		select * from sj_recruit_info where College_id=#{CollegeCode}     order by create_time limit #{page},1
+	</select>
+	<select id="selectAllzpxxBycolleage" parameterType="string" resultType="int">
+		select count(*) from sj_recruit_info where College_id=#{org_id}    order by create_time
+	</select>
+	
+	<select id="selectten" parameterType="String" resultType="com.sict.entity.RecruitInfo">
+		select * from sj_recruit_info order by create_time limit 0,10 ;
+	</select>
+</mapper>

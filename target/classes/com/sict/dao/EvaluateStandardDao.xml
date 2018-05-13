@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sict.dao.EvaluateStandardDao">
+	<insert id="insert" parameterType="com.sict.entity.EvaluateStandard"
+		statementType="PREPARED">
+		insert into
+		sj_evaluate_standard(id,standard_code,standard_name,type,description,scope,create_time,temp1,temp2,temp3)
+		values
+		(#{id},#{standard_code},#{standard_name},#{type},#{description},#{scope},#{create_time},#{temp1},#{temp2},#{temp3})
+	</insert>
+	<select id="select" parameterType="com.sict.entity.EvaluateStandard"
+		resultType="com.sict.entity.EvaluateStandard">
+		select * from sj_evaluate_standard where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="standard_code != null">
+			and standard_code = #{standard_code}
+		</if>
+		<if test="standard_name != null">
+			and standard_name = #{standard_name}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="scope != null">
+			and scope = #{scope}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<select id="selectCount" parameterType="com.sict.entity.EvaluateStandard"
+		resultType="int">
+		select count(*) from sj_evaluate_standard where 1 = 1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="standard_code != null">
+			and standard_code = #{standard_code}
+		</if>
+		<if test="standard_name != null">
+			and standard_name = #{standard_name}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="description != null">
+			and description = #{description}
+		</if>
+		<if test="scope != null">
+			and scope = #{scope}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="temp1 != null">
+			and temp1 = #{temp1}
+		</if>
+		<if test="temp2 != null">
+			and temp2 = #{temp2}
+		</if>
+		<if test="temp3 != null">
+			and temp3 = #{temp3}
+		</if>
+
+	</select>
+	<update id="update" parameterType="com.sict.entity.EvaluateStandard">
+		UPDATE sj_evaluate_standard
+		<set>
+			<if test="id != null">id=#{id},</if>
+			<if test="standard_code != null">standard_code=#{standard_code},</if>
+			<if test="standard_name != null">standard_name=#{standard_name},</if>
+			<if test="type != null">type=#{type},</if>
+			<if test="description != null">description=#{description},</if>
+			<if test="scope != null">scope=#{scope},</if>
+			<if test="create_time != null">create_time=#{create_time},</if>
+			<if test="temp1 != null">temp1=#{temp1},</if>
+			<if test="temp2 != null">temp2=#{temp2},</if>
+			<if test="temp3 != null">temp3=#{temp3}</if>
+
+		</set>
+		WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="com.sict.entity.EvaluateStandard">
+		delete from sj_evaluate_standard where id=#{id}
+	</delete>
+	<select id="selectByID" parameterType="String"
+		resultType="com.sict.entity.EvaluateStandard">
+		select * from sj_evaluate_standard where id=#{id}
+	</select>
+	<!--功能查出本学院的奖惩指标 by 王磊2015-1-24 -->
+	<select id="selectById" parameterType="String"
+		resultType="com.sict.entity.EvaluateStandard">
+         <![CDATA[ 												
+         select * from sj_evaluate_standard where 
+         SCOPE in(SELECT id FROM sj_org WHERE PARENT_ID=#{xy_id} or ID=#{xy_id}) 
+         order by scope
+		 ]]>
+	</select>
+	<!--功能查出奖惩指标的年份 by 王磊2015-1-26 -->
+	<select id="selectYears" resultType="String">
+         <![CDATA[ 												
+        SELECT DISTINCT LEFT(CREATE_TIME,4) from sj_evaluate_standard order by CREATE_TIME
+		 ]]>
+	</select>
+	<!--功能通过year 和范围查出记录 王磊2015-1-26 -->
+	<select id="selectByYearAndScore" parameterType="map"
+		resultType="com.sict.entity.EvaluateStandard">
+		 <![CDATA[  SELECT  * from sj_evaluate_standard where scope=#{scope} and CREATE_TIME like CONCAT(#{year},'%') 
+		 order by scope ]]>
+	</select>
+	<!-- 查出编号最大的一条记录 by王磊2015-1-26 -->
+	<select id="maxEvalStandCode" resultType="String">
+         <![CDATA[ 
+              SELECT max(SubString(STANDARD_CODE,-3)) FROM sj_evaluate_standard 
+              where STANDARD_CODE like CONCAT(#{part_code},'%')
+		 ]]>
+	</select>
+	<!--功能通过时间 和学院id查出标准记录 王磊2015-1-26 -->
+	<select id="selectByYearAndId" parameterType="map"
+		resultType="com.sict.entity.EvaluateStandard">
+		 <![CDATA[select * from sj_evaluate_standard where 
+         SCOPE in(SELECT id FROM sj_org WHERE PARENT_ID=#{xy_id} or ID=#{xy_id}) and CREATE_TIME LIKE CONCAT(#{year},'%')
+         order by scope
+         ]]>
+	</select>
+	<!-- 通过学院id和老师部门id查出奖惩本老师系的标准和老师所在院的标准 -->
+	<select id="selectByIds" parameterType="map"
+		resultType="com.sict.entity.EvaluateStandard">
+         <![CDATA[ 												
+         select * from sj_evaluate_standard where 
+         (scope =#{xy_id} or scope=#{xibu_id}) and type="实习"
+         order by scope
+		 ]]>
+	</select>
+	<!-- 根据标准类型查询出此类型所有标准 by 李达 20160301 -->
+	<select id="selectByType" parameterType="map"
+		resultType="com.sict.entity.EvaluateStandard">
+         <![CDATA[ 												
+         select * from sj_evaluate_standard where type=#{type}
+         
+		 ]]>
+	</select>
+	<!-- 根据标准类型早操和范围查询出早操指标(若存在多条记录会报错，仅用于早操) -->
+	<select id="selectByTypeAndScope" parameterType="map"
+		resultType="com.sict.entity.EvaluateStandard">
+         <![CDATA[ 												
+         select * from sj_evaluate_standard where 
+         scope =#{scope}  and type=#{type}
+		 ]]>
+	</select>
+</mapper>
